@@ -1,17 +1,17 @@
-import { ACTION } from 'common/actions';
 import { Message } from 'app/business/message/Message';
 import { Action } from 'redux-actions';
+import { EventPayload } from 'common/actions';
 
-export type PUBLISH_MESSAGE = ACTION<Message>;
+export type PUBLISH_MESSAGE = EventPayload<Array<Message>>;
 export const PUBLISH_MESSAGE = 'PUBLISH_MESSAGE';
 
-export type UNPUBLISH_MESSAGE = ACTION<null>;
+export type UNPUBLISH_MESSAGE = EventPayload<null>;
 export const UNPUBLISH_MESSAGE = 'UNPUBLISH_MESSAGE';
 
-export const publishMessage = (message : Message): Action<PUBLISH_MESSAGE> => {
+export const publishMessage = (message: Message): Action<PUBLISH_MESSAGE> => {
   const messages: Array<Message> = [];
   if (message.displayMode == null) {
-    message.displayMode = 'toast' ;
+    message.displayMode = 'toast';
   }
   messages.push(message);
   return {

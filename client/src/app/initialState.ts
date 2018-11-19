@@ -5,6 +5,8 @@ const appInitialState: InstanceState = {
     message: {
       entity: [],
     },
+    brick: {
+    },
   },
   form: null,
   routing: null,

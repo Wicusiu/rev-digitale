@@ -119,51 +119,51 @@ export interface AccessToken {
 /**
  * 
  * @export
- * @interface Brique
+ * @interface Brick
  */
-export interface Brique {
+export interface Brick {
     /**
      * 
      * @type {string}
-     * @memberof Brique
+     * @memberof Brick
      */
     name: string;
     /**
      * 
      * @type {string}
-     * @memberof Brique
+     * @memberof Brick
      */
     description?: string;
     /**
      * 
      * @type {string}
-     * @memberof Brique
+     * @memberof Brick
      */
     logo: string;
     /**
      * 
      * @type {Date}
-     * @memberof Brique
+     * @memberof Brick
      */
     createdDate?: Date;
     /**
      * 
      * @type {Date}
-     * @memberof Brique
+     * @memberof Brick
      */
     modifiedDate: Date;
     /**
      * 
-     * @type {number}
-     * @memberof Brique
+     * @type {string}
+     * @memberof Brick
      */
-    id?: number;
+    id: string;
     /**
      * 
-     * @type {number}
-     * @memberof Brique
+     * @type {string}
+     * @memberof Brick
      */
-    moduleId?: number;
+    moduleId?: string;
 }
 
 /**
@@ -234,54 +234,54 @@ export interface Module {
     logo: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Module
      */
-    id?: number;
+    id: string;
 }
 
 /**
  * 
  * @export
- * @interface NewBrique
+ * @interface NewBrick
  */
-export interface NewBrique {
+export interface NewBrick {
     /**
      * 
      * @type {string}
-     * @memberof NewBrique
+     * @memberof NewBrick
      */
     name: string;
     /**
      * 
      * @type {string}
-     * @memberof NewBrique
+     * @memberof NewBrick
      */
     description?: string;
     /**
      * 
      * @type {string}
-     * @memberof NewBrique
+     * @memberof NewBrick
      */
     logo: string;
     /**
      * 
      * @type {Date}
-     * @memberof NewBrique
+     * @memberof NewBrick
      */
     createdDate?: Date;
     /**
      * 
      * @type {Date}
-     * @memberof NewBrique
+     * @memberof NewBrick
      */
     modifiedDate: Date;
     /**
      * 
-     * @type {number}
-     * @memberof NewBrique
+     * @type {string}
+     * @memberof NewBrick
      */
-    moduleId?: number;
+    moduleId?: string;
 }
 
 /**
@@ -348,10 +348,10 @@ export interface NewSession {
     moduleId: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof NewSession
      */
-    sessionId?: number;
+    sessionId?: string;
 }
 
 /**
@@ -424,16 +424,16 @@ export interface Session {
     moduleId: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Session
      */
-    id?: number;
+    id: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof Session
      */
-    sessionId?: number;
+    sessionId?: string;
 }
 
 /**
@@ -468,10 +468,10 @@ export interface User {
     emailVerified?: boolean;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof User
      */
-    id?: number;
+    id: string;
 }
 
 /**
@@ -484,10 +484,10 @@ export interface XAny {
 
 
 /**
- * BriqueApi - fetch parameter creator
+ * BrickApi - fetch parameter creator
  * @export
  */
-export const BriqueApiFetchParamCreator = function (configuration?: Configuration) {
+export const BrickApiFetchParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
@@ -496,8 +496,8 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueCount(where?: string, options: any = {}): FetchArgs {
-            const localVarPath = `/briques/count`;
+        brickCount(where?: string, options: any = {}): FetchArgs {
+            const localVarPath = `/bricks/count`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
             const localVarHeaderParameter = {} as any;
@@ -520,12 +520,12 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @summary Create a new instance of the model and persist it into the data source.
-         * @param {NewBrique} [data] Model instance data
+         * @param {NewBrick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueCreate(data?: NewBrique, options: any = {}): FetchArgs {
-            const localVarPath = `/briques`;
+        brickCreate(data?: NewBrick, options: any = {}): FetchArgs {
+            const localVarPath = `/bricks`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {} as any;
@@ -537,7 +537,7 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"NewBrique" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            const needsSerialization = (<any>"NewBrick" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.body =  needsSerialization ? JSON.stringify(data || {}) : (data || "");
 
             return {
@@ -552,8 +552,8 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueCreateChangeStreamGetBriquesChangeStream(paramsStream?: string, options: any = {}): FetchArgs {
-            const localVarPath = `/briques/change-stream`;
+        brickCreateChangeStreamGetBricksChangeStream(paramsStream?: string, options: any = {}): FetchArgs {
+            const localVarPath = `/bricks/change-stream`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
             const localVarHeaderParameter = {} as any;
@@ -580,8 +580,8 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueCreateChangeStreamPostBriquesChangeStream(paramsStream?: string, options: any = {}): FetchArgs {
-            const localVarPath = `/briques/change-stream`;
+        brickCreateChangeStreamPostBricksChangeStream(paramsStream?: string, options: any = {}): FetchArgs {
+            const localVarPath = `/bricks/change-stream`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {} as any;
@@ -612,12 +612,12 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueDeleteById(id: string, options: any = {}): FetchArgs {
+        brickDeleteById(id: string, options: any = {}): FetchArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling briqueDeleteById.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling brickDeleteById.');
             }
-            const localVarPath = `/briques/{id}`
+            const localVarPath = `/bricks/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'DELETE' }, options);
@@ -641,12 +641,12 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueExistsGetBriquesidExists(id: string, options: any = {}): FetchArgs {
+        brickExistsGetBricksidExists(id: string, options: any = {}): FetchArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling briqueExistsGetBriquesidExists.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling brickExistsGetBricksidExists.');
             }
-            const localVarPath = `/briques/{id}/exists`
+            const localVarPath = `/bricks/{id}/exists`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
@@ -670,12 +670,12 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueExistsHeadBriquesid(id: string, options: any = {}): FetchArgs {
+        brickExistsHeadBricksid(id: string, options: any = {}): FetchArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling briqueExistsHeadBriquesid.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling brickExistsHeadBricksid.');
             }
-            const localVarPath = `/briques/{id}`
+            const localVarPath = `/bricks/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'HEAD' }, options);
@@ -699,8 +699,8 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueFind(filter?: string, options: any = {}): FetchArgs {
-            const localVarPath = `/briques`;
+        brickFind(filter?: string, options: any = {}): FetchArgs {
+            const localVarPath = `/bricks`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
             const localVarHeaderParameter = {} as any;
@@ -728,12 +728,12 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueFindById(id: string, filter?: string, options: any = {}): FetchArgs {
+        brickFindById(id: string, filter?: string, options: any = {}): FetchArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling briqueFindById.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling brickFindById.');
             }
-            const localVarPath = `/briques/{id}`
+            const localVarPath = `/bricks/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
@@ -761,8 +761,8 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueFindOne(filter?: string, options: any = {}): FetchArgs {
-            const localVarPath = `/briques/findOne`;
+        brickFindOne(filter?: string, options: any = {}): FetchArgs {
+            const localVarPath = `/bricks/findOne`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
             const localVarHeaderParameter = {} as any;
@@ -785,12 +785,12 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @summary Patch an existing model instance or insert a new one into the data source.
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briquePatchOrCreate(data?: Brique, options: any = {}): FetchArgs {
-            const localVarPath = `/briques`;
+        brickPatchOrCreate(data?: Brick, options: any = {}): FetchArgs {
+            const localVarPath = `/bricks`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'PATCH' }, options);
             const localVarHeaderParameter = {} as any;
@@ -802,7 +802,7 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"Brique" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            const needsSerialization = (<any>"Brick" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.body =  needsSerialization ? JSON.stringify(data || {}) : (data || "");
 
             return {
@@ -813,17 +813,17 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @summary Patch attributes for a model instance and persist it into the data source.
-         * @param {string} id brique id
-         * @param {Brique} [data] An object of model property name/value pairs
+         * @param {string} id brick id
+         * @param {Brick} [data] An object of model property name/value pairs
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briquePrototypePatchAttributes(id: string, data?: Brique, options: any = {}): FetchArgs {
+        brickPrototypePatchAttributes(id: string, data?: Brick, options: any = {}): FetchArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling briquePrototypePatchAttributes.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling brickPrototypePatchAttributes.');
             }
-            const localVarPath = `/briques/{id}`
+            const localVarPath = `/bricks/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'PATCH' }, options);
@@ -836,7 +836,7 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"Brique" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            const needsSerialization = (<any>"Brick" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.body =  needsSerialization ? JSON.stringify(data || {}) : (data || "");
 
             return {
@@ -848,16 +848,16 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
          * 
          * @summary Replace attributes for a model instance and persist it into the data source.
          * @param {string} id Model id
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueReplaceByIdPostBriquesidReplace(id: string, data?: Brique, options: any = {}): FetchArgs {
+        brickReplaceByIdPostBricksidReplace(id: string, data?: Brick, options: any = {}): FetchArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling briqueReplaceByIdPostBriquesidReplace.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling brickReplaceByIdPostBricksidReplace.');
             }
-            const localVarPath = `/briques/{id}/replace`
+            const localVarPath = `/bricks/{id}/replace`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
@@ -870,7 +870,7 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"Brique" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            const needsSerialization = (<any>"Brick" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.body =  needsSerialization ? JSON.stringify(data || {}) : (data || "");
 
             return {
@@ -882,16 +882,16 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
          * 
          * @summary Replace attributes for a model instance and persist it into the data source.
          * @param {string} id Model id
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueReplaceByIdPutBriquesid(id: string, data?: Brique, options: any = {}): FetchArgs {
+        brickReplaceByIdPutBricksid(id: string, data?: Brick, options: any = {}): FetchArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling briqueReplaceByIdPutBriquesid.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling brickReplaceByIdPutBricksid.');
             }
-            const localVarPath = `/briques/{id}`
+            const localVarPath = `/bricks/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'PUT' }, options);
@@ -904,7 +904,7 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"Brique" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            const needsSerialization = (<any>"Brick" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.body =  needsSerialization ? JSON.stringify(data || {}) : (data || "");
 
             return {
@@ -915,12 +915,12 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @summary Replace an existing model instance or insert a new one into the data source.
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueReplaceOrCreatePostBriquesReplaceOrCreate(data?: Brique, options: any = {}): FetchArgs {
-            const localVarPath = `/briques/replaceOrCreate`;
+        brickReplaceOrCreatePostBricksReplaceOrCreate(data?: Brick, options: any = {}): FetchArgs {
+            const localVarPath = `/bricks/replaceOrCreate`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {} as any;
@@ -932,7 +932,7 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"Brique" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            const needsSerialization = (<any>"Brick" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.body =  needsSerialization ? JSON.stringify(data || {}) : (data || "");
 
             return {
@@ -943,12 +943,12 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @summary Replace an existing model instance or insert a new one into the data source.
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueReplaceOrCreatePutBriques(data?: Brique, options: any = {}): FetchArgs {
-            const localVarPath = `/briques`;
+        brickReplaceOrCreatePutBricks(data?: Brick, options: any = {}): FetchArgs {
+            const localVarPath = `/bricks`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'PUT' }, options);
             const localVarHeaderParameter = {} as any;
@@ -960,7 +960,7 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"Brique" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            const needsSerialization = (<any>"Brick" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.body =  needsSerialization ? JSON.stringify(data || {}) : (data || "");
 
             return {
@@ -972,12 +972,12 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
          * 
          * @summary Update instances of the model matched by {{where}} from the data source.
          * @param {string} [where] Criteria to match model instances
-         * @param {Brique} [data] An object of model property name/value pairs
+         * @param {Brick} [data] An object of model property name/value pairs
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueUpdateAll(where?: string, data?: Brique, options: any = {}): FetchArgs {
-            const localVarPath = `/briques/update`;
+        brickUpdateAll(where?: string, data?: Brick, options: any = {}): FetchArgs {
+            const localVarPath = `/bricks/update`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {} as any;
@@ -993,7 +993,7 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"Brique" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            const needsSerialization = (<any>"Brick" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.body =  needsSerialization ? JSON.stringify(data || {}) : (data || "");
 
             return {
@@ -1005,12 +1005,12 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
          * 
          * @summary Update an existing model instance or insert a new one into the data source based on the where criteria.
          * @param {string} [where] Criteria to match model instances
-         * @param {Brique} [data] An object of model property name/value pairs
+         * @param {Brick} [data] An object of model property name/value pairs
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueUpsertWithWhere(where?: string, data?: Brique, options: any = {}): FetchArgs {
-            const localVarPath = `/briques/upsertWithWhere`;
+        brickUpsertWithWhere(where?: string, data?: Brick, options: any = {}): FetchArgs {
+            const localVarPath = `/bricks/upsertWithWhere`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {} as any;
@@ -1026,7 +1026,7 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"Brique" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            const needsSerialization = (<any>"Brick" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.body =  needsSerialization ? JSON.stringify(data || {}) : (data || "");
 
             return {
@@ -1038,10 +1038,10 @@ export const BriqueApiFetchParamCreator = function (configuration?: Configuratio
 };
 
 /**
- * BriqueApi - functional programming interface
+ * BrickApi - functional programming interface
  * @export
  */
-export const BriqueApiFp = function(configuration?: Configuration) {
+export const BrickApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
@@ -1050,8 +1050,8 @@ export const BriqueApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueCount(where?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<InlineResponse200> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueCount(where, options);
+        brickCount(where?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<InlineResponse200> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickCount(where, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1065,12 +1065,12 @@ export const BriqueApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create a new instance of the model and persist it into the data source.
-         * @param {NewBrique} [data] Model instance data
+         * @param {NewBrick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueCreate(data?: NewBrique, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brique> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueCreate(data, options);
+        brickCreate(data?: NewBrick, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brick> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickCreate(data, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1088,8 +1088,8 @@ export const BriqueApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueCreateChangeStreamGetBriquesChangeStream(paramsStream?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<any> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueCreateChangeStreamGetBriquesChangeStream(paramsStream, options);
+        brickCreateChangeStreamGetBricksChangeStream(paramsStream?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<any> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickCreateChangeStreamGetBricksChangeStream(paramsStream, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1107,8 +1107,8 @@ export const BriqueApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueCreateChangeStreamPostBriquesChangeStream(paramsStream?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<any> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueCreateChangeStreamPostBriquesChangeStream(paramsStream, options);
+        brickCreateChangeStreamPostBricksChangeStream(paramsStream?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<any> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickCreateChangeStreamPostBricksChangeStream(paramsStream, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1126,8 +1126,8 @@ export const BriqueApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueDeleteById(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<any> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueDeleteById(id, options);
+        brickDeleteById(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<any> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickDeleteById(id, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1145,8 +1145,8 @@ export const BriqueApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueExistsGetBriquesidExists(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<InlineResponse2001> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueExistsGetBriquesidExists(id, options);
+        brickExistsGetBricksidExists(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<InlineResponse2001> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickExistsGetBricksidExists(id, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1164,8 +1164,8 @@ export const BriqueApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueExistsHeadBriquesid(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<InlineResponse2001> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueExistsHeadBriquesid(id, options);
+        brickExistsHeadBricksid(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<InlineResponse2001> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickExistsHeadBricksid(id, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1183,8 +1183,8 @@ export const BriqueApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueFind(filter?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<Brique>> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueFind(filter, options);
+        brickFind(filter?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<Brick>> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickFind(filter, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1203,8 +1203,8 @@ export const BriqueApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueFindById(id: string, filter?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brique> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueFindById(id, filter, options);
+        brickFindById(id: string, filter?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brick> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickFindById(id, filter, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1222,8 +1222,8 @@ export const BriqueApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueFindOne(filter?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brique> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueFindOne(filter, options);
+        brickFindOne(filter?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brick> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickFindOne(filter, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1237,12 +1237,12 @@ export const BriqueApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Patch an existing model instance or insert a new one into the data source.
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briquePatchOrCreate(data?: Brique, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brique> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briquePatchOrCreate(data, options);
+        brickPatchOrCreate(data?: Brick, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brick> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickPatchOrCreate(data, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1256,13 +1256,13 @@ export const BriqueApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Patch attributes for a model instance and persist it into the data source.
-         * @param {string} id brique id
-         * @param {Brique} [data] An object of model property name/value pairs
+         * @param {string} id brick id
+         * @param {Brick} [data] An object of model property name/value pairs
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briquePrototypePatchAttributes(id: string, data?: Brique, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brique> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briquePrototypePatchAttributes(id, data, options);
+        brickPrototypePatchAttributes(id: string, data?: Brick, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brick> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickPrototypePatchAttributes(id, data, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1277,12 +1277,12 @@ export const BriqueApiFp = function(configuration?: Configuration) {
          * 
          * @summary Replace attributes for a model instance and persist it into the data source.
          * @param {string} id Model id
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueReplaceByIdPostBriquesidReplace(id: string, data?: Brique, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brique> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueReplaceByIdPostBriquesidReplace(id, data, options);
+        brickReplaceByIdPostBricksidReplace(id: string, data?: Brick, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brick> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickReplaceByIdPostBricksidReplace(id, data, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1297,12 +1297,12 @@ export const BriqueApiFp = function(configuration?: Configuration) {
          * 
          * @summary Replace attributes for a model instance and persist it into the data source.
          * @param {string} id Model id
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueReplaceByIdPutBriquesid(id: string, data?: Brique, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brique> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueReplaceByIdPutBriquesid(id, data, options);
+        brickReplaceByIdPutBricksid(id: string, data?: Brick, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brick> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickReplaceByIdPutBricksid(id, data, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1316,12 +1316,12 @@ export const BriqueApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Replace an existing model instance or insert a new one into the data source.
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueReplaceOrCreatePostBriquesReplaceOrCreate(data?: Brique, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brique> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueReplaceOrCreatePostBriquesReplaceOrCreate(data, options);
+        brickReplaceOrCreatePostBricksReplaceOrCreate(data?: Brick, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brick> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickReplaceOrCreatePostBricksReplaceOrCreate(data, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1335,12 +1335,12 @@ export const BriqueApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Replace an existing model instance or insert a new one into the data source.
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueReplaceOrCreatePutBriques(data?: Brique, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brique> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueReplaceOrCreatePutBriques(data, options);
+        brickReplaceOrCreatePutBricks(data?: Brick, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brick> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickReplaceOrCreatePutBricks(data, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1355,12 +1355,12 @@ export const BriqueApiFp = function(configuration?: Configuration) {
          * 
          * @summary Update instances of the model matched by {{where}} from the data source.
          * @param {string} [where] Criteria to match model instances
-         * @param {Brique} [data] An object of model property name/value pairs
+         * @param {Brick} [data] An object of model property name/value pairs
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueUpdateAll(where?: string, data?: Brique, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<InlineResponse2002> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueUpdateAll(where, data, options);
+        brickUpdateAll(where?: string, data?: Brick, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<InlineResponse2002> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickUpdateAll(where, data, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1375,12 +1375,12 @@ export const BriqueApiFp = function(configuration?: Configuration) {
          * 
          * @summary Update an existing model instance or insert a new one into the data source based on the where criteria.
          * @param {string} [where] Criteria to match model instances
-         * @param {Brique} [data] An object of model property name/value pairs
+         * @param {Brick} [data] An object of model property name/value pairs
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueUpsertWithWhere(where?: string, data?: Brique, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brique> {
-            const localVarFetchArgs = BriqueApiFetchParamCreator(configuration).briqueUpsertWithWhere(where, data, options);
+        brickUpsertWithWhere(where?: string, data?: Brick, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brick> {
+            const localVarFetchArgs = BrickApiFetchParamCreator(configuration).brickUpsertWithWhere(where, data, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1395,10 +1395,10 @@ export const BriqueApiFp = function(configuration?: Configuration) {
 };
 
 /**
- * BriqueApi - factory interface
+ * BrickApi - factory interface
  * @export
  */
-export const BriqueApiFactory = function (configuration?: Configuration, fetch?: FetchAPI, basePath?: string) {
+export const BrickApiFactory = function (configuration?: Configuration, fetch?: FetchAPI, basePath?: string) {
     return {
         /**
          * 
@@ -1407,18 +1407,18 @@ export const BriqueApiFactory = function (configuration?: Configuration, fetch?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueCount(where?: string, options?: any) {
-            return BriqueApiFp(configuration).briqueCount(where, options)(fetch, basePath);
+        brickCount(where?: string, options?: any) {
+            return BrickApiFp(configuration).brickCount(where, options)(fetch, basePath);
         },
         /**
          * 
          * @summary Create a new instance of the model and persist it into the data source.
-         * @param {NewBrique} [data] Model instance data
+         * @param {NewBrick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueCreate(data?: NewBrique, options?: any) {
-            return BriqueApiFp(configuration).briqueCreate(data, options)(fetch, basePath);
+        brickCreate(data?: NewBrick, options?: any) {
+            return BrickApiFp(configuration).brickCreate(data, options)(fetch, basePath);
         },
         /**
          * 
@@ -1427,8 +1427,8 @@ export const BriqueApiFactory = function (configuration?: Configuration, fetch?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueCreateChangeStreamGetBriquesChangeStream(paramsStream?: string, options?: any) {
-            return BriqueApiFp(configuration).briqueCreateChangeStreamGetBriquesChangeStream(paramsStream, options)(fetch, basePath);
+        brickCreateChangeStreamGetBricksChangeStream(paramsStream?: string, options?: any) {
+            return BrickApiFp(configuration).brickCreateChangeStreamGetBricksChangeStream(paramsStream, options)(fetch, basePath);
         },
         /**
          * 
@@ -1437,8 +1437,8 @@ export const BriqueApiFactory = function (configuration?: Configuration, fetch?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueCreateChangeStreamPostBriquesChangeStream(paramsStream?: string, options?: any) {
-            return BriqueApiFp(configuration).briqueCreateChangeStreamPostBriquesChangeStream(paramsStream, options)(fetch, basePath);
+        brickCreateChangeStreamPostBricksChangeStream(paramsStream?: string, options?: any) {
+            return BrickApiFp(configuration).brickCreateChangeStreamPostBricksChangeStream(paramsStream, options)(fetch, basePath);
         },
         /**
          * 
@@ -1447,8 +1447,8 @@ export const BriqueApiFactory = function (configuration?: Configuration, fetch?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueDeleteById(id: string, options?: any) {
-            return BriqueApiFp(configuration).briqueDeleteById(id, options)(fetch, basePath);
+        brickDeleteById(id: string, options?: any) {
+            return BrickApiFp(configuration).brickDeleteById(id, options)(fetch, basePath);
         },
         /**
          * 
@@ -1457,8 +1457,8 @@ export const BriqueApiFactory = function (configuration?: Configuration, fetch?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueExistsGetBriquesidExists(id: string, options?: any) {
-            return BriqueApiFp(configuration).briqueExistsGetBriquesidExists(id, options)(fetch, basePath);
+        brickExistsGetBricksidExists(id: string, options?: any) {
+            return BrickApiFp(configuration).brickExistsGetBricksidExists(id, options)(fetch, basePath);
         },
         /**
          * 
@@ -1467,8 +1467,8 @@ export const BriqueApiFactory = function (configuration?: Configuration, fetch?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueExistsHeadBriquesid(id: string, options?: any) {
-            return BriqueApiFp(configuration).briqueExistsHeadBriquesid(id, options)(fetch, basePath);
+        brickExistsHeadBricksid(id: string, options?: any) {
+            return BrickApiFp(configuration).brickExistsHeadBricksid(id, options)(fetch, basePath);
         },
         /**
          * 
@@ -1477,8 +1477,8 @@ export const BriqueApiFactory = function (configuration?: Configuration, fetch?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueFind(filter?: string, options?: any) {
-            return BriqueApiFp(configuration).briqueFind(filter, options)(fetch, basePath);
+        brickFind(filter?: string, options?: any) {
+            return BrickApiFp(configuration).brickFind(filter, options)(fetch, basePath);
         },
         /**
          * 
@@ -1488,8 +1488,8 @@ export const BriqueApiFactory = function (configuration?: Configuration, fetch?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueFindById(id: string, filter?: string, options?: any) {
-            return BriqueApiFp(configuration).briqueFindById(id, filter, options)(fetch, basePath);
+        brickFindById(id: string, filter?: string, options?: any) {
+            return BrickApiFp(configuration).brickFindById(id, filter, options)(fetch, basePath);
         },
         /**
          * 
@@ -1498,114 +1498,114 @@ export const BriqueApiFactory = function (configuration?: Configuration, fetch?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueFindOne(filter?: string, options?: any) {
-            return BriqueApiFp(configuration).briqueFindOne(filter, options)(fetch, basePath);
+        brickFindOne(filter?: string, options?: any) {
+            return BrickApiFp(configuration).brickFindOne(filter, options)(fetch, basePath);
         },
         /**
          * 
          * @summary Patch an existing model instance or insert a new one into the data source.
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briquePatchOrCreate(data?: Brique, options?: any) {
-            return BriqueApiFp(configuration).briquePatchOrCreate(data, options)(fetch, basePath);
+        brickPatchOrCreate(data?: Brick, options?: any) {
+            return BrickApiFp(configuration).brickPatchOrCreate(data, options)(fetch, basePath);
         },
         /**
          * 
          * @summary Patch attributes for a model instance and persist it into the data source.
-         * @param {string} id brique id
-         * @param {Brique} [data] An object of model property name/value pairs
+         * @param {string} id brick id
+         * @param {Brick} [data] An object of model property name/value pairs
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briquePrototypePatchAttributes(id: string, data?: Brique, options?: any) {
-            return BriqueApiFp(configuration).briquePrototypePatchAttributes(id, data, options)(fetch, basePath);
+        brickPrototypePatchAttributes(id: string, data?: Brick, options?: any) {
+            return BrickApiFp(configuration).brickPrototypePatchAttributes(id, data, options)(fetch, basePath);
         },
         /**
          * 
          * @summary Replace attributes for a model instance and persist it into the data source.
          * @param {string} id Model id
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueReplaceByIdPostBriquesidReplace(id: string, data?: Brique, options?: any) {
-            return BriqueApiFp(configuration).briqueReplaceByIdPostBriquesidReplace(id, data, options)(fetch, basePath);
+        brickReplaceByIdPostBricksidReplace(id: string, data?: Brick, options?: any) {
+            return BrickApiFp(configuration).brickReplaceByIdPostBricksidReplace(id, data, options)(fetch, basePath);
         },
         /**
          * 
          * @summary Replace attributes for a model instance and persist it into the data source.
          * @param {string} id Model id
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueReplaceByIdPutBriquesid(id: string, data?: Brique, options?: any) {
-            return BriqueApiFp(configuration).briqueReplaceByIdPutBriquesid(id, data, options)(fetch, basePath);
+        brickReplaceByIdPutBricksid(id: string, data?: Brick, options?: any) {
+            return BrickApiFp(configuration).brickReplaceByIdPutBricksid(id, data, options)(fetch, basePath);
         },
         /**
          * 
          * @summary Replace an existing model instance or insert a new one into the data source.
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueReplaceOrCreatePostBriquesReplaceOrCreate(data?: Brique, options?: any) {
-            return BriqueApiFp(configuration).briqueReplaceOrCreatePostBriquesReplaceOrCreate(data, options)(fetch, basePath);
+        brickReplaceOrCreatePostBricksReplaceOrCreate(data?: Brick, options?: any) {
+            return BrickApiFp(configuration).brickReplaceOrCreatePostBricksReplaceOrCreate(data, options)(fetch, basePath);
         },
         /**
          * 
          * @summary Replace an existing model instance or insert a new one into the data source.
-         * @param {Brique} [data] Model instance data
+         * @param {Brick} [data] Model instance data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueReplaceOrCreatePutBriques(data?: Brique, options?: any) {
-            return BriqueApiFp(configuration).briqueReplaceOrCreatePutBriques(data, options)(fetch, basePath);
+        brickReplaceOrCreatePutBricks(data?: Brick, options?: any) {
+            return BrickApiFp(configuration).brickReplaceOrCreatePutBricks(data, options)(fetch, basePath);
         },
         /**
          * 
          * @summary Update instances of the model matched by {{where}} from the data source.
          * @param {string} [where] Criteria to match model instances
-         * @param {Brique} [data] An object of model property name/value pairs
+         * @param {Brick} [data] An object of model property name/value pairs
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueUpdateAll(where?: string, data?: Brique, options?: any) {
-            return BriqueApiFp(configuration).briqueUpdateAll(where, data, options)(fetch, basePath);
+        brickUpdateAll(where?: string, data?: Brick, options?: any) {
+            return BrickApiFp(configuration).brickUpdateAll(where, data, options)(fetch, basePath);
         },
         /**
          * 
          * @summary Update an existing model instance or insert a new one into the data source based on the where criteria.
          * @param {string} [where] Criteria to match model instances
-         * @param {Brique} [data] An object of model property name/value pairs
+         * @param {Brick} [data] An object of model property name/value pairs
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        briqueUpsertWithWhere(where?: string, data?: Brique, options?: any) {
-            return BriqueApiFp(configuration).briqueUpsertWithWhere(where, data, options)(fetch, basePath);
+        brickUpsertWithWhere(where?: string, data?: Brick, options?: any) {
+            return BrickApiFp(configuration).brickUpsertWithWhere(where, data, options)(fetch, basePath);
         },
     };
 };
 
 /**
- * BriqueApi - object-oriented interface
+ * BrickApi - object-oriented interface
  * @export
- * @class BriqueApi
+ * @class BrickApi
  * @extends {BaseAPI}
  */
-export class BriqueApi extends BaseAPI {
+export class BrickApi extends BaseAPI {
     /**
      * 
      * @summary Count instances of the model matched by where from the data source.
      * @param {} [where] Criteria to match model instances
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueCount(where?: string, options?: any) {
-        return BriqueApiFp(this.configuration).briqueCount(where, options)(this.fetch, this.basePath);
+    public brickCount(where?: string, options?: any) {
+        return BrickApiFp(this.configuration).brickCount(where, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1614,10 +1614,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} [data] Model instance data
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueCreate(data?: NewBrique, options?: any) {
-        return BriqueApiFp(this.configuration).briqueCreate(data, options)(this.fetch, this.basePath);
+    public brickCreate(data?: NewBrick, options?: any) {
+        return BrickApiFp(this.configuration).brickCreate(data, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1626,10 +1626,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} [paramsStream] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueCreateChangeStreamGetBriquesChangeStream(paramsStream?: string, options?: any) {
-        return BriqueApiFp(this.configuration).briqueCreateChangeStreamGetBriquesChangeStream(paramsStream, options)(this.fetch, this.basePath);
+    public brickCreateChangeStreamGetBricksChangeStream(paramsStream?: string, options?: any) {
+        return BrickApiFp(this.configuration).brickCreateChangeStreamGetBricksChangeStream(paramsStream, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1638,10 +1638,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} [paramsStream] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueCreateChangeStreamPostBriquesChangeStream(paramsStream?: string, options?: any) {
-        return BriqueApiFp(this.configuration).briqueCreateChangeStreamPostBriquesChangeStream(paramsStream, options)(this.fetch, this.basePath);
+    public brickCreateChangeStreamPostBricksChangeStream(paramsStream?: string, options?: any) {
+        return BrickApiFp(this.configuration).brickCreateChangeStreamPostBricksChangeStream(paramsStream, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1650,10 +1650,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} id Model id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueDeleteById(id: string, options?: any) {
-        return BriqueApiFp(this.configuration).briqueDeleteById(id, options)(this.fetch, this.basePath);
+    public brickDeleteById(id: string, options?: any) {
+        return BrickApiFp(this.configuration).brickDeleteById(id, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1662,10 +1662,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} id Model id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueExistsGetBriquesidExists(id: string, options?: any) {
-        return BriqueApiFp(this.configuration).briqueExistsGetBriquesidExists(id, options)(this.fetch, this.basePath);
+    public brickExistsGetBricksidExists(id: string, options?: any) {
+        return BrickApiFp(this.configuration).brickExistsGetBricksidExists(id, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1674,10 +1674,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} id Model id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueExistsHeadBriquesid(id: string, options?: any) {
-        return BriqueApiFp(this.configuration).briqueExistsHeadBriquesid(id, options)(this.fetch, this.basePath);
+    public brickExistsHeadBricksid(id: string, options?: any) {
+        return BrickApiFp(this.configuration).brickExistsHeadBricksid(id, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1686,10 +1686,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} [filter] Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueFind(filter?: string, options?: any) {
-        return BriqueApiFp(this.configuration).briqueFind(filter, options)(this.fetch, this.basePath);
+    public brickFind(filter?: string, options?: any) {
+        return BrickApiFp(this.configuration).brickFind(filter, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1699,10 +1699,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} [filter] Filter defining fields and include - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueFindById(id: string, filter?: string, options?: any) {
-        return BriqueApiFp(this.configuration).briqueFindById(id, filter, options)(this.fetch, this.basePath);
+    public brickFindById(id: string, filter?: string, options?: any) {
+        return BrickApiFp(this.configuration).brickFindById(id, filter, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1711,10 +1711,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} [filter] Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueFindOne(filter?: string, options?: any) {
-        return BriqueApiFp(this.configuration).briqueFindOne(filter, options)(this.fetch, this.basePath);
+    public brickFindOne(filter?: string, options?: any) {
+        return BrickApiFp(this.configuration).brickFindOne(filter, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1723,23 +1723,23 @@ export class BriqueApi extends BaseAPI {
      * @param {} [data] Model instance data
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briquePatchOrCreate(data?: Brique, options?: any) {
-        return BriqueApiFp(this.configuration).briquePatchOrCreate(data, options)(this.fetch, this.basePath);
+    public brickPatchOrCreate(data?: Brick, options?: any) {
+        return BrickApiFp(this.configuration).brickPatchOrCreate(data, options)(this.fetch, this.basePath);
     }
 
     /**
      * 
      * @summary Patch attributes for a model instance and persist it into the data source.
-     * @param {} id brique id
+     * @param {} id brick id
      * @param {} [data] An object of model property name/value pairs
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briquePrototypePatchAttributes(id: string, data?: Brique, options?: any) {
-        return BriqueApiFp(this.configuration).briquePrototypePatchAttributes(id, data, options)(this.fetch, this.basePath);
+    public brickPrototypePatchAttributes(id: string, data?: Brick, options?: any) {
+        return BrickApiFp(this.configuration).brickPrototypePatchAttributes(id, data, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1749,10 +1749,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} [data] Model instance data
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueReplaceByIdPostBriquesidReplace(id: string, data?: Brique, options?: any) {
-        return BriqueApiFp(this.configuration).briqueReplaceByIdPostBriquesidReplace(id, data, options)(this.fetch, this.basePath);
+    public brickReplaceByIdPostBricksidReplace(id: string, data?: Brick, options?: any) {
+        return BrickApiFp(this.configuration).brickReplaceByIdPostBricksidReplace(id, data, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1762,10 +1762,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} [data] Model instance data
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueReplaceByIdPutBriquesid(id: string, data?: Brique, options?: any) {
-        return BriqueApiFp(this.configuration).briqueReplaceByIdPutBriquesid(id, data, options)(this.fetch, this.basePath);
+    public brickReplaceByIdPutBricksid(id: string, data?: Brick, options?: any) {
+        return BrickApiFp(this.configuration).brickReplaceByIdPutBricksid(id, data, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1774,10 +1774,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} [data] Model instance data
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueReplaceOrCreatePostBriquesReplaceOrCreate(data?: Brique, options?: any) {
-        return BriqueApiFp(this.configuration).briqueReplaceOrCreatePostBriquesReplaceOrCreate(data, options)(this.fetch, this.basePath);
+    public brickReplaceOrCreatePostBricksReplaceOrCreate(data?: Brick, options?: any) {
+        return BrickApiFp(this.configuration).brickReplaceOrCreatePostBricksReplaceOrCreate(data, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1786,10 +1786,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} [data] Model instance data
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueReplaceOrCreatePutBriques(data?: Brique, options?: any) {
-        return BriqueApiFp(this.configuration).briqueReplaceOrCreatePutBriques(data, options)(this.fetch, this.basePath);
+    public brickReplaceOrCreatePutBricks(data?: Brick, options?: any) {
+        return BrickApiFp(this.configuration).brickReplaceOrCreatePutBricks(data, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1799,10 +1799,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} [data] An object of model property name/value pairs
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueUpdateAll(where?: string, data?: Brique, options?: any) {
-        return BriqueApiFp(this.configuration).briqueUpdateAll(where, data, options)(this.fetch, this.basePath);
+    public brickUpdateAll(where?: string, data?: Brick, options?: any) {
+        return BrickApiFp(this.configuration).brickUpdateAll(where, data, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1812,10 +1812,10 @@ export class BriqueApi extends BaseAPI {
      * @param {} [data] An object of model property name/value pairs
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BriqueApi
+     * @memberof BrickApi
      */
-    public briqueUpsertWithWhere(where?: string, data?: Brique, options?: any) {
-        return BriqueApiFp(this.configuration).briqueUpsertWithWhere(where, data, options)(this.fetch, this.basePath);
+    public brickUpsertWithWhere(where?: string, data?: Brick, options?: any) {
+        return BrickApiFp(this.configuration).brickUpsertWithWhere(where, data, options)(this.fetch, this.basePath);
     }
 
 }
@@ -2149,18 +2149,18 @@ export const ModuleApiFetchParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary Crée une instance dans briqueId de ce modèle.
+         * @summary Crée une instance dans brickId de ce modèle.
          * @param {string} id module id
-         * @param {Brique} [data] 
+         * @param {Brick} [data] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        modulePrototypeCreateBriqueId(id: string, data?: Brique, options: any = {}): FetchArgs {
+        modulePrototypeCreateBrickId(id: string, data?: Brick, options: any = {}): FetchArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling modulePrototypeCreateBriqueId.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling modulePrototypeCreateBrickId.');
             }
-            const localVarPath = `/modules/{id}/briqueId`
+            const localVarPath = `/modules/{id}/brickId`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
@@ -2173,7 +2173,7 @@ export const ModuleApiFetchParamCreator = function (configuration?: Configuratio
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"Brique" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            const needsSerialization = (<any>"Brick" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.body =  needsSerialization ? JSON.stringify(data || {}) : (data || "");
 
             return {
@@ -2183,17 +2183,17 @@ export const ModuleApiFetchParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary Supprime briqueId de ce modèle.
+         * @summary Supprime brickId de ce modèle.
          * @param {string} id module id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        modulePrototypeDestroyBriqueId(id: string, options: any = {}): FetchArgs {
+        modulePrototypeDestroyBrickId(id: string, options: any = {}): FetchArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling modulePrototypeDestroyBriqueId.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling modulePrototypeDestroyBrickId.');
             }
-            const localVarPath = `/modules/{id}/briqueId`
+            const localVarPath = `/modules/{id}/brickId`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'DELETE' }, options);
@@ -2212,18 +2212,18 @@ export const ModuleApiFetchParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary Extrait la relation hasOne briqueId.
+         * @summary Extrait la relation hasOne brickId.
          * @param {string} id module id
          * @param {boolean} [refresh] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        modulePrototypeGetBriqueId(id: string, refresh?: boolean, options: any = {}): FetchArgs {
+        modulePrototypeGetBrickId(id: string, refresh?: boolean, options: any = {}): FetchArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling modulePrototypeGetBriqueId.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling modulePrototypeGetBrickId.');
             }
-            const localVarPath = `/modules/{id}/briqueId`
+            const localVarPath = `/modules/{id}/brickId`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
@@ -2280,18 +2280,18 @@ export const ModuleApiFetchParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary Mettez à jour briqueId de ce modèle.
+         * @summary Mettez à jour brickId de ce modèle.
          * @param {string} id module id
-         * @param {Brique} [data] 
+         * @param {Brick} [data] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        modulePrototypeUpdateBriqueId(id: string, data?: Brique, options: any = {}): FetchArgs {
+        modulePrototypeUpdateBrickId(id: string, data?: Brick, options: any = {}): FetchArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling modulePrototypeUpdateBriqueId.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling modulePrototypeUpdateBrickId.');
             }
-            const localVarPath = `/modules/{id}/briqueId`
+            const localVarPath = `/modules/{id}/brickId`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'PUT' }, options);
@@ -2304,7 +2304,7 @@ export const ModuleApiFetchParamCreator = function (configuration?: Configuratio
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"Brique" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            const needsSerialization = (<any>"Brick" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.body =  needsSerialization ? JSON.stringify(data || {}) : (data || "");
 
             return {
@@ -2723,14 +2723,14 @@ export const ModuleApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Crée une instance dans briqueId de ce modèle.
+         * @summary Crée une instance dans brickId de ce modèle.
          * @param {string} id module id
-         * @param {Brique} [data] 
+         * @param {Brick} [data] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        modulePrototypeCreateBriqueId(id: string, data?: Brique, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brique> {
-            const localVarFetchArgs = ModuleApiFetchParamCreator(configuration).modulePrototypeCreateBriqueId(id, data, options);
+        modulePrototypeCreateBrickId(id: string, data?: Brick, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brick> {
+            const localVarFetchArgs = ModuleApiFetchParamCreator(configuration).modulePrototypeCreateBrickId(id, data, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -2743,13 +2743,13 @@ export const ModuleApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Supprime briqueId de ce modèle.
+         * @summary Supprime brickId de ce modèle.
          * @param {string} id module id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        modulePrototypeDestroyBriqueId(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
-            const localVarFetchArgs = ModuleApiFetchParamCreator(configuration).modulePrototypeDestroyBriqueId(id, options);
+        modulePrototypeDestroyBrickId(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
+            const localVarFetchArgs = ModuleApiFetchParamCreator(configuration).modulePrototypeDestroyBrickId(id, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -2762,14 +2762,14 @@ export const ModuleApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Extrait la relation hasOne briqueId.
+         * @summary Extrait la relation hasOne brickId.
          * @param {string} id module id
          * @param {boolean} [refresh] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        modulePrototypeGetBriqueId(id: string, refresh?: boolean, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brique> {
-            const localVarFetchArgs = ModuleApiFetchParamCreator(configuration).modulePrototypeGetBriqueId(id, refresh, options);
+        modulePrototypeGetBrickId(id: string, refresh?: boolean, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brick> {
+            const localVarFetchArgs = ModuleApiFetchParamCreator(configuration).modulePrototypeGetBrickId(id, refresh, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -2802,14 +2802,14 @@ export const ModuleApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Mettez à jour briqueId de ce modèle.
+         * @summary Mettez à jour brickId de ce modèle.
          * @param {string} id module id
-         * @param {Brique} [data] 
+         * @param {Brick} [data] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        modulePrototypeUpdateBriqueId(id: string, data?: Brique, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brique> {
-            const localVarFetchArgs = ModuleApiFetchParamCreator(configuration).modulePrototypeUpdateBriqueId(id, data, options);
+        modulePrototypeUpdateBrickId(id: string, data?: Brick, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Brick> {
+            const localVarFetchArgs = ModuleApiFetchParamCreator(configuration).modulePrototypeUpdateBrickId(id, data, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -3060,35 +3060,35 @@ export const ModuleApiFactory = function (configuration?: Configuration, fetch?:
         },
         /**
          * 
-         * @summary Crée une instance dans briqueId de ce modèle.
+         * @summary Crée une instance dans brickId de ce modèle.
          * @param {string} id module id
-         * @param {Brique} [data] 
+         * @param {Brick} [data] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        modulePrototypeCreateBriqueId(id: string, data?: Brique, options?: any) {
-            return ModuleApiFp(configuration).modulePrototypeCreateBriqueId(id, data, options)(fetch, basePath);
+        modulePrototypeCreateBrickId(id: string, data?: Brick, options?: any) {
+            return ModuleApiFp(configuration).modulePrototypeCreateBrickId(id, data, options)(fetch, basePath);
         },
         /**
          * 
-         * @summary Supprime briqueId de ce modèle.
+         * @summary Supprime brickId de ce modèle.
          * @param {string} id module id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        modulePrototypeDestroyBriqueId(id: string, options?: any) {
-            return ModuleApiFp(configuration).modulePrototypeDestroyBriqueId(id, options)(fetch, basePath);
+        modulePrototypeDestroyBrickId(id: string, options?: any) {
+            return ModuleApiFp(configuration).modulePrototypeDestroyBrickId(id, options)(fetch, basePath);
         },
         /**
          * 
-         * @summary Extrait la relation hasOne briqueId.
+         * @summary Extrait la relation hasOne brickId.
          * @param {string} id module id
          * @param {boolean} [refresh] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        modulePrototypeGetBriqueId(id: string, refresh?: boolean, options?: any) {
-            return ModuleApiFp(configuration).modulePrototypeGetBriqueId(id, refresh, options)(fetch, basePath);
+        modulePrototypeGetBrickId(id: string, refresh?: boolean, options?: any) {
+            return ModuleApiFp(configuration).modulePrototypeGetBrickId(id, refresh, options)(fetch, basePath);
         },
         /**
          * 
@@ -3103,14 +3103,14 @@ export const ModuleApiFactory = function (configuration?: Configuration, fetch?:
         },
         /**
          * 
-         * @summary Mettez à jour briqueId de ce modèle.
+         * @summary Mettez à jour brickId de ce modèle.
          * @param {string} id module id
-         * @param {Brique} [data] 
+         * @param {Brick} [data] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        modulePrototypeUpdateBriqueId(id: string, data?: Brique, options?: any) {
-            return ModuleApiFp(configuration).modulePrototypeUpdateBriqueId(id, data, options)(fetch, basePath);
+        modulePrototypeUpdateBrickId(id: string, data?: Brick, options?: any) {
+            return ModuleApiFp(configuration).modulePrototypeUpdateBrickId(id, data, options)(fetch, basePath);
         },
         /**
          * 
@@ -3321,40 +3321,40 @@ export class ModuleApi extends BaseAPI {
 
     /**
      * 
-     * @summary Crée une instance dans briqueId de ce modèle.
+     * @summary Crée une instance dans brickId de ce modèle.
      * @param {} id module id
      * @param {} [data] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ModuleApi
      */
-    public modulePrototypeCreateBriqueId(id: string, data?: Brique, options?: any) {
-        return ModuleApiFp(this.configuration).modulePrototypeCreateBriqueId(id, data, options)(this.fetch, this.basePath);
+    public modulePrototypeCreateBrickId(id: string, data?: Brick, options?: any) {
+        return ModuleApiFp(this.configuration).modulePrototypeCreateBrickId(id, data, options)(this.fetch, this.basePath);
     }
 
     /**
      * 
-     * @summary Supprime briqueId de ce modèle.
+     * @summary Supprime brickId de ce modèle.
      * @param {} id module id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ModuleApi
      */
-    public modulePrototypeDestroyBriqueId(id: string, options?: any) {
-        return ModuleApiFp(this.configuration).modulePrototypeDestroyBriqueId(id, options)(this.fetch, this.basePath);
+    public modulePrototypeDestroyBrickId(id: string, options?: any) {
+        return ModuleApiFp(this.configuration).modulePrototypeDestroyBrickId(id, options)(this.fetch, this.basePath);
     }
 
     /**
      * 
-     * @summary Extrait la relation hasOne briqueId.
+     * @summary Extrait la relation hasOne brickId.
      * @param {} id module id
      * @param {} [refresh] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ModuleApi
      */
-    public modulePrototypeGetBriqueId(id: string, refresh?: boolean, options?: any) {
-        return ModuleApiFp(this.configuration).modulePrototypeGetBriqueId(id, refresh, options)(this.fetch, this.basePath);
+    public modulePrototypeGetBrickId(id: string, refresh?: boolean, options?: any) {
+        return ModuleApiFp(this.configuration).modulePrototypeGetBrickId(id, refresh, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -3372,15 +3372,15 @@ export class ModuleApi extends BaseAPI {
 
     /**
      * 
-     * @summary Mettez à jour briqueId de ce modèle.
+     * @summary Mettez à jour brickId de ce modèle.
      * @param {} id module id
      * @param {} [data] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ModuleApi
      */
-    public modulePrototypeUpdateBriqueId(id: string, data?: Brique, options?: any) {
-        return ModuleApiFp(this.configuration).modulePrototypeUpdateBriqueId(id, data, options)(this.fetch, this.basePath);
+    public modulePrototypeUpdateBrickId(id: string, data?: Brick, options?: any) {
+        return ModuleApiFp(this.configuration).modulePrototypeUpdateBrickId(id, data, options)(this.fetch, this.basePath);
     }
 
     /**

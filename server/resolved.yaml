@@ -701,12 +701,12 @@ paths:
         '204':
           description: Request was successful
       deprecated: false
-  /briques:
+  /bricks:
     post:
       tags:
-        - brique
+        - brick
       summary: Create a new instance of the model and persist it into the data source.
-      operationId: brique.create
+      operationId: brick.create
       parameters:
         - name: data
           in: body
@@ -714,18 +714,18 @@ paths:
           required: false
           schema:
             description: Model instance data
-            $ref: '#/definitions/$new_brique'
+            $ref: '#/definitions/$new_brick'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       deprecated: false
     patch:
       tags:
-        - brique
+        - brick
       summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: brique.patchOrCreate
+      operationId: brick.patchOrCreate
       parameters:
         - name: data
           in: body
@@ -733,18 +733,18 @@ paths:
           required: false
           schema:
             description: Model instance data
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       deprecated: false
     put:
       tags:
-        - brique
+        - brick
       summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: brique.replaceOrCreate__put_briques
+      operationId: brick.replaceOrCreate__put_bricks
       parameters:
         - name: data
           in: body
@@ -752,18 +752,18 @@ paths:
           required: false
           schema:
             description: Model instance data
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       deprecated: false
     get:
       tags:
-        - brique
+        - brick
       summary: Find all instances of the model matched by filter from the data source.
-      operationId: brique.find
+      operationId: brick.find
       parameters:
         - name: filter
           in: query
@@ -777,14 +777,14 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/brique'
+              $ref: '#/definitions/brick'
       deprecated: false
-  /briques/replaceOrCreate:
+  /bricks/replaceOrCreate:
     post:
       tags:
-        - brique
+        - brick
       summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: brique.replaceOrCreate__post_briques_replaceOrCreate
+      operationId: brick.replaceOrCreate__post_bricks_replaceOrCreate
       parameters:
         - name: data
           in: body
@@ -792,19 +792,19 @@ paths:
           required: false
           schema:
             description: Model instance data
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       deprecated: false
-  /briques/upsertWithWhere:
+  /bricks/upsertWithWhere:
     post:
       tags:
-        - brique
+        - brick
       summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
-      operationId: brique.upsertWithWhere
+      operationId: brick.upsertWithWhere
       parameters:
         - name: where
           in: query
@@ -818,19 +818,19 @@ paths:
           required: false
           schema:
             description: An object of model property name/value pairs
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       deprecated: false
-  '/briques/{id}/exists':
+  '/bricks/{id}/exists':
     get:
       tags:
-        - brique
+        - brick
       summary: Check whether a model instance exists in the data source.
-      operationId: 'brique.exists__get_briques_{id}_exists'
+      operationId: 'brick.exists__get_bricks_{id}_exists'
       parameters:
         - name: id
           in: path
@@ -847,12 +847,12 @@ paths:
               exists:
                 type: boolean
       deprecated: false
-  '/briques/{id}':
+  '/bricks/{id}':
     head:
       tags:
-        - brique
+        - brick
       summary: Check whether a model instance exists in the data source.
-      operationId: 'brique.exists__head_briques_{id}'
+      operationId: 'brick.exists__head_bricks_{id}'
       parameters:
         - name: id
           in: path
@@ -871,9 +871,9 @@ paths:
       deprecated: false
     get:
       tags:
-        - brique
+        - brick
       summary: 'Find a model instance by {{id}} from the data source.'
-      operationId: brique.findById
+      operationId: brick.findById
       parameters:
         - name: id
           in: path
@@ -891,13 +891,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       deprecated: false
     put:
       tags:
-        - brique
+        - brick
       summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: 'brique.replaceById__put_briques_{id}'
+      operationId: 'brick.replaceById__put_bricks_{id}'
       parameters:
         - name: id
           in: path
@@ -911,18 +911,18 @@ paths:
           required: false
           schema:
             description: Model instance data
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       deprecated: false
     delete:
       tags:
-        - brique
+        - brick
       summary: 'Delete a model instance by {{id}} from the data source.'
-      operationId: brique.deleteById
+      operationId: brick.deleteById
       parameters:
         - name: id
           in: path
@@ -938,13 +938,13 @@ paths:
       deprecated: false
     patch:
       tags:
-        - brique
+        - brick
       summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: brique.prototype.patchAttributes
+      operationId: brick.prototype.patchAttributes
       parameters:
         - name: id
           in: path
-          description: brique id
+          description: brick id
           required: true
           type: string
           format: JSON
@@ -954,19 +954,19 @@ paths:
           required: false
           schema:
             description: An object of model property name/value pairs
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       deprecated: false
-  '/briques/{id}/replace':
+  '/bricks/{id}/replace':
     post:
       tags:
-        - brique
+        - brick
       summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: 'brique.replaceById__post_briques_{id}_replace'
+      operationId: 'brick.replaceById__post_bricks_{id}_replace'
       parameters:
         - name: id
           in: path
@@ -980,19 +980,19 @@ paths:
           required: false
           schema:
             description: Model instance data
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       deprecated: false
-  /briques/findOne:
+  /bricks/findOne:
     get:
       tags:
-        - brique
+        - brick
       summary: Find first instance of the model matched by filter from the data source.
-      operationId: brique.findOne
+      operationId: brick.findOne
       parameters:
         - name: filter
           in: query
@@ -1004,14 +1004,14 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       deprecated: false
-  /briques/update:
+  /bricks/update:
     post:
       tags:
-        - brique
+        - brick
       summary: 'Update instances of the model matched by {{where}} from the data source.'
-      operationId: brique.updateAll
+      operationId: brick.updateAll
       parameters:
         - name: where
           in: query
@@ -1025,7 +1025,7 @@ paths:
           required: false
           schema:
             description: An object of model property name/value pairs
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       responses:
         '200':
           description: Request was successful
@@ -1038,12 +1038,12 @@ paths:
                 type: number
                 format: double
       deprecated: false
-  /briques/count:
+  /bricks/count:
     get:
       tags:
-        - brique
+        - brick
       summary: Count instances of the model matched by where from the data source.
-      operationId: brique.count
+      operationId: brick.count
       parameters:
         - name: where
           in: query
@@ -1061,12 +1061,12 @@ paths:
                 type: number
                 format: double
       deprecated: false
-  /briques/change-stream:
+  /bricks/change-stream:
     post:
       tags:
-        - brique
+        - brick
       summary: Create a change stream.
-      operationId: brique.createChangeStream__post_briques_change-stream
+      operationId: brick.createChangeStream__post_bricks_change-stream
       parameters:
         - name: paramsStream
           in: formData
@@ -1081,9 +1081,9 @@ paths:
       deprecated: false
     get:
       tags:
-        - brique
+        - brick
       summary: Create a change stream.
-      operationId: brique.createChangeStream__get_briques_change-stream
+      operationId: brick.createChangeStream__get_bricks_change-stream
       parameters:
         - name: paramsStream
           in: query
@@ -1096,12 +1096,12 @@ paths:
           schema:
             type: file
       deprecated: false
-  '/modules/{id}/briqueId':
+  '/modules/{id}/brickId':
     get:
       tags:
         - module
-      summary: Extrait la relation hasOne briqueId.
-      operationId: module.prototype.__get__briqueId
+      summary: Extrait la relation hasOne brickId.
+      operationId: module.prototype.__get__brickId
       parameters:
         - name: id
           in: path
@@ -1117,13 +1117,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       deprecated: false
     post:
       tags:
         - module
-      summary: Crée une instance dans briqueId de ce modèle.
-      operationId: module.prototype.__create__briqueId
+      summary: Crée une instance dans brickId de ce modèle.
+      operationId: module.prototype.__create__brickId
       parameters:
         - name: id
           in: path
@@ -1135,18 +1135,18 @@ paths:
           in: body
           required: false
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       deprecated: false
     put:
       tags:
         - module
-      summary: Mettez à jour briqueId de ce modèle.
-      operationId: module.prototype.__update__briqueId
+      summary: Mettez à jour brickId de ce modèle.
+      operationId: module.prototype.__update__brickId
       parameters:
         - name: id
           in: path
@@ -1158,18 +1158,18 @@ paths:
           in: body
           required: false
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/brique'
+            $ref: '#/definitions/brick'
       deprecated: false
     delete:
       tags:
         - module
-      summary: Supprime briqueId de ce modèle.
-      operationId: module.prototype.__destroy__briqueId
+      summary: Supprime brickId de ce modèle.
+      operationId: module.prototype.__destroy__brickId
       parameters:
         - name: id
           in: path
@@ -2143,7 +2143,7 @@ paths:
       deprecated: false
 tags:
   - name: User
-  - name: brique
+  - name: brick
   - name: module
   - name: session
 consumes:
@@ -2207,12 +2207,12 @@ definitions:
       emailVerified:
         type: boolean
       id:
-        type: number
-        format: double
+        type: string
     required:
+      - id
       - email
     additionalProperties: false
-  $new_brique:
+  $new_brick:
     properties:
       name:
         type: string
@@ -2227,14 +2227,13 @@ definitions:
         type: string
         format: date-time
       moduleId:
-        type: number
-        format: double
+        type: string
     required:
       - name
       - logo
       - modified_date
     additionalProperties: false
-  brique:
+  brick:
     properties:
       name:
         type: string
@@ -2249,12 +2248,11 @@ definitions:
         type: string
         format: date-time
       id:
-        type: number
-        format: double
+        type: string
       moduleId:
-        type: number
-        format: double
+        type: string
     required:
+      - id
       - name
       - logo
       - modified_date
@@ -2280,9 +2278,9 @@ definitions:
       logo:
         type: string
       id:
-        type: number
-        format: double
+        type: string
     required:
+      - id
       - description
       - logo
     additionalProperties: false
@@ -2297,20 +2295,19 @@ definitions:
         format: date-time
       location:
         type: string
-      module_id:
+      moduleId:
         type: string
       id:
-        type: number
-        format: double
+        type: string
       sessionId:
-        type: number
-        format: double
+        type: string
     required:
+      - id
       - name
       - description
       - date
       - location
-      - module_id
+      - moduleId
     additionalProperties: false
   $new_session:
     properties:
@@ -2323,15 +2320,14 @@ definitions:
         format: date-time
       location:
         type: string
-      module_id:
+      moduleId:
         type: string
       sessionId:
-        type: number
-        format: double
+        type: string
     required:
       - name
       - description
       - date
       - location
-      - module_id
+      - moduleId
     additionalProperties: false

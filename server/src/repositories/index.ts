@@ -1,3 +1,3 @@
-export * from './brique.repository';
+export * from './brick.repository';
 export * from './module.repository';
 export * from './session.repository';

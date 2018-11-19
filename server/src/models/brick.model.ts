@@ -1,7 +1,7 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property } from '@loopback/repository';
 
 @model()
-export class Brique extends Entity {
+export class Brick extends Entity {
   @property({
     type: 'string',
     required: true,
@@ -37,7 +37,7 @@ export class Brique extends Entity {
   })
   modifiedDate: string;
 
-  constructor(data?: Partial<Brique>) {
+  constructor(data?: Partial<Brick>) {
     super(data);
   }
 }
