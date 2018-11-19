@@ -15,7 +15,7 @@ import {
   del,
   requestBody,
 } from '@loopback/rest';
-import { Brick } from '../models';
+import { Brick, Module } from '../models';
 import { BrickRepository } from '../repositories';
 
 export class BrickController {
@@ -95,6 +95,18 @@ export class BrickController {
     return await this.brickRepository.findById(id);
   }
 
+  @get('/bricks/{id}/modules', {
+    responses: {
+      '200': {
+        description: 'Brick modules',
+        content: { 'application/json': { schema: { 'x-ts-type': Brick } } },
+      },
+    },
+  })
+  async getModules(@param.path.string('id') id: string): Promise<Array<Module>> {
+    return await this.brickRepository.modules(id).find();
+  }
+
   @patch('/bricks/{id}', {
     responses: {
       '204': {
@@ -118,5 +130,13 @@ export class BrickController {
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.brickRepository.deleteById(id);
+  }
+
+  @post('/bricks/{id}/module')
+  async createModule(
+    @param.path.string('id') brickId: typeof Brick.prototype.id,
+    @requestBody() moduleData: Module,
+  ): Promise<Module> {
+    return await this.brickRepository.modules(brickId).create(moduleData);
   }
 }

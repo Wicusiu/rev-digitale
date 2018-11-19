@@ -1,4 +1,5 @@
-import { Entity, model, property } from '@loopback/repository';
+import { Entity, model, property, hasMany } from '@loopback/repository';
+import { Module } from './module.model';
 
 @model()
 export class Brick extends Entity {
@@ -36,6 +37,9 @@ export class Brick extends Entity {
     required: true,
   })
   modifiedDate: string;
+
+  @hasMany(() => Module)
+  modules?: Module[];
 
   constructor(data?: Partial<Brick>) {
     super(data);

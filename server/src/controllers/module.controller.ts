@@ -15,20 +15,20 @@ import {
   del,
   requestBody,
 } from '@loopback/rest';
-import {Module} from '../models';
-import {ModuleRepository} from '../repositories';
+import { Module, Brick } from '../models';
+import { ModuleRepository } from '../repositories';
 
 export class ModuleController {
   constructor(
     @repository(ModuleRepository)
-    public moduleRepository : ModuleRepository,
-  ) {}
+    public moduleRepository: ModuleRepository,
+  ) { }
 
   @post('/modules', {
     responses: {
       '200': {
         description: 'Module model instance',
-        content: {'application/json': {schema: {'x-ts-type': Module}}},
+        content: { 'application/json': { schema: { 'x-ts-type': Module } } },
       },
     },
   })
@@ -40,7 +40,7 @@ export class ModuleController {
     responses: {
       '200': {
         description: 'Module model count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -56,7 +56,7 @@ export class ModuleController {
         description: 'Array of Module model instances',
         content: {
           'application/json': {
-            schema: {type: 'array', items: {'x-ts-type': Module}},
+            schema: { type: 'array', items: { 'x-ts-type': Module } },
           },
         },
       },
@@ -72,7 +72,7 @@ export class ModuleController {
     responses: {
       '200': {
         description: 'Module PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -87,7 +87,7 @@ export class ModuleController {
     responses: {
       '200': {
         description: 'Module model instance',
-        content: {'application/json': {schema: {'x-ts-type': Module}}},
+        content: { 'application/json': { schema: { 'x-ts-type': Module } } },
       },
     },
   })
@@ -118,5 +118,12 @@ export class ModuleController {
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.moduleRepository.deleteById(id);
+  }
+
+  @get('/modules/{id}/brick')
+  async getBrick(
+    @param.path.string('id') moduleId: typeof Module.prototype.id,
+  ): Promise<Brick> {
+    return await this.moduleRepository.brick(moduleId);
   }
 }

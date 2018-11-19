@@ -1,5 +1,6 @@
-import { Entity, model, property, belongsTo } from '@loopback/repository';
+import { Entity, model, property, belongsTo, hasMany } from '@loopback/repository';
 import { Brick } from './brick.model';
+import { Session } from './session.model';
 
 @model()
 export class Module extends Entity {
@@ -24,6 +25,9 @@ export class Module extends Entity {
 
   @belongsTo(() => Brick)
   brickId: string;
+
+  @hasMany(() => Session)
+  sessions?: Session[];
 
   constructor(data?: Partial<Module>) {
     super(data);
