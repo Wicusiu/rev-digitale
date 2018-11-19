@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny" : false,
+    "module": "commonJs",
+    "moduleResolution": "node",
+    "target": "es5",
+    "jsx": "react",
+    "allowSyntheticDefaultImports" : false,
+    "lib": ["es2015", "es2017", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "src/components/business/*",
+        "src/components/*",
+        "src/*"
+      ]
+    }
+  },
+  "exclude": [
+    ".cache-loader",
+    ".storybook",
+    ".vscode",
+    "build",
+    "node_modules",
+    "dist",
+    "*.jsx",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
+}

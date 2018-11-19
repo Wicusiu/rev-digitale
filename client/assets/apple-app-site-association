@@ -1,0 +1,28 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "NKA8UL8SN8.up.coop.com.debug",
+        "paths": [
+          "/account/validate/*",
+          "/login/passwordRecovery/*"
+        ]
+      },
+      {
+        "appID": "NKA8UL8SN8.up.coop.com.staging",
+        "paths": [
+          "/account/validate/*",
+          "/login/passwordRecovery/*"
+        ]
+      },
+      {
+        "appID": "NKA8UL8SN8.up.coop.com",
+        "paths": [
+          "/account/validate/*",
+          "/login/passwordRecovery/*"
+        ]
+      }
+    ]
+  }
+}

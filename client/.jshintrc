@@ -1,0 +1,12 @@
+{
+  "undef": true,
+  "unused": true,
+  "maxerr" : 10000,
+  "eqnull":true,
+  "eqeqeq":true,
+  "asi":true,
+  "lastsemic":true,
+  "browser": true,
+  "esversion": 6,
+  "node": true
+}

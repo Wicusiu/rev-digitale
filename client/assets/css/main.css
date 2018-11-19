@@ -1,0 +1,39 @@
+@import url('~react-leaflet-markercluster/dist/styles.min.css');
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+  font-size: 100%;
+}
+
+.icon-starHalfRating:before {
+  content: "\e838";
+}
+.icon-starHalfRating:after {
+  content: "\e838";
+}
+
+img,
+embed,
+object,
+video {
+  max-width: 100%;
+}
+
+/* Hide ZendDesk widget */
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .zEWidget-launcher {
+    display: none
+  }
+  label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+  }
+}
+
+.up-radio .up-control-text {
+  color: #369;
+}
