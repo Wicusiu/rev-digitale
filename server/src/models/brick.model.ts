@@ -34,7 +34,6 @@ export class Brick extends Entity {
 
   @property({
     type: 'date',
-    required: true,
   })
   modifiedDate: string;
 
