@@ -28,6 +28,7 @@
     "test:dev": "lb-mocha --allow-console-logs dist/test/**/*.js && npm run posttest",
     "prestart": "npm run build",
     "start": "node .",
+    "start:inspect": "npm run prestart ; node --inspect-brk=18764 .",
     "prepublishOnly": "npm run test"
   },
   "repository": {
@@ -44,6 +45,7 @@
     "src"
   ],
   "dependencies": {
+    "@loopback/authentication": "^1.0.5",
     "@loopback/boot": "^1.0.4",
     "@loopback/context": "^1.1.0",
     "@loopback/core": "^1.1.0",
@@ -53,12 +55,22 @@
     "@loopback/rest-explorer": "^1.1.1",
     "@loopback/service-proxy": "^1.0.2",
     "express-graphql": "^0.7.1",
+    "express-jwt": "^5.3.1",
+    "jsonwebtoken": "^8.4.0",
+    "jwks-rsa": "^1.3.0",
     "loopback-connector-mongodb": "^3.9.2",
-    "oasgraph": "^0.11.2"
+    "oasgraph": "^0.11.2",
+    "passport": "^0.4.0",
+    "passport-http": "^0.3.0",
+    "passport-http-bearer": "^1.0.1"
   },
   "devDependencies": {
     "@loopback/build": "^1.0.1",
     "@loopback/testlab": "^1.0.1",
-    "@types/node": "^10.11.2"
+    "@types/jsonwebtoken": "^8.3.0",
+    "@types/node": "^10.11.2",
+    "@types/passport": "^0.4.7",
+    "@types/passport-http": "^0.3.6",
+    "@types/passport-http-bearer": "^1.0.33"
   }
 }

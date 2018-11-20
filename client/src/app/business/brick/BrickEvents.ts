@@ -81,10 +81,10 @@ export const update = function (briqueService: IBrickService, entity: Brick) {
   };
 };
 
-export type DeleteBrickEventPayload = EventPayload<Brick>;
+export type DeleteBrickEventPayload = EventPayload<string>;
 export const DELETE_BRICK_EVENT = 'DELETE_BRICK_EVENT';
 
-const deleteEventCreator = (status: ACTION_STATUS, aggregate?: Brick, messages?: Array<IResultMessage>): Action<CountBrickEventPayload> => ({
+const deleteEventCreator = (status: ACTION_STATUS, aggregate?: string, messages?: Array<IResultMessage>): Action<DeleteBrickEventPayload> => ({
   payload: {
     status,
     aggregate,
@@ -97,7 +97,7 @@ const deleteEventCreator = (status: ACTION_STATUS, aggregate?: Brick, messages?:
 export const remove = (briqueService: IBrickService, id: string) => {
   return async (dispatch) => {
     dispatch(deleteEventCreator('PENDING'));
-    return briqueService.delete(id).then((entityDeleteResult: IActionResult<Brick>) => {
+    return briqueService.delete(id).then((entityDeleteResult: IActionResult<string>) => {
       dispatch(deleteEventCreator('SUCCESS', entityDeleteResult.entity));
       return entityDeleteResult;
     }).catch((error) => {

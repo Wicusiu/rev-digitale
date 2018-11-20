@@ -7,7 +7,7 @@ import HomeContainer from 'app/web/home/HomeContainer';
 
 export const routes = (
   <Route path="/" component={Background}>
-    <IndexRedirect to="/home"/>
+    <IndexRedirect to="/home" />
     <Route path="/home" component={HomeContainer} props={{ public: true }} />
     <Route path="*" component={Error404} />
   </Route>

@@ -15,15 +15,26 @@ import {
   del,
   requestBody,
 } from '@loopback/rest';
-import { Brick, Module } from '../models';
+
+import {
+  AuthenticationBindings,
+  UserProfile,
+  authenticate,
+} from '@loopback/authentication';
+
+import { Brick, Module, User } from '../models';
 import { BrickRepository } from '../repositories';
+import { inject } from '@loopback/context';
 
 export class BrickController {
   constructor(
     @repository(BrickRepository)
     public brickRepository: BrickRepository,
+    @inject(AuthenticationBindings.CURRENT_USER)
+    private user: User,
   ) { }
 
+  @authenticate('BearerStrategy')
   @post('/bricks', {
     responses: {
       '200': {
@@ -36,6 +47,7 @@ export class BrickController {
     return await this.brickRepository.create(brick);
   }
 
+  @authenticate('BearerStrategy')
   @get('/bricks/count', {
     responses: {
       '200': {
@@ -50,6 +62,7 @@ export class BrickController {
     return await this.brickRepository.count(where);
   }
 
+  @authenticate('BearerStrategy')
   @get('/bricks', {
     responses: {
       '200': {
@@ -68,6 +81,7 @@ export class BrickController {
     return await this.brickRepository.find(filter);
   }
 
+  @authenticate('BearerStrategy')
   @patch('/bricks', {
     responses: {
       '200': {
@@ -83,6 +97,7 @@ export class BrickController {
     return await this.brickRepository.updateAll(brick, where);
   }
 
+  @authenticate('BearerStrategy')
   @get('/bricks/{id}', {
     responses: {
       '200': {
@@ -95,6 +110,7 @@ export class BrickController {
     return await this.brickRepository.findById(id);
   }
 
+  @authenticate('BearerStrategy')
   @get('/bricks/{id}/modules', {
     responses: {
       '200': {
@@ -107,6 +123,7 @@ export class BrickController {
     return await this.brickRepository.modules(id).find();
   }
 
+  @authenticate('BearerStrategy')
   @patch('/bricks/{id}', {
     responses: {
       '204': {
@@ -121,6 +138,7 @@ export class BrickController {
     await this.brickRepository.updateById(id, brick);
   }
 
+  @authenticate('BearerStrategy')
   @del('/bricks/{id}', {
     responses: {
       '204': {
@@ -132,6 +150,7 @@ export class BrickController {
     await this.brickRepository.deleteById(id);
   }
 
+  @authenticate('BearerStrategy')
   @post('/bricks/{id}/module')
   async createModule(
     @param.path.string('id') brickId: typeof Brick.prototype.id,
