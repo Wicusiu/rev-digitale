@@ -1,16 +1,20 @@
-import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
-import {RepositoryMixin} from '@loopback/repository';
-import {RestApplication} from '@loopback/rest';
-import {ServiceMixin} from '@loopback/service-proxy';
-import {AppSequence} from './sequence';
+import { BootMixin } from '@loopback/boot';
+import { ApplicationConfig } from '@loopback/core';
+import { RepositoryMixin } from '@loopback/repository';
+import { RestApplication } from '@loopback/rest';
+import { ServiceMixin } from '@loopback/service-proxy';
+import { AppSequence } from './sequence';
 import * as path from 'path';
+
+import { RestExplorerComponent, RestExplorerBindings } from '@loopback/rest-explorer';
 
 export class RevolutionDigitaleApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
     super(options);
+
+    this.component(RestExplorerComponent);
 
     // Set up the custom sequence
     this.sequence(AppSequence);

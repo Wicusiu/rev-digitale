@@ -4,7 +4,7 @@ const request = require('request');
 const unzip = require('unzip2');
 
 const codeGenEndpoint = 'http://generator.swagger.io/api/gen/clients';
-const swaggerEndpoint = 'http://localhost:3000/explorer/swagger.json';
+const swaggerEndpoint = 'http://localhost:3000/openapi.json';
 
 const language = 'typescript-fetch';
 
@@ -16,7 +16,6 @@ request.get({
     throw error;
   }
 
-
   const swaggerObj = JSON.parse(body);
 
   const postBody = {
@@ -27,8 +26,7 @@ request.get({
       modelPackage: 'api.clients.settings'
     }
   };
-  console.log(swaggerObj)
-    
+
   request.post({
     'rejectUnauthorized': false,
     url: codeGenEndpoint + '/' + language,
@@ -46,11 +44,13 @@ request.get({
     }
 
     const responseObj = JSON.parse(body);
-    
+
     request({
       'rejectUnauthorized': false,
       url: responseObj.link,
       encoding: null
-    }).pipe(unzip.Extract({ path: 'src/app/api/mapper/swagger' }));
+    }).pipe(unzip.Extract({
+      path: 'src/app/api/mapper/swagger'
+    }));
   });
 });
