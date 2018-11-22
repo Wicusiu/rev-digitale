@@ -32,8 +32,7 @@ module.exports = {
     ],
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.tsx?$/,
         include: path.resolve(__dirname, path.join('src')),
         exclude: [/node_modules/, /build/, '/\.cache-loader/'],
@@ -75,8 +74,8 @@ module.exports = {
         use: 'file-loader?name=fonts/[name].[ext]'
       },
       {
-          test: /\.svg$/,
-          use: 'svg-inline-loader'
+        test: /\.svg$/,
+        use: 'svg-inline-loader'
       },
       {
         test: /\.(jpe?g|gif|png)$/,
@@ -96,11 +95,13 @@ module.exports = {
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
     }),
     new HTMLWebpackPlugin({
-      title: 'Mon application',
+      title: 'Up - (R)evolution Digitale',
       template: 'assets/index.html',
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
+    new ForkTsCheckerWebpackPlugin({
+      checkSyntacticErrors: true
+    }),
   ]
 };

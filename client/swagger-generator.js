@@ -50,7 +50,7 @@ request.get({
       url: responseObj.link,
       encoding: null
     }).pipe(unzip.Extract({
-      path: 'src/app/api/mapper/swagger'
+      path: 'src/app/api/mapper/swagger/v3/'
     }));
   });
 });

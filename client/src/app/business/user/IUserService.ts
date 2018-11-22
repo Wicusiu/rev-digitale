@@ -7,4 +7,5 @@ export interface Credentials {
 
 export interface IUserService {
   signIn: (credentials: Credentials) => Promise<IUser>;
+  read: (id: string) => Promise<IUser>;
 }

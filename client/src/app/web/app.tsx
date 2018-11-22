@@ -12,59 +12,64 @@ import { InstanceState } from 'app/reducers';
 import { IResultMessage } from 'common/actions';
 import { routes } from './routes';
 import ErrorPage from './ErrorPage';
-import { UpLoadingIndicator } from '@up-group/react-controls';
+import { UpLoadingIndicator, UpThemeProvider, UpDefaultTheme } from '@up-group/react-controls';
 
 interface ApplicationProps {
   store: any;
   history: any;
   onRouteUpdate: any;
   theme: any;
-  isFetching?:boolean;
+  isFetching?: boolean;
 }
 
 interface ApplicationState {
-  errors? : IResultMessage[];
-  isFetching : boolean;
+  errors?: IResultMessage[];
+  isFetching: boolean;
 }
 
 class Application extends React.Component<ApplicationProps, ApplicationState>{
 
   static defaultProps = {
-    isFetching : true,
+    isFetching: true,
   };
 
   constructor(props, context) {
     super(props, context);
     this.state = {
-      isFetching : props.isFetching,
-    } ;
+      isFetching: props.isFetching,
+    };
   }
 
   componentDidMount() {
     setTimeout(() => {
-      this.setState({ isFetching : false });
+      this.setState({ isFetching: false });
     }, 2000);
   }
 
   render() {
     if (this.state.errors) {
-      return <ErrorPage errors={ this.state.errors }  />;
+      return <ErrorPage errors={this.state.errors} />;
     }
 
     if (this.state.isFetching) {
-      return <Background>
-        <UpLoadingIndicator message={'Chargement en cours...'} isLoading={true} />
-        </Background>;
+      return (
+        <UpThemeProvider theme={UpDefaultTheme}>
+          <Background>
+            <UpLoadingIndicator message={'Chargement en cours...'} isLoading={true} />
+          </Background></UpThemeProvider>
+      );
     }
 
     return (
-      <Provider store={this.props.store}>
-        <Router history={this.props.history} onUpdate={this.props.onRouteUpdate}>
-          {
-            routes
-          }
-        </Router>
-      </Provider>);
+      <UpThemeProvider theme={UpDefaultTheme}>
+        <Provider store={this.props.store}>
+          <Router history={this.props.history} onUpdate={this.props.onRouteUpdate}>
+            {
+              routes
+            }
+          </Router>
+        </Provider>
+      </UpThemeProvider>);
   }
 }
 

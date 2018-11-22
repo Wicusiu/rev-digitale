@@ -7,8 +7,9 @@ const appInitialState: InstanceState = {
     },
     brick: {
     },
+    user: {
+    },
   },
-  form: null,
   routing: null,
 };
 

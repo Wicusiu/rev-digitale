@@ -5,7 +5,6 @@ import { IResultMessage } from 'common/actions';
 import { isEmpty } from 'common/utils';
 import { ErrorCode } from './ErrorCodes';
 
-// TODO : extract this to infra
 const middleware = function (dispatch, httpStatusCodeMiddlewareConfig): Middleware {
   return function (response: Response): Promise<Response> {
     const statusCodeToExecute = Object.getOwnPropertyNames(httpStatusCodeMiddlewareConfig).find((httpErrorCode) => {

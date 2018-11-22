@@ -12,7 +12,7 @@ export type ActionSize = 'icon' | 'xsmall' | 'small' | 'normal' | 'large' | 'xl'
 
 export type ActionType = 'save' | 'cancel' | 'print' | 'read' | 'edit' | 'delete' | 'add' | 'analyse' | 'open' | 'pay' | 'filter' | 'export' | 'document' | 'send' | 'search' | 'verify' | 'go_to_next' | 'go_to_previous' | 'enable' | 'disable';
 
-export type IntentType = 'primary' | 'secondary' | 'danger' | 'warning' | 'success' | 'info' | 'default' | 'error' | 'light' | 'social';
+export type IntentType = 'primary' | 'danger' | 'warning' | 'success' | 'info' | 'default' | 'error' | 'light';
 
 export interface IAction {
   label: string;

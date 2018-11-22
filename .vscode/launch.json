@@ -3,7 +3,9 @@
   // Pointez pour afficher la description des attributs existants.
   // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
-  "configurations": [{
+  "configurations": [
+
+    {
       "type": "node",
       "request": "attach",
       "name": "Attach",
@@ -12,8 +14,8 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome against localhost",
-      "url": "http://localhost:3000/explorer",
+      "name": "App on 1337",
+      "url": "http://localhost:1337",
       "webRoot": "${workspaceFolder}"
     }
   ]

@@ -34,4 +34,4 @@ const getMessageReducer: ReducerMap<MessageState, MESSAGE_EVENT> = {
   [UNPUBLISH_MESSAGE]: unPublishMessageReducer,
 };
 
-export const messageReducer = handleActions<MessageState, MESSAGE_EVENT>(getMessageReducer, INITIAL_STATE);
+export const MessageReducer = handleActions<MessageState, MESSAGE_EVENT>(getMessageReducer, INITIAL_STATE);

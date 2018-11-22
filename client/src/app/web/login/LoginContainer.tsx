@@ -1,46 +1,43 @@
 import * as React from 'react';
+
 import { connect, Dispatch } from 'react-redux';
 import { apiMiddleware } from 'app/api/ApiMiddlewares';
 import { InstanceState } from 'app/reducers';
-// import { Credentials } from 'user/user/IUserService';
-// import { UserService } from 'app/api/UserService';
 import { BASE_URL } from 'app/config';
-import { LoginComponent, LoginComponentProps } from 'app/web/login/LoginComponent';
+import LoginComponent, { LoginComponentProps } from 'app/web/login/LoginComponent';
 import { push } from 'react-router-redux';
-// import { SignIn, resendToken, logoutStatus } from 'user/user/UserAction';
+import { signIn, signOutEventCreator } from 'app/business/user/UserEvents';
+import { UserCredentials } from 'app/api/mapper/swagger/typescript-fetch-client';
+import { UserService } from 'app/api/UserService';
+import { WithThemeProps } from '@up-group/react-controls';
 import { RouteComponentProps } from 'react-router';
-// import { SignupArgs, SignInArgs } from 'app/api/mapper/swagger/typescript-fetch-client';
-import { makeJWTConfig } from 'app/api/JsonServiceBase';
 
 const mapDispatchToProps = function (dispatch: Dispatch<any>) {
-  // const userService = new UserService(BASE_URL, null, apiMiddleware(dispatch));
+  const userService = new UserService(BASE_URL, null, apiMiddleware(dispatch));
   return {
-    authUser: (credentials: any) => {
+    authUser: (credentials: UserCredentials) => {
       const args = { ...credentials };
-      if (args.device_type == null) {
-        args.device_type = 'SignInArgs.DeviceTypeEnum.Browser';
-      }
-      // return dispatch(SignIn(userService, args));
-    },
-    navigateTo: (path) => {
-      return dispatch(push(path));
+      return dispatch(signIn(userService, args));
     },
     onUserAuthenticated: () => {
-      // dispatch(redirectUserToDefaultPath());
+      return dispatch(push('/home'));
     },
     clearState: () => {
-      // return dispatch(logoutStatus('SUCCESS'));
+      dispatch(signOutEventCreator('SUCCESS'));
     },
   } as Partial<LoginComponentProps>;
 };
 
-const mapStateToProps = function (state: InstanceState, ownProps: LoginComponentProps & RouteComponentProps<any, { spaceType: string }>) {
+const mapStateToProps = function (state: InstanceState, ownProps: LoginComponentProps & WithThemeProps & RouteComponentProps<any, {}>) {
+
+  const passedProps = ownProps.route && ownProps.route.props ? ownProps.route.props : {};
 
   return {
-    // isFetching: state.user.user.isLoading,
-    // authToken: state.user.user.token,
-    // authenticatedUser: state.user.user.entity,
-    // errors: state.user.user.errors,
+    ...passedProps,
+    isFetching: state.application.user.isFetching,
+    authToken: state.application.user.authenticatedUser ? state.application.user.authenticatedUser.token : null,
+    authenticatedUser: state.application.user.authenticatedUser,
+    errors: state.application.user.errors,
   } as Partial<LoginComponentProps>;
 };
 

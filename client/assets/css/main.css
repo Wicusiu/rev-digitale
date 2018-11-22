@@ -1,5 +1,3 @@
-@import url('~react-leaflet-markercluster/dist/styles.min.css');
-
 body {
   margin: 0;
   padding: 0;
@@ -10,6 +8,7 @@ body {
 .icon-starHalfRating:before {
   content: "\e838";
 }
+
 .icon-starHalfRating:after {
   content: "\e838";
 }
@@ -23,17 +22,10 @@ video {
 
 /* Hide ZendDesk widget */
 @media screen and (min-width: 320px) and (max-width: 480px) {
-  .zEWidget-launcher {
-    display: none
-  }
   label {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 100%;
   }
-}
-
-.up-radio .up-control-text {
-  color: #369;
 }

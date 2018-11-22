@@ -1,14 +1,18 @@
-import { messageReducer, MessageState } from './message/MessageReducer';
+import { MessageReducer, MessageState } from './message/MessageReducer';
 import { combineReducers } from 'redux';
-import { BrickState } from './brick/BrickReducer';
+import { BrickState, BrickReducer } from './brick/BrickReducer';
+import { UserState, UserReducer } from './user/UserReducer';
 
 const combinedReducer = combineReducers({
-  message: messageReducer,
+  message: MessageReducer,
+  brick: BrickReducer,
+  user: UserReducer,
 });
 
 export interface ApplicationState {
   message: MessageState;
   brick: BrickState;
+  user: UserState;
 }
 
 export { combinedReducer as ApplicationReducer };

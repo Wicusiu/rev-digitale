@@ -7,8 +7,7 @@ const BASE_URL = process.env.NODE_ENV === 'production' ?
   // 'https://devupcitiz.solutions-implicit.fr/backend'
   // 'https://recupcitiz.solutions-implicit.fr/backend'
   // 'https://qa-paysdelaloire.up-maregion.fr/backend'
-  'http://localhost:58307'
-;
+  'http://localhost:3000';
 
 const DEFAULT_ERROR = 'Une erreur est survenue';
 
