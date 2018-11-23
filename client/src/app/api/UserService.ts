@@ -21,5 +21,4 @@ export class UserService extends JsonServiceBase<User> implements IUserService {
     const params = UserApiFetchParamCreator().usersIdGet(id);
     return this.fetch<User>(params.url, params.options);
   }
-
 }

@@ -10,7 +10,8 @@ export type EventPayload<T> = {
 
 export type ActionSize = 'icon' | 'xsmall' | 'small' | 'normal' | 'large' | 'xl';
 
-export type ActionType = 'save' | 'cancel' | 'print' | 'read' | 'edit' | 'delete' | 'add' | 'analyse' | 'open' | 'pay' | 'filter' | 'export' | 'document' | 'send' | 'search' | 'verify' | 'go_to_next' | 'go_to_previous' | 'enable' | 'disable';
+// export type ActionType = 'save' | 'cancel' | 'print' | 'read' | 'edit' | 'delete' | 'add' | 'analyse' | 'open' | 'pay' | 'filter' | 'export' | 'document' | 'send' | 'search' ;
+export type ActionType = 'save' | 'cancel' | 'read' | 'edit' | 'delete' | 'add' | 'open' | 'filter' | 'export' | 'document' | 'send' | 'search';
 
 export type IntentType = 'primary' | 'danger' | 'warning' | 'success' | 'info' | 'default' | 'error' | 'light';
 

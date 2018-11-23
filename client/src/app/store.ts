@@ -8,6 +8,7 @@ import reducers from './reducers';
 import { loadState, saveState } from './localStorage';
 import { routerMiddleware } from 'react-router-redux';
 import { browserHistory } from 'react-router';
+import { UserState } from './business/user/UserReducer';
 
 const persistedState = loadState();
 
@@ -50,15 +51,17 @@ const store = createStore(
 );
 
 const getStateForPersistence = (store) => {
-  return {};
+  const stateForPersistence: UserState = get(store.getState(), 'application.user', {});
+  stateForPersistence.errors = null;
+  return {
+    application: { user: stateForPersistence },
+  };
 };
 
 // TODO : Replace by redux-persist
 store.subscribe(throttle(
   () => {
-    saveState({
-      user: getStateForPersistence(store),
-    });
+    saveState(getStateForPersistence(store));
   },
   1000));
 

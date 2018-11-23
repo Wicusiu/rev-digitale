@@ -4,7 +4,7 @@ import appInitialState from 'app/initialState';
 import { Module } from 'app/api/mapper/swagger/typescript-fetch-client';
 import { StateWithPagination } from 'common/state/StateWithPagination';
 import { READ_MODULE_EVENT, ReadModuleEventPayload, UpdateModuleEventPayload, DeleteModuleEventPayload, AddModuleEventPayload, ADD_MODULE_EVENT, UPDATE_MODULE_EVENT, DELETE_MODULE_EVENT } from './ModuleEvents';
-import { DefaultReadEntityReducerFactory } from 'common/state/DefaultReadEntityReducer';
+import { DefaultReadEntityReducerFactory } from 'common/state/DefaultEntityReducer';
 
 export interface ModuleState extends StateWithPagination<Module> { }
 

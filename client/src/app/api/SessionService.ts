@@ -1,51 +1,56 @@
 import { JsonServiceBase, Middleware } from 'app/api/JsonServiceBase';
 import { IResultMessage, IActionResult } from 'common/actions';
-import { Brick, BrickApiFetchParamCreator } from './mapper/swagger/typescript-fetch-client';
-import { IBrickService } from 'app/business/brick/IBrickService';
+import { Session, SessionApiFetchParamCreator } from './mapper/swagger/typescript-fetch-client';
+import { ISessionService } from 'app/business/session/ISessionService';
 
-export class BrickService extends JsonServiceBase<Brick> implements IBrickService {
+export class SessionService extends JsonServiceBase<Session> implements ISessionService {
 
   constructor(endpoint: string, config: RequestInit, middlewares: Array<Middleware>) {
     super(endpoint, middlewares, { ...config, headers: { 'Content-Type': 'application/json' } });
   }
 
-  read(id: string): Promise<Brick> {
-    const params = BrickApiFetchParamCreator().brickFindById(id);
-    return this.fetch<Brick>(params.url, params.options);
+  read(id: string): Promise<Session> {
+    const params = SessionApiFetchParamCreator().sessionFindById(id);
+    return this.fetch<Session>(params.url, params.options);
   }
 
   count(): Promise<number> {
-    const params = BrickApiFetchParamCreator().brickCount();
+    const params = SessionApiFetchParamCreator().sessionCount();
     return this.fetch<number>(params.url, params.options);
   }
 
-  add(args: Brick): Promise<IActionResult<Brick>> {
-    const params = BrickApiFetchParamCreator().brickCreate(args);
-    return this.fetch<Brick>(params.url, params.options).then((brick: Brick) => {
+  add(args: Session): Promise<IActionResult<Session>> {
+    const params = SessionApiFetchParamCreator().sessionCreate(args);
+    return this.fetch<Session>(params.url, params.options).then((session: Session) => {
       return {
         succeeded: true,
-        entity: brick,
-      } as IActionResult<Brick>;
+        entity: session,
+      } as IActionResult<Session>;
     });
   }
 
-  update(args: Brick): Promise<IActionResult<Brick>> {
-    const params = BrickApiFetchParamCreator().brickPatchOrCreate(args);
-    return this.fetch<Brick>(params.url, params.options).then((brick: Brick) => {
+  update(args: Session): Promise<IActionResult<Session>> {
+    const params = SessionApiFetchParamCreator().sessionPatchOrCreate(args);
+    return this.fetch<Session>(params.url, params.options).then((session: Session) => {
       return {
         succeeded: true,
-        entity: brick,
-      } as IActionResult<Brick>;
+        entity: session,
+      } as IActionResult<Session>;
     });
   }
 
   delete(id: string): Promise<IActionResult<string>> {
-    const params = BrickApiFetchParamCreator().brickDeleteById(id);
+    const params = SessionApiFetchParamCreator().sessionDeleteById(id);
     return this.fetch<void>(params.url, params.options).then(() => {
       return {
         succeeded: true,
         entity: id,
       } as IActionResult<string>;
     });
+  }
+
+  all(): Promise<Array<Session>> {
+    const params = SessionApiFetchParamCreator().sessionFind();
+    return this.fetch<Array<Session>>(params.url, params.options);
   }
 }

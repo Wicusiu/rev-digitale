@@ -9,7 +9,7 @@ import { ThemeProps } from 'common/theme/theme';
 import { DeviceSmartphones } from 'common/utils/devices';
 import { InstanceState } from 'app/reducers';
 import { IUser } from 'app/business/user/User';
-import { WithThemeProps, UpBox } from '@up-group/react-controls';
+import { WithThemeProps, UpBox, UpDefaultTheme } from '@up-group/react-controls';
 import Avatar from 'app/components/display/Avatar';
 import Menu, { IMenuItem } from 'app/components/display/Menu';
 
@@ -130,16 +130,17 @@ export interface IHeaderState {
 }
 
 class HeaderView extends React.Component<IHeaderProps & WithThemeProps, IHeaderState> {
+
+  static defaultProps = {
+    theme: UpDefaultTheme,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       showMenu: false,
     };
   }
-
-  static defaultProps = {
-    passList: [],
-  };
 
   toggleState = (e) => {
     e.preventDefault();

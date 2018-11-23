@@ -20,7 +20,7 @@ const mapDispatchToProps = function (dispatch: Dispatch<any>) {
       return dispatch(signIn(userService, args));
     },
     onUserAuthenticated: () => {
-      return dispatch(push('/home'));
+      return dispatch(push('/bricks'));
     },
     clearState: () => {
       dispatch(signOutEventCreator('SUCCESS'));

@@ -95,7 +95,7 @@
   },
   "dependencies": {
     "@types/dom4": "^2.0.1",
-    "@up-group/react-controls": "0.1.8",
+    "@up-group/react-controls": "0.1.12",
     "axios": "^0.18.0",
     "chart.js": "^2.7.2",
     "classnames": "^2.2.5",

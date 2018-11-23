@@ -4,7 +4,7 @@ import appInitialState from 'app/initialState';
 import { User } from 'app/api/mapper/swagger/typescript-fetch-client';
 import { StateWithPagination } from 'common/state/StateWithPagination';
 import { READ_USER_EVENT, ReadUserEventPayload, SignInUserEventPayload, SIGNIN_USER_EVENT, SignOutUserEventPayload, SIGNOUT_USER_EVENT } from './UserEvents';
-import { DefaultReadEntityReducerFactory } from 'common/state/DefaultReadEntityReducer';
+import { DefaultReadEntityReducerFactory } from 'common/state/DefaultEntityReducer';
 import { IUser } from './User';
 
 export interface UserState extends StateWithPagination<User> {

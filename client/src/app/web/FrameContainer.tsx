@@ -52,7 +52,7 @@ interface IFrameContainerProps {
   user: IUser;
   location: Location;
   isLoading: boolean;
-  getSpaceMenu: (
+  getWorkspaceMenu: (
     user: IUser,
     icon: string,
   ) => Promise<IMenuItemData[]>;
@@ -98,7 +98,7 @@ class FrameContainer extends React.Component<IFrameContainerProps & RouteCompone
     }
 
     newProps
-      .getSpaceMenu(newProps.user, '')
+      .getWorkspaceMenu(newProps.user, '')
       .then(menuItems => this.setState({ menuItems }))
       .catch((/*errors*/) => {
         // TODO : Affichage des erreurs

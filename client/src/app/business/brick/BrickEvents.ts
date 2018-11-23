@@ -106,3 +106,28 @@ export const remove = (brickService: IBrickService, id: string) => {
     });
   };
 };
+
+export type ListBrickEventPayload = EventPayload<Array<Brick>>;
+export const LIST_BRICK_EVENT = 'LIST_BRICK_EVENT';
+
+const listEventCreator = (status: ACTION_STATUS, aggregate?: Array<Brick>, messages?: Array<IResultMessage>): Action<ListBrickEventPayload> => ({
+  payload: {
+    status,
+    aggregate,
+    messages,
+  },
+  type: LIST_BRICK_EVENT,
+});
+
+export const list = function (brickService: IBrickService) {
+  return async (dispatch) => {
+    dispatch(listEventCreator('PENDING'));
+    return brickService.all().then((bricks: Array<Brick>) => {
+      dispatch(listEventCreator('SUCCESS', bricks));
+      return bricks;
+    }).catch((error) => {
+      dispatch(addEventCreator('FAILURE', null, error));
+      throw error;
+    });
+  };
+};
