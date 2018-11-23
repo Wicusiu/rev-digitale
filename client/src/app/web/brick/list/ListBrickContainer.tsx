@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 const mapDispatchToProps = function (dispatch: Dispatch<any>) {
   return {
     getBricks: (authToken: string) => {
+      console.log(authToken);
       const brickService = ServiceFactory.create(BrickService, dispatch, authToken);
       return dispatch(list(brickService));
     },

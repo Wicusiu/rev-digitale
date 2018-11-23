@@ -28,6 +28,11 @@ export class Brick extends Entity {
   logo?: string;
 
   @property({
+    type: 'number',
+  })
+  order?: number;
+
+  @property({
     type: 'date',
   })
   createdDate?: string;

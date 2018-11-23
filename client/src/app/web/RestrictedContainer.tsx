@@ -10,6 +10,8 @@ import Background from 'app/web/Background';
 import { PATH_TO_REDIRECT_AFTER_LOGIN } from 'app/localStorage';
 import { UpBox, UpNotification } from '@up-group/react-controls';
 
+const bgSvg = require('../../../assets/img/bg.svg');
+
 export interface IRestrictedContainerProps {
   children?: any;
   isAuthed?: boolean;
@@ -22,6 +24,7 @@ const pageInfoStyle = style({
 }, media(DeviceSmartphones, {
   padding: '20px',
 }));
+
 
 export function restrict(Component: React.ComponentClass) {
 
@@ -51,7 +54,7 @@ export function restrict(Component: React.ComponentClass) {
     }
 
     render() {
-      return (<Background>
+      return (<Background backgroundUrl={`data:image/svg+xml;utf8,${bgSvg}`}>
         <UpBox className={pageInfoStyle} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
           <UpNotification intent={'info'}>
             Vous avez été déconnecté. Vous allez être redirigé vers la page d'authentification

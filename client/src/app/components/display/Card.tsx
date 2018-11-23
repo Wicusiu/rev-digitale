@@ -25,14 +25,23 @@ const CardWrapperStyle = style({
   ...card,
   width: '100%',
   backgroundColor: colorMap.white,
-}, media(DeviceSmartphones, {}));
+  $nest: {
+    '&.up-card': {
+      marginBottom: '20px',
+    },
+  },
+}, media(DeviceSmartphones, {
+  marginBottom: '10px',
+}));
 
 const CardContentStyle = style({
   margin: '24px 56px 24px 24px',
   backgroundColor: colorMap.white,
   $nest: {
     p: {
-      margin: '2px 0px',
+      margin: '8px 8px',
+      color: 'black',
+      textAlign: 'left',
     },
   },
 }, media(DeviceSmartphones, {
@@ -75,13 +84,14 @@ const WrapperLogoStyle = style({
 
 const LogoStyle = style({
   position: 'relative',
-  width: '210px',
-  height: '210px',
+  width: '180px',
+  height: '180px',
   overflow: 'hidden',
   $nest: {
     img: {
       width: '100%',
       maxWidth: '100%',
+      height: '100%',
     },
   },
 }, media(DeviceSmartphones, {
@@ -267,7 +277,7 @@ class Card extends React.Component<ICardProps & WithThemeProps> {
     return (
       <UpBox
         flexDirection={displayMode === 'card' ? 'row' : 'column'}
-        className={CardWrapperStyle}
+        className={classnames(CardWrapperStyle, 'up-card')}
         onClick={this.props.navigateToCardView}
         backgroundColor={colorMap.white}
       >
@@ -286,18 +296,21 @@ class Card extends React.Component<ICardProps & WithThemeProps> {
         }
         <UpBox className={CardContentStyle} flexDirection={'column'}>
           <UpParagraph className={CardTitleStyle}>{name}</UpParagraph>
-          <UpParagraph className={CardSubtitleStyle}>{subtitle}</UpParagraph>
-          <UpParagraph className={CardAddressStyle}>{location}</UpParagraph>
-          <UpParagraph className={PhoneInfoStyle}>
-            {phoneNumber &&
+          {subtitle &&
+            <UpParagraph className={CardSubtitleStyle}>{subtitle}</UpParagraph>
+          }
+          {location &&
+            <UpParagraph className={CardAddressStyle}>{location}</UpParagraph>
+          }
+          {phoneNumber &&
+            <UpParagraph className={PhoneInfoStyle}>
               <a href={`tel:${phoneNumber}`}>
                 {phoneNumber}
               </a>
-            }
-          </UpParagraph>
-
-          <UpParagraph className={LinksInfoStyle}>
-            {websiteLink &&
+            </UpParagraph>
+          }
+          {websiteLink &&
+            <UpParagraph className={LinksInfoStyle}>
               <a className={URLSiteInfoStyle}
                 onClick={e => e.stopPropagation()}
                 href={absoluteUrl(websiteLink)}
@@ -305,12 +318,12 @@ class Card extends React.Component<ICardProps & WithThemeProps> {
               >
                 {websiteLink}
               </a>
-            }
-            {displayMode === 'card' &&
-              <SocialLinks {...this.props.card} />
-            }
-          </UpParagraph>
-          {displayMode === 'card' &&
+              {displayMode === 'card' &&
+                <SocialLinks {...this.props.card} />
+              }
+            </UpParagraph>
+          }
+          {description && displayMode === 'card' &&
             <UpParagraph className={DescriptionStyle}>
               {description}
             </UpParagraph>
@@ -328,6 +341,7 @@ class Card extends React.Component<ICardProps & WithThemeProps> {
                 disabled={action.disabled}
                 actionType={action.type}
                 intent={action.intent}
+                width={'icon'}
                 onClick={action.execute}
                 tooltip={action.tooltip}>{action.label}</UpButton>;
             })}

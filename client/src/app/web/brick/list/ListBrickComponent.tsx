@@ -5,6 +5,8 @@ import { RouteComponentProps } from 'react-router';
 import { IUser } from 'app/business/user/User';
 import Card, { CardInfo } from 'app/components/display/Card';
 
+import Page from '../../../components/container/Page';
+
 export interface IBricksComponentProps {
   isFetching?: boolean;
   bricks?: Array<Brick>;
@@ -15,12 +17,14 @@ export interface IBricksComponentProps {
 class ListBrickComponent extends React.Component<IBricksComponentProps & WithThemeProps & RouteComponentProps<any, {}>> {
 
   static defaultProps: IBricksComponentProps = {
-
+    isFetching: true,
   };
 
   componentDidMount() {
-    // Récupération des bricks
-    this.props.getBricks(this.props.authenticatedUser.token);
+    if (this.props.authenticatedUser) {
+      // Récupération des bricks
+      this.props.getBricks(this.props.authenticatedUser.token);
+    }
   }
 
   render() {
@@ -30,10 +34,7 @@ class ListBrickComponent extends React.Component<IBricksComponentProps & WithThe
       </UpBox>;
     }
     if (this.props.bricks) {
-      return <div>
-        <UpNotification>
-          Les bricks disponibles
-        </UpNotification>
+      return <Page title="Les bricks disponibles">
         {this.props.bricks.map((brick: Brick) => {
           const card: CardInfo = {
             description: brick.description,
@@ -43,9 +44,8 @@ class ListBrickComponent extends React.Component<IBricksComponentProps & WithThe
           return <Card card={card} ></Card>;
         })
         }
-      </div>;
+      </Page>;
     }
-
     return null;
   }
 }

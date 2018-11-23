@@ -4,29 +4,31 @@ import { colorMap } from 'common/theme/theme';
 import { UpBox } from '@up-group/react-controls';
 import { center } from 'csstips';
 
-const bgSvg = require('../../../assets/img/bg.svg');
+const bgPng = require('../../../assets/img/background.png');
 
 interface IBackgroundProps {
   children?: any;
+  backgroundUrl?: string;
 }
 
-const BackgroundStyle = style(
-  {
-    background: `url('data:image/svg+xml;utf8,${bgSvg}')`,
-    backgroundSize: 'contain',
-    backgroundRepeat: 'no-repeat',
-    overflow: 'hidden',
-    height: '110vh  !important',
-    paddingBottom: '10vh !important',
-    $nest: {
-      '@media print': {
-        background: colorMap.white,
-        overflow: 'hidden',
-      },
-    },
-  });
+const Background: React.SFC<IBackgroundProps> = ({ children, backgroundUrl }) => {
 
-const Background: React.SFC<IBackgroundProps> = ({ children }) => {
+  const BackgroundStyle = style(
+    {
+      background: `url('${backgroundUrl == null ? bgPng : backgroundUrl}')`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      overflow: 'hidden',
+      height: '110vh  !important',
+      paddingBottom: '10vh !important',
+      $nest: {
+        '@media print': {
+          background: colorMap.white,
+          overflow: 'hidden',
+        },
+      },
+    });
+
   return <UpBox className={BackgroundStyle} justifyContent={'center'} alignItems={'center'}>
     {children}
   </UpBox>;

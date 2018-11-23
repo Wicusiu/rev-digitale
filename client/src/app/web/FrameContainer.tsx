@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import IdleTimer from 'react-idle-timer';
-import { style } from 'typestyle';
+import { style, media } from 'typestyle';
 import FooterView from './FooterView';
 import { push, replace } from 'react-router-redux';
 import { Location } from 'history';
@@ -22,6 +22,7 @@ import { IResultMessage } from 'common/actions';
 import { generateId } from 'common/utils';
 import MainContent from 'app/components/container/MainContent';
 import { UpBox, UpLoadingIndicator, UpToast } from '@up-group/react-controls';
+import { DeviceSmartphones } from 'common/utils/devices';
 
 const Element = Scroll.Element;
 
@@ -35,7 +36,10 @@ const goBackToHome = (error: Error, componentStack: string) => {
 
 const layoutStyle = style({
   height: '100vh',
-});
+  width: '80%',
+}, media(DeviceSmartphones, {
+  width: '100%',
+}));
 
 const IconStyle = style({
   fontFamily: 'materialinear',

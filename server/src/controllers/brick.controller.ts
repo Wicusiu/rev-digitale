@@ -78,6 +78,10 @@ export class BrickController {
   async find(
     @param.query.object('filter', getFilterSchemaFor(Brick)) filter?: Filter,
   ): Promise<Brick[]> {
+    const brickfilter: Filter = { ...filter };
+    if (brickfilter.order == null) {
+      brickfilter.order = ['order ASC'];
+    }
     return await this.brickRepository.find(filter);
   }
 

@@ -24,8 +24,12 @@ export const Level = {
   0: 'error',
 };
 
-const mapErrorToResultMessage = (error: IError): IResultMessage => {
-  const resultMessage: IResultMessage = { message: error.label, code: ErrorCode[error.code], intent: 'error' };
+const mapErrorToResultMessage = (error: any): IResultMessage => {
+  const resultMessage: IResultMessage = {
+    message: error.label || error.message,
+    code: error.code ? ErrorCode[error.code] : error.statusCode,
+    intent: 'error',
+  };
   return resultMessage;
 };
 
@@ -62,13 +66,24 @@ const applicationHttpStatusCodeMiddlewares = {
     });
   },
   401(dispatch: Dispatch<any>, response: Response): Promise<Response> {
-    // dispatch(SignOut());
     // Retourne la liste des erreurs
-    return response.text().then(text => Promise.reject(text ? JSON.parse(text).map(mapErrorToResultMessage) : []));
+    return response.text().then((text) => {
+      let responseBody: Array<any> = text ? JSON.parse(text) : [];
+      if (!Array.isArray(responseBody)) {
+        responseBody = [responseBody];
+      }
+      return Promise.reject(responseBody.map(mapErrorToResultMessage));
+    });
   },
   403(dispatch: Dispatch<any>, response: Response): Promise<Array<IError>> {
     // Retourne la liste des erreurs
-    return response.text().then(text => Promise.reject(text ? JSON.parse(text).map(mapErrorToResultMessage) : []));
+    return response.text().then((text) => {
+      let responseBody: Array<any> = text ? JSON.parse(text) : [];
+      if (!Array.isArray(responseBody)) {
+        responseBody = [responseBody];
+      }
+      return Promise.reject(responseBody.map(mapErrorToResultMessage));
+    });
   },
   404(dispatch: Dispatch<any>, response: Response): Promise<Response> {
     console.warn('status code 404');

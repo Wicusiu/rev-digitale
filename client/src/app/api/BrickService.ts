@@ -6,7 +6,7 @@ import { IBrickService } from 'app/business/brick/IBrickService';
 export class BrickService extends JsonServiceBase<Brick> implements IBrickService {
 
   constructor(endpoint: string, config: RequestInit, middlewares: Array<Middleware>) {
-    super(endpoint, middlewares, { ...config, headers: { 'Content-Type': 'application/json' } });
+    super(endpoint, middlewares, config);
   }
 
   read(id: string): Promise<Brick> {

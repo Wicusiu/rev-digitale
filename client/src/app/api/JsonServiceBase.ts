@@ -40,7 +40,7 @@ export abstract class JsonServiceBase<T>{
   }
 
   protected async fetch<T>(url: string, params: RequestInit): Promise<T> {
-    const newConfig = merge(params, this.fetchConfig);
+    const newConfig = merge(params, this.fetchConfig, { headers: { 'Content-Type': 'application/json' } });
     try {
       return fetch(this.endpoint + url, newConfig).then((results) => {
         return applyMiddleWares(this.middleWares, results);

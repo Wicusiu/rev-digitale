@@ -18,6 +18,11 @@ export class Module extends Entity {
   name: string;
 
   @property({
+    type: 'number',
+  })
+  order?: number;
+
+  @property({
     type: 'string',
     required: true,
   })
