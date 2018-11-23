@@ -7,7 +7,7 @@ import { IUser } from 'app/business/user/USer';
 export class UserService extends JsonServiceBase<User> implements IUserService {
 
   constructor(endpoint: string, config: RequestInit, middlewares: Array<Middleware>) {
-    super(endpoint, middlewares, config);
+    super(endpoint, middlewares, { ...config, headers: { 'Content-Type': 'application/json' } });
   }
 
   signIn: (credentials: Credentials) => Promise<IUser> = (credentials) => {

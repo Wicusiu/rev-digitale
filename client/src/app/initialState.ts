@@ -9,6 +9,9 @@ const appInitialState: InstanceState = {
     },
     user: {
     },
+    session: {
+    },
+    module: {},
   },
   routing: null,
 };

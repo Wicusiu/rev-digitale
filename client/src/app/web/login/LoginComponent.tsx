@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { IResultMessage } from 'common/actions';
 import { IUser } from 'app/business/user/USer';
-import Scrollable from 'app/components/Scrollable';
-import ResponsiveBox from 'app/components/ResponsiveBox';
+import Scrollable from 'app/components/container/Scrollable';
+import ResponsiveBox from 'app/components/container/ResponsiveBox';
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -62,9 +62,8 @@ class LoginComponent extends React.Component<LoginComponentProps & WithThemeProp
           }
         >
           <Formik
-            initialValues={{ email: 'guillaume.chomat@up.coop', password: 'Arcan69!' }}
+            initialValues={{ email: 'guillaume.chomat@up.coop', password: 'Fripon69' }}
             onSubmit={(values, { setSubmitting }) => {
-              console.log(values);
               return this.login(values);
             }}
             validationSchema={Yup.object().shape({

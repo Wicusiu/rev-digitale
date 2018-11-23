@@ -2,6 +2,7 @@ import { EventPayload, IResultMessage, ACTION_STATUS, IActionResult } from 'comm
 import { User, UserCredentials } from 'app/api/mapper/swagger/typescript-fetch-client';
 import { Action } from 'redux-actions';
 import { IUserService } from './IUserService';
+import { push } from 'react-router-redux';
 
 export type SignInUserEventPayload = EventPayload<User>;
 export type SignOutUserEventPayload = EventPayload<User>;
@@ -35,6 +36,14 @@ export const signIn = function (userService: IUserService, entity: UserCredentia
       dispatch(signInEventCreator('FAILURE', null, error));
       throw error;
     });
+  };
+};
+
+export const signOut = function () {
+  return function (dispatch) {
+    dispatch(signOutEventCreator('SUCCESS'));
+    dispatch(dispatch(push('/login'))());
+    return Promise.resolve();
   };
 };
 

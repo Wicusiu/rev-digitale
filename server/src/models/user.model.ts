@@ -38,6 +38,11 @@ export class User extends Entity {
   })
   date: string;
 
+  @property({
+    type: 'string',
+  })
+  photo: string;
+
   constructor(data?: Partial<User>) {
     super(data);
   }

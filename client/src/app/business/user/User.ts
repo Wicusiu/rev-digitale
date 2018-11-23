@@ -7,6 +7,7 @@ export interface IUser {
   email?: string;
   mobilePhoneNumber?: string;
   phoneNumber?: string;
+  photo?: string;
   activated?: boolean;
   activationDate?: Date;
   desactivationDate?: Date;

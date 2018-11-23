@@ -18,10 +18,10 @@ const addEventCreator = (status: ACTION_STATUS, aggregate?: Brick, messages?: Ar
   type: ADD_BRICK_EVENT,
 });
 
-export const add = function (briqueService: IBrickService, entity: Brick) {
+export const add = function (brickService: IBrickService, entity: Brick) {
   return async (dispatch) => {
     dispatch(addEventCreator('PENDING'));
-    return briqueService.add(entity).then((entityAddResult: IActionResult<Brick>) => {
+    return brickService.add(entity).then((entityAddResult: IActionResult<Brick>) => {
       dispatch(addEventCreator('SUCCESS', entityAddResult.entity));
       return entityAddResult;
     }).catch((error) => {
@@ -43,12 +43,12 @@ const readEventCreator = (status: ACTION_STATUS, aggregate?: Brick, messages?: A
   type: READ_BRICK_EVENT,
 });
 
-export const read = function (briqueService: IBrickService, id: string) {
+export const read = function (brickService: IBrickService, id: string) {
   return async (dispatch) => {
     dispatch(readEventCreator('PENDING'));
-    return briqueService.read(id).then((brique: Brick) => {
-      dispatch(readEventCreator('SUCCESS', brique));
-      return brique;
+    return brickService.read(id).then((brick: Brick) => {
+      dispatch(readEventCreator('SUCCESS', brick));
+      return brick;
     }).catch((error) => {
       dispatch(readEventCreator('FAILURE', null, error));
       throw error;
@@ -68,10 +68,10 @@ const updateEventCreator = (status: ACTION_STATUS, aggregate?: Brick, messages?:
   type: UPDATE_BRICK_EVENT,
 });
 
-export const update = function (briqueService: IBrickService, entity: Brick) {
+export const update = function (brickService: IBrickService, entity: Brick) {
   return async (dispatch) => {
     dispatch(updateEventCreator('PENDING'));
-    return briqueService.update(entity).then((entityUpdateResult: IActionResult<Brick>) => {
+    return brickService.update(entity).then((entityUpdateResult: IActionResult<Brick>) => {
       dispatch(updateEventCreator('SUCCESS', entityUpdateResult.entity));
       return entityUpdateResult;
     }).catch((error) => {
@@ -94,10 +94,10 @@ const deleteEventCreator = (status: ACTION_STATUS, aggregate?: string, messages?
 });
 
 // 'delete' word can't be used
-export const remove = (briqueService: IBrickService, id: string) => {
+export const remove = (brickService: IBrickService, id: string) => {
   return async (dispatch) => {
     dispatch(deleteEventCreator('PENDING'));
-    return briqueService.delete(id).then((entityDeleteResult: IActionResult<string>) => {
+    return brickService.delete(id).then((entityDeleteResult: IActionResult<string>) => {
       dispatch(deleteEventCreator('SUCCESS', entityDeleteResult.entity));
       return entityDeleteResult;
     }).catch((error) => {
