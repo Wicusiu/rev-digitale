@@ -6,7 +6,7 @@ import { IModuleService } from 'app/business/module/IModuleService';
 export class ModuleService extends JsonServiceBase<Module> implements IModuleService {
 
   constructor(endpoint: string, config: RequestInit, middlewares: Array<Middleware>) {
-    super(endpoint, middlewares, { ...config, headers: { 'Content-Type': 'application/json' } });
+    super(endpoint, middlewares, config);
   }
 
   read(id: string): Promise<Module> {

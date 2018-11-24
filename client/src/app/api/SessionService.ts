@@ -6,7 +6,7 @@ import { ISessionService } from 'app/business/session/ISessionService';
 export class SessionService extends JsonServiceBase<Session> implements ISessionService {
 
   constructor(endpoint: string, config: RequestInit, middlewares: Array<Middleware>) {
-    super(endpoint, middlewares, { ...config, headers: { 'Content-Type': 'application/json' } });
+    super(endpoint, middlewares, config);
   }
 
   read(id: string): Promise<Session> {

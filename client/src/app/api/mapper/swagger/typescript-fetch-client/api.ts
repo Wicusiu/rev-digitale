@@ -2565,12 +2565,13 @@ export const ModuleApiFetchParamCreator = function (configuration?: Configuratio
          * @throws {RequiredError}
          */
         moduleGetByBrick(id: string, filter?: string, options: any = {}): FetchArgs {
-            const localVarPath = `/modules/byBrick`;
+            const localVarPath = `/modules/byBrick/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
             if (filter !== undefined) {
                 localVarQueryParameter['filter'] = filter;
             }
