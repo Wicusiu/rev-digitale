@@ -177,11 +177,12 @@ export interface CardInfo {
 
 export interface ICardProps {
   card: CardInfo;
-  navigateToCardView?: (e: React.MouseEvent<any>) => void;
   defaultIcon?: string;
   displayMode?: CardDisplayMode;
   actions?: IAction[];
   publicAccess?: boolean;
+  className?: string;
+  navigateToCardView?: (e: React.MouseEvent<any>) => void;
 }
 
 class Card extends React.Component<ICardProps & WithThemeProps> {
@@ -198,7 +199,7 @@ class Card extends React.Component<ICardProps & WithThemeProps> {
   render() {
 
     const { name, location, phoneNumber, subtitle, description, photo, websiteLink } = this.props.card;
-    const { defaultIcon, displayMode, theme } = this.props;
+    const { defaultIcon, displayMode, theme, className } = this.props;
 
     const NavigationStyleTheme = style({
       color: theme.colorMap.primary,
@@ -277,7 +278,7 @@ class Card extends React.Component<ICardProps & WithThemeProps> {
     return (
       <UpBox
         flexDirection={displayMode === 'card' ? 'row' : 'column'}
-        className={classnames(CardWrapperStyle, 'up-card')}
+        className={classnames(CardWrapperStyle, className, 'up-card')}
         onClick={this.props.navigateToCardView}
         backgroundColor={colorMap.white}
       >

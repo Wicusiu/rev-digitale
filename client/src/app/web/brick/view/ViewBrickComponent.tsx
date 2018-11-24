@@ -6,6 +6,8 @@ import { isEmpty } from 'common/utils';
 import { IUser } from 'app/business/user/User';
 import Page from 'app/components/container/Page';
 import Card, { CardInfo } from 'app/components/display/Card';
+import { style } from 'typestyle';
+import { fadeIn, appearFromBottom } from 'common/animations';
 
 export interface IViewBrickComponentProps {
   authenticatedUser?: IUser;
@@ -54,14 +56,15 @@ class ViewBrickComponent extends React.Component<IViewBrickComponentProps & With
             name: mod.name,
             photo: mod.logo,
           };
-          return <Card card={card} actions={[
-            {
-              execute: () => { },
-              intent: 'primary',
-              type: 'read',
-              label: 'Voir',
-            },
-          ]}></Card>;
+          return <div className={style((appearFromBottom(1, 'ease')))}>
+            <Card key={mod.id} className={style((fadeIn(2, 'ease')))} card={card} actions={[
+              {
+                execute: () => { },
+                intent: 'primary',
+                type: 'read',
+                label: 'Voir',
+              },
+            ]}></Card></div>;
         })
         }
       </Page>;

@@ -6,6 +6,8 @@ import { IUser } from 'app/business/user/User';
 import Card, { CardInfo } from 'app/components/display/Card';
 
 import Page from '../../../components/container/Page';
+import { appearFromBottom, fadeIn } from 'common/animations';
+import { style } from 'typestyle';
 
 export interface IBricksComponentProps {
   isFetching?: boolean;
@@ -42,14 +44,15 @@ class ListBrickComponent extends React.Component<IBricksComponentProps & WithThe
             name: brick.name,
             photo: brick.logo,
           };
-          return <Card key={brick.id} card={card} actions={[
-            {
-              execute: () => this.props.viewBrick(brick.id),
-              intent: 'primary',
-              type: 'read',
-              label: 'Voir',
-            },
-          ]}></Card>;
+          return <div className={style((appearFromBottom(1, 'ease')))}>
+            <Card key={brick.id} card={card} className={style((fadeIn(2, 'ease')))} actions={[
+              {
+                execute: () => this.props.viewBrick(brick.id),
+                intent: 'primary',
+                type: 'read',
+                label: 'Voir',
+              },
+            ]}></Card></div>;
         })
         }
       </Page>;
