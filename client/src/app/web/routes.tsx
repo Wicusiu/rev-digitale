@@ -3,7 +3,6 @@ import { Route, IndexRedirect } from 'react-router';
 
 import Background from './Background';
 import Error404 from 'app/web/Error404';
-import HomeContainer from 'app/web/home/HomeContainer';
 import LoginContainer from './login/LoginContainer';
 import { restrict } from './RestrictedContainer';
 import FrameContainer from './FrameContainer';
@@ -17,6 +16,7 @@ export const routes = (
     <Route component={restrict(FrameContainer)}>
       <Route path="/bricks" component={BricksContainer} />
       <Route path="/bricks/:id" component={ViewBrickContainer} />
+      <Route path="/bricks/view/:id" component={ViewBrickContainer} />
     </Route>
     <Route path="*" component={Error404} />
   </Route>

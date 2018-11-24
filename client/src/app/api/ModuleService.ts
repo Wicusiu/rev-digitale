@@ -54,7 +54,7 @@ export class ModuleService extends JsonServiceBase<Module> implements IModuleSer
     return this.fetch<Array<Module>>(params.url, params.options);
   }
   getByBrickId(brickId: string): Promise<Module[]> {
-    const params = ModuleApiFetchParamCreator().module();
+    const params = ModuleApiFetchParamCreator().moduleGetByBrick(brickId);
     return this.fetch<Array<Module>>(params.url, params.options);
   }
 }
