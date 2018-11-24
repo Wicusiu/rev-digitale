@@ -12,6 +12,7 @@ export interface IBricksComponentProps {
   bricks?: Array<Brick>;
   authenticatedUser?: IUser;
   getBricks?: (authToken: string) => Promise<Array<Brick>>;
+  viewBrick?: (id: string) => void;
 }
 
 class ListBrickComponent extends React.Component<IBricksComponentProps & WithThemeProps & RouteComponentProps<any, {}>> {
@@ -34,14 +35,21 @@ class ListBrickComponent extends React.Component<IBricksComponentProps & WithThe
       </UpBox>;
     }
     if (this.props.bricks) {
-      return <Page title="Les bricks disponibles">
+      return <Page title="Les briques disponibles">
         {this.props.bricks.map((brick: Brick) => {
           const card: CardInfo = {
             description: brick.description,
             name: brick.name,
             photo: brick.logo,
           };
-          return <Card card={card} ></Card>;
+          return <Card key={brick.id} card={card} actions={[
+            {
+              execute: () => this.props.viewBrick(brick.id),
+              intent: 'primary',
+              type: 'read',
+              label: 'Voir',
+            },
+          ]}></Card>;
         })
         }
       </Page>;

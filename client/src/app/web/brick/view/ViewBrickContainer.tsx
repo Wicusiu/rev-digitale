@@ -9,12 +9,18 @@ import { WithThemeProps } from '@up-group/react-controls';
 import { connect } from 'react-redux';
 import { isEmpty } from 'common/utils';
 import { push } from 'react-router-redux';
+import { ModuleService } from 'app/api/ModuleService';
+import { getByBrick } from 'app/business/module/events/getByBrick';
 
 const mapDispatchToProps = function (dispatch: Dispatch<any>) {
   return {
     read: (authToken: string, id: string) => {
       const brickService = ServiceFactory.create(BrickService, dispatch, authToken);
       return dispatch(read(brickService, id));
+    },
+    getModules: (authToken: string, brickId: string) => {
+      const moduleService = ServiceFactory.create(ModuleService, dispatch, authToken);
+      return dispatch(getByBrick(moduleService, brickId));
     },
     navigateTo: (route: string) => dispatch(push(route)),
   } as Partial<IViewBrickComponentProps>;
@@ -31,6 +37,9 @@ const mapStateToProps = function (state: InstanceState, ownProps: IViewBrickComp
     errors: state.application.brick.errors,
     brick: state.application.brick.currentValue,
     isFetching: state.application.brick.isFetching,
+    isFetchingModules: state.application.module.isFetching,
+    modules: state.application.module.values,
+    errorsModules: state.application.module.errors,
   } as Partial<IViewBrickComponentProps>;
 };
 

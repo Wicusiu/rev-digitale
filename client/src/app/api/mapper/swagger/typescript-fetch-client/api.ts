@@ -158,12 +158,6 @@ export interface Brick {
      * @memberof Brick
      */
     id: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Brick
-     */
-    moduleId?: string;
 }
 
 /**
@@ -238,6 +232,12 @@ export interface Module {
      * @memberof Module
      */
     id: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Brick
+     */
+    brickId?: string;
 }
 
 /**
@@ -276,12 +276,6 @@ export interface NewBrick {
      * @memberof NewBrick
      */
     modifiedDate: Date;
-    /**
-     *
-     * @type {string}
-     * @memberof NewBrick
-     */
-    moduleId?: string;
 }
 
 /**
@@ -308,6 +302,12 @@ export interface NewModule {
      * @memberof NewModule
      */
     logo: string;
+    /**
+     *
+     * @type {string}
+     * @memberof NewBrick
+     */
+    brickId?: string;
 }
 
 /**
@@ -346,12 +346,6 @@ export interface NewSession {
      * @memberof NewSession
      */
     moduleId: string;
-    /**
-     *
-     * @type {string}
-     * @memberof NewSession
-     */
-    sessionId?: string;
 }
 
 /**
@@ -440,12 +434,6 @@ export interface Session {
      * @memberof Session
      */
     id: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Session
-     */
-    sessionId?: string;
 }
 
 /**
@@ -2568,6 +2556,35 @@ export const ModuleApiFetchParamCreator = function (configuration?: Configuratio
                 options: localVarRequestOptions,
             };
         },
+        /**
+         *
+         * @summary Find all instances of the model matched by brick and filter from the data source.
+         * @param {string} [id] Id of a brick
+         * @param {string} [filter] Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        moduleGetByBrick(id: string, filter?: string, options: any = {}): FetchArgs {
+            const localVarPath = `/modules/byBrick`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -2719,6 +2736,26 @@ export const ModuleApiFp = function (configuration?: Configuration) {
          */
         moduleFind(filter?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<Module>> {
             const localVarFetchArgs = ModuleApiFetchParamCreator(configuration).moduleFind(filter, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Find all instances of the model matched by brick id and filter from the data source.
+         * @param {string} [id] Id of a brick
+         * @param {string} [filter] Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        moduleGetByBrick(id: string, filter?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<Module>> {
+            const localVarFetchArgs = ModuleApiFetchParamCreator(configuration).moduleGetByBrick(id, filter, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -3092,6 +3129,17 @@ export const ModuleApiFactory = function (configuration?: Configuration, fetch?:
          */
         moduleFind(filter?: string, options?: any) {
             return ModuleApiFp(configuration).moduleFind(filter, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Find all instances of the model matched by brick and filter from the data source.
+         * @param {string} [id] Id of a brick
+         * @param {string} [filter] Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        moduleGetByBrick(id: string, filter?: string, options?: any) {
+            return ModuleApiFp(configuration).moduleGetByBrick(id, filter, options)(fetch, basePath);
         },
         /**
          *

@@ -17,6 +17,7 @@ import {
 } from '@loopback/rest';
 import { Module, Brick } from '../models';
 import { ModuleRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
 
 export class ModuleController {
   constructor(
@@ -24,6 +25,7 @@ export class ModuleController {
     public moduleRepository: ModuleRepository,
   ) { }
 
+  @authenticate('BearerStrategy')
   @post('/modules', {
     responses: {
       '200': {
@@ -36,6 +38,7 @@ export class ModuleController {
     return await this.moduleRepository.create(module);
   }
 
+  @authenticate('BearerStrategy')
   @get('/modules/count', {
     responses: {
       '200': {
@@ -50,6 +53,7 @@ export class ModuleController {
     return await this.moduleRepository.count(where);
   }
 
+  @authenticate('BearerStrategy')
   @get('/modules', {
     responses: {
       '200': {
@@ -68,6 +72,35 @@ export class ModuleController {
     return await this.moduleRepository.find(filter);
   }
 
+  @authenticate('BearerStrategy')
+  @get('/modules/byBrick/{id}', {
+    responses: {
+      '200': {
+        description: 'Array of Module model instances',
+        content: {
+          'application/json': {
+            schema: { type: 'array', items: { 'x-ts-type': Module } },
+          },
+        },
+      },
+      '404': {
+        description: 'Ressource not found',
+        content: {
+          'application/json': {
+            schema: { message: typeof ('string') },
+          },
+        },
+      },
+    },
+  })
+  async getByBrickId(
+    @param.path.string('id') id: string,
+  ): Promise<Module[]> {
+    const brickFilter: Filter = { where: { brickId: id } };
+    return await this.moduleRepository.find(brickFilter);
+  }
+
+  @authenticate('BearerStrategy')
   @patch('/modules', {
     responses: {
       '200': {
@@ -83,6 +116,7 @@ export class ModuleController {
     return await this.moduleRepository.updateAll(module, where);
   }
 
+  @authenticate('BearerStrategy')
   @get('/modules/{id}', {
     responses: {
       '200': {
@@ -95,6 +129,7 @@ export class ModuleController {
     return await this.moduleRepository.findById(id);
   }
 
+  @authenticate('BearerStrategy')
   @patch('/modules/{id}', {
     responses: {
       '204': {
@@ -109,6 +144,7 @@ export class ModuleController {
     await this.moduleRepository.updateById(id, module);
   }
 
+  @authenticate('BearerStrategy')
   @del('/modules/{id}', {
     responses: {
       '204': {
@@ -120,6 +156,7 @@ export class ModuleController {
     await this.moduleRepository.deleteById(id);
   }
 
+  @authenticate('BearerStrategy')
   @get('/modules/{id}/brick')
   async getBrick(
     @param.path.string('id') moduleId: typeof Module.prototype.id,

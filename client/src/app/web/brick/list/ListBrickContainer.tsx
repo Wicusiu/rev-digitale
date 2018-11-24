@@ -9,6 +9,7 @@ import { InstanceState } from 'app/reducers';
 import { WithThemeProps } from '@up-group/react-controls';
 import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 const mapDispatchToProps = function (dispatch: Dispatch<any>) {
   return {
@@ -17,6 +18,7 @@ const mapDispatchToProps = function (dispatch: Dispatch<any>) {
       const brickService = ServiceFactory.create(BrickService, dispatch, authToken);
       return dispatch(list(brickService));
     },
+    viewBrick: (id: string) => dispatch(push(`/bricks/view/${id}`)),
   } as Partial<IBricksComponentProps>;
 };
 
