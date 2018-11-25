@@ -18,6 +18,11 @@ import {
 import { Session, Module } from '../models';
 import { SessionRepository } from '../repositories';
 
+import * as ical from 'ical-generator';
+import * as moment from 'moment';
+
+const upCal = ical({ domain: 'outlook.office.com', name: 'Up Calendar' });
+
 export class SessionController {
   constructor(
     @repository(SessionRepository)
@@ -93,6 +98,25 @@ export class SessionController {
   })
   async findById(@param.path.string('id') id: string): Promise<Session> {
     return await this.sessionRepository.findById(id);
+  }
+
+  @get('/sessions/ics/{id}', {
+    responses: {
+      '200': {
+        description: 'ICal Data Event for a given session',
+        content: { 'text/calendar': { schema: { 'x-ts-type': ical.ICalEvent } } },
+      },
+    },
+  })
+  async getICS(@param.path.string('id') id: string): Promise<ical.ICalEvent> {
+    const session = await this.sessionRepository.findById(id);
+    return upCal.createEvent({
+      start: session.date,
+      end: moment().add(1, 'hour'),
+      stamp: moment(),
+      summary: 'My Event',
+      organizer: 'Sebastian Pekarek <mail@example.com>'
+    });
   }
 
   @patch('/sessions/{id}', {
