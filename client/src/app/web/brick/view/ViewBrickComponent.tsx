@@ -47,7 +47,7 @@ class ViewBrickComponent extends React.Component<IViewBrickComponentProps & With
       </UpBox>;
     }
     if (this.props.brick) {
-      return <Page title={this.props.brick.name}>
+      return <Page title={this.props.brick.name} titleStyle={{ color: 'white !important' }}>
         <UpNotification>
           {this.props.brick.description}
         </UpNotification>

@@ -37,7 +37,7 @@ class ListBrickComponent extends React.Component<IBricksComponentProps & WithThe
       </UpBox>;
     }
     if (this.props.bricks) {
-      return <Page title="Les briques disponibles">
+      return <Page title="Les briques disponibles" titleStyle={{ color: 'white !important' }}>
         {this.props.bricks.map((brick: Brick) => {
           const card: CardInfo = {
             description: brick.description,
