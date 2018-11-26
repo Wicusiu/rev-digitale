@@ -22,6 +22,7 @@ const mapDispatchToProps = function (dispatch: Dispatch<any>) {
       const moduleService = ServiceFactory.create(ModuleService, dispatch, authToken);
       return dispatch(getByBrick(moduleService, brickId));
     },
+    viewModule: (id: string) => dispatch(push(`/modules/${id}`)),
     navigateTo: (route: string) => dispatch(push(route)),
   } as Partial<IViewBrickComponentProps>;
 };

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Brick, Module } from 'app/api/mapper/swagger/typescript-fetch-client';
+import { Module, Session } from 'app/api/mapper/swagger/typescript-fetch-client';
 import { WithThemeProps, UpBox, UpLoadingIndicator, UpNotification } from '@up-group/react-controls';
 import { RouteComponentProps } from 'react-router';
 import { isEmpty } from 'common/utils';
@@ -9,34 +9,33 @@ import Card, { CardInfo } from 'app/components/display/Card';
 import { style } from 'typestyle';
 import { fadeIn, appearFromBottom } from 'common/animations';
 
-export interface IViewBrickComponentProps {
+export interface IViewModuleComponentProps {
   authenticatedUser?: IUser;
   isFetching?: boolean;
-  brick?: Brick;
-  modules?: Array<Module>;
-  brickId: string;
-
+  module?: Module;
+  id: string;
+  sessions?: Array<Session>;
   navigateTo?: (route: string) => void;
   read?: (authToken: string, id: string) => void;
-  getModules?: (authToken: string, id: string) => void;
-  viewModule?: (id: string) => void;
+  getSessions?: (authToken: string, id: string) => void;
+  viewSession?: (id: string) => void;
 }
 
-class ViewBrickComponent extends React.Component<IViewBrickComponentProps & WithThemeProps & RouteComponentProps<any, { id?: string }>> {
+class ViewModuleComponent extends React.Component<IViewModuleComponentProps & WithThemeProps & RouteComponentProps<any, { id?: string }>> {
 
-  static defaultProps: IViewBrickComponentProps = {
-    brickId: null,
+  static defaultProps: IViewModuleComponentProps = {
+    id: null,
   };
 
   componentDidMount() {
-    // Récupération de la brick
-    if (isEmpty(this.props.brickId)) {
+    // Récupération de la module
+    if (isEmpty(this.props.id)) {
       this.props.navigateTo('/404');
     } else {
       // Lecture de la description de la brique
-      this.props.read(this.props.authenticatedUser.token, this.props.brickId);
+      this.props.read(this.props.authenticatedUser.token, this.props.id);
       // Lecture des modules de la brique
-      this.props.getModules(this.props.authenticatedUser.token, this.props.brickId);
+      this.props.getSessions(this.props.authenticatedUser.token, this.props.id);
     }
   }
 
@@ -46,21 +45,20 @@ class ViewBrickComponent extends React.Component<IViewBrickComponentProps & With
         <UpLoadingIndicator isLoading={true} />
       </UpBox>;
     }
-    if (this.props.brick) {
-      return <Page title={this.props.brick.name}>
+    if (this.props.module) {
+      return <Page title={this.props.module.name}>
         <UpNotification>
-          {this.props.brick.description}
+          {this.props.module.description}
         </UpNotification>
-        {this.props.modules && this.props.modules.map((mod: Module) => {
+        {this.props.sessions && this.props.sessions.map((session: Session) => {
           const card: CardInfo = {
-            description: mod.description,
-            name: mod.name,
-            photo: mod.logo,
+            description: session.description,
+            name: session.name,
           };
           return <div className={style((appearFromBottom(1, 'ease')))}>
-            <Card key={mod.id} className={style((fadeIn(2, 'ease')))} card={card} actions={[
+            <Card key={session.id} className={style((fadeIn(2, 'ease')))} card={card} actions={[
               {
-                execute: () => this.props.viewModule(mod.id),
+                execute: () => this.props.viewSession(session.id),
                 intent: 'primary',
                 type: 'read',
                 label: 'Voir',
@@ -75,4 +73,4 @@ class ViewBrickComponent extends React.Component<IViewBrickComponentProps & With
   }
 }
 
-export default ViewBrickComponent;
+export default ViewModuleComponent;

@@ -24,6 +24,7 @@ import { createCredentials } from 'crypto';
 import { secretKey } from '../config';
 
 import * as jwt from 'jsonwebtoken'
+import { authenticate } from '@loopback/authentication';
 
 @model()
 export class UserCredentials {
@@ -58,6 +59,7 @@ export class UserController {
     public userRepository: UserRepository,
   ) { }
 
+  @authenticate('BearerStrategy')
   @post('/users', {
     responses: {
       '200': {
@@ -102,6 +104,7 @@ export class UserController {
     throw new HttpErrors[403]('User not authenticated');
   }
 
+  @authenticate('BearerStrategy')
   @get('/users/count', {
     responses: {
       '200': {
@@ -116,6 +119,7 @@ export class UserController {
     return await this.userRepository.count(where);
   }
 
+  @authenticate('BearerStrategy')
   @get('/users', {
     responses: {
       '200': {
@@ -134,6 +138,7 @@ export class UserController {
     return await this.userRepository.find(filter);
   }
 
+  @authenticate('BearerStrategy')
   @patch('/users', {
     responses: {
       '200': {
@@ -149,6 +154,7 @@ export class UserController {
     return await this.userRepository.updateAll(user, where);
   }
 
+  @authenticate('BearerStrategy')
   @get('/users/{id}', {
     responses: {
       '200': {
@@ -161,6 +167,7 @@ export class UserController {
     return await this.userRepository.findById(id);
   }
 
+  @authenticate('BearerStrategy')
   @patch('/users/{id}', {
     responses: {
       '204': {
@@ -175,6 +182,7 @@ export class UserController {
     await this.userRepository.updateById(id, user);
   }
 
+  @authenticate('BearerStrategy')
   @del('/users/{id}', {
     responses: {
       '204': {

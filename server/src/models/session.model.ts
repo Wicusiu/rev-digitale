@@ -24,19 +24,13 @@ export class Session extends Entity {
     type: 'date',
     required: true,
   })
-  date: Date;
+  startDate: Date;
 
   @property({
     type: 'string',
     required: true,
   })
-  start: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  end: string;
+  endDate: Date;
 
   @belongsTo(() => Module)
   moduleId: string

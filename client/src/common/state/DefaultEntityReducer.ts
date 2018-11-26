@@ -13,6 +13,16 @@ export const DefaultReadEntityReducerFactory = <T extends IEntity>(): ReducerMap
   };
 };
 
+export const DefaultAddEntityReducerFactory = <T extends IEntity>(): ReducerMapValue<StateWithPagination<T>, EventPayload<T>> => {
+  return (state: StateWithPagination<T>, action: Action<EventPayload<T>>): StateWithPagination<T> => {
+    return {
+      errors: action.payload.status === 'FAILURE' ? action.payload.messages : null,
+      currentValue: action.payload.status === 'SUCCESS' ? action.payload.aggregate : null,
+      isFetching: action.payload.status === 'PENDING',
+    };
+  };
+};
+
 export const DefaultListEntityReducerFactory = <T extends IEntity>(): ReducerMapValue<StateWithPagination<T>, EventPayload<Array<T>>> => {
   return (state: StateWithPagination<T>, action: Action<EventPayload<Array<T>>>): StateWithPagination<T> => {
     return {

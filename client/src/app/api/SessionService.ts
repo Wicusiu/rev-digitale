@@ -53,4 +53,14 @@ export class SessionService extends JsonServiceBase<Session> implements ISession
     const params = SessionApiFetchParamCreator().sessionFind();
     return this.fetch<Array<Session>>(params.url, params.options);
   }
+
+  getByModuleId(moduleId: string): Promise<Session[]> {
+    const params = SessionApiFetchParamCreator().sessionGetByModule(moduleId);
+    return this.fetch<Array<Session>>(params.url, params.options);
+  }
+
+  getByUserId(userId: string): Promise<Session[]> {
+    const params = SessionApiFetchParamCreator().sessionGetByModule(userId);
+    return this.fetch<Array<Session>>(params.url, params.options);
+  }
 }

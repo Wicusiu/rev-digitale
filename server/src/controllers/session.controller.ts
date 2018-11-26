@@ -20,6 +20,7 @@ import { SessionRepository } from '../repositories';
 
 import * as ical from 'ical-generator';
 import * as moment from 'moment';
+import { authenticate } from '@loopback/authentication';
 
 const upCal = ical({ domain: 'outlook.office.com', name: 'Up Calendar' });
 
@@ -29,6 +30,7 @@ export class SessionController {
     public sessionRepository: SessionRepository,
   ) { }
 
+  @authenticate('BearerStrategy')
   @post('/sessions', {
     responses: {
       '200': {
@@ -41,6 +43,7 @@ export class SessionController {
     return await this.sessionRepository.create(session);
   }
 
+  @authenticate('BearerStrategy')
   @get('/sessions/count', {
     responses: {
       '200': {
@@ -55,6 +58,7 @@ export class SessionController {
     return await this.sessionRepository.count(where);
   }
 
+  @authenticate('BearerStrategy')
   @get('/sessions', {
     responses: {
       '200': {
@@ -73,6 +77,7 @@ export class SessionController {
     return await this.sessionRepository.find(filter);
   }
 
+  @authenticate('BearerStrategy')
   @patch('/sessions', {
     responses: {
       '200': {
@@ -88,6 +93,7 @@ export class SessionController {
     return await this.sessionRepository.updateAll(session, where);
   }
 
+  @authenticate('BearerStrategy')
   @get('/sessions/{id}', {
     responses: {
       '200': {
@@ -100,6 +106,7 @@ export class SessionController {
     return await this.sessionRepository.findById(id);
   }
 
+  @authenticate('BearerStrategy')
   @get('/sessions/ics/{id}', {
     responses: {
       '200': {
@@ -111,14 +118,15 @@ export class SessionController {
   async getICS(@param.path.string('id') id: string): Promise<ical.ICalEvent> {
     const session = await this.sessionRepository.findById(id);
     return upCal.createEvent({
-      start: session.date,
-      end: moment().add(1, 'hour'),
+      start: session.startDate,
+      end: session.endDate,
       stamp: moment(),
       summary: 'My Event',
       organizer: 'Sebastian Pekarek <mail@example.com>'
     });
   }
 
+  @authenticate('BearerStrategy')
   @patch('/sessions/{id}', {
     responses: {
       '204': {
@@ -133,6 +141,7 @@ export class SessionController {
     await this.sessionRepository.updateById(id, session);
   }
 
+  @authenticate('BearerStrategy')
   @del('/sessions/{id}', {
     responses: {
       '204': {
@@ -144,10 +153,69 @@ export class SessionController {
     await this.sessionRepository.deleteById(id);
   }
 
+  @authenticate('BearerStrategy')
   @get('/sessions/{id}/module')
   async getModule(
     @param.path.string('id') sessionId: typeof Module.prototype.id,
   ): Promise<Module> {
     return await this.sessionRepository.module(sessionId);
+  }
+
+  @authenticate('BearerStrategy')
+  @get('/sessions/byModule/{id}', {
+    responses: {
+      '200': {
+        description: 'Array of Session model instances',
+        content: {
+          'application/json': {
+            schema: { type: 'array', items: { 'x-ts-type': Session } },
+          },
+        },
+      },
+      '404': {
+        description: 'Ressource not found',
+        content: {
+          'application/json': {
+            schema: { message: typeof ('string') },
+          },
+        },
+      },
+    },
+  })
+  async getByModuleId(
+    @param.path.string('id') id: string,
+  ): Promise<Session[]> {
+    const sessionFilter: Filter = { where: { moduleId: id } };
+    return await this.sessionRepository.find(sessionFilter);
+  }
+
+  @authenticate('BearerStrategy')
+  @get('/sessions/byUser/{id}', {
+    responses: {
+      '200': {
+        description: 'Array of Session model instances',
+        content: {
+          'application/json': {
+            schema: { type: 'array', items: { 'x-ts-type': Session } },
+          },
+        },
+      },
+      '404': {
+        description: 'Ressource not found',
+        content: {
+          'application/json': {
+            schema: { message: typeof ('string') },
+          },
+        },
+      },
+    },
+  })
+  async getByUserId(
+    @param.path.string('id') id: string,
+  ): Promise<Session[]> {
+    //const sessionFilter: Filter = { where: { moduleId: id } };
+    //return await this.sessionRepository.find(sessionFilter);
+    // @TODO Implementation
+    return Promise.resolve<Array<Session>>(new Array<Session>());
   }
 }
