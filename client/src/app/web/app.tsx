@@ -3,6 +3,8 @@ import { Provider, connect } from 'react-redux';
 import { Router } from 'react-router';
 import Background from './Background';
 
+require('../../../assets/favicon.ico');
+
 import 'typeface-roboto';
 // import * as injectTapEventPlugin from 'react-tap-event-plugin';
 

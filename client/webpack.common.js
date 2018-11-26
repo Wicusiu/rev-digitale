@@ -81,6 +81,10 @@ module.exports = {
         test: /\.(jpe?g|gif|png)$/,
         use: 'file-loader?name=img/[name].[ext]',
       },
+      {
+        test: /\.(ico)$/,
+        use: 'file-loader?name=[name].[ext]',
+      },
     ],
   },
   devServer: {
