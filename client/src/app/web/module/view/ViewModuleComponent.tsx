@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Module, Session } from 'app/api/mapper/swagger/typescript-fetch-client';
-import { WithThemeProps, UpBox, UpLoadingIndicator, UpNotification } from '@up-group/react-controls';
+import { WithThemeProps, UpBox, UpLoadingIndicator, UpNotification, UpButton } from '@up-group/react-controls';
 import { RouteComponentProps } from 'react-router';
 import { isEmpty } from 'common/utils';
 import { IUser } from 'app/business/user/User';
@@ -19,6 +19,7 @@ export interface IViewModuleComponentProps {
   read?: (authToken: string, id: string) => void;
   getSessions?: (authToken: string, id: string) => void;
   viewSession?: (id: string) => void;
+  addSession?: () => void;
 }
 
 class ViewModuleComponent extends React.Component<IViewModuleComponentProps & WithThemeProps & RouteComponentProps<any, { id?: string }>> {
@@ -46,10 +47,15 @@ class ViewModuleComponent extends React.Component<IViewModuleComponentProps & Wi
       </UpBox>;
     }
     if (this.props.module) {
-      return <Page title={this.props.module.name}>
+      return <Page title={this.props.module.name} titleStyle={{ color: 'white !important' }}>
         <UpNotification>
           {this.props.module.description}
         </UpNotification>
+        {this.props.authenticatedUser && this.props.authenticatedUser.is_admin &&
+          <UpButton intent={'primary'} actionType={'add'} onClick={() => this.props.addSession()}>
+            Ajouter une nouvelle session
+          </UpButton>
+        }
         {this.props.sessions && this.props.sessions.map((session: Session) => {
           const card: CardInfo = {
             description: session.description,

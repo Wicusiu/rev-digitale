@@ -42,7 +42,7 @@ export const signIn = function (userService: IUserService, entity: UserCredentia
 export const signOut = function () {
   return function (dispatch) {
     dispatch(signOutEventCreator('SUCCESS'));
-    dispatch(dispatch(push('/login'))());
+    dispatch(push('/login'));
     return Promise.resolve();
   };
 };

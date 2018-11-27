@@ -167,7 +167,7 @@ class HeaderView extends React.Component<IHeaderProps & WithThemeProps, IHeaderS
             <div className={profileSectionStyle}>
               <div className={dropdownMenuWrapperStyle} onClick={this.toggleState}>
                 <Avatar size={'icon'} photo={user.photo ? user.photo : null} />
-                <span className={loginShowStyle}>{user.firstName} {user.lastName}</span>
+                <span className={loginShowStyle}>{user.first_name} {user.last_name}</span>
                 <span className={classnames(dropdownIconStyle, 'icon-arrow_drop_down')} />
                 <Menu className={classnames(dropdownMenuStyle, { toggled: isMenuToggled })}
                   items={this.props.items} />

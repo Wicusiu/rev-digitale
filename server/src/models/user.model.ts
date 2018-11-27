@@ -43,6 +43,11 @@ export class User extends Entity {
   })
   photo: string;
 
+  @property({
+    type: 'boolean',
+  })
+  is_admin: boolean;
+
   constructor(data?: Partial<User>) {
     super(data);
   }

@@ -22,7 +22,8 @@ const mapDispatchToProps = function (dispatch: Dispatch<any>) {
       const sessionService = ServiceFactory.create(SessionService, dispatch, authToken);
       return dispatch(getByModule(sessionService, moduleId));
     },
-    viewSession: (id: string) => dispatch(push(`/sessions/${id}`)),
+    viewSession: (id: string) => dispatch(push(`/sessions/edit/${id}`)),
+    addSession: () => dispatch(push(`/sessions/add`)),
     navigateTo: (route: string) => dispatch(push(route)),
   } as Partial<IViewModuleComponentProps>;
 };

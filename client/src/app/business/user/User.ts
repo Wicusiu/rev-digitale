@@ -1,17 +1,18 @@
 
 export interface IUser {
   username?: string;
-  lastName?: string;
-  firstName?: string;
+  last_name?: string;
+  first_name?: string;
   title?: string;
   email?: string;
-  mobilePhoneNumber?: string;
-  phoneNumber?: string;
+  mobile_number?: string;
+  phone_number?: string;
   photo?: string;
   activated?: boolean;
-  activationDate?: Date;
-  desactivationDate?: Date;
+  activation_date?: Date;
+  desactivation_date?: Date;
   lastConnection?: Date;
   id?: string;
   token?: string;
+  is_admin?: boolean;
 }
