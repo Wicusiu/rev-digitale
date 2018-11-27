@@ -1,4 +1,4 @@
-import { colorMap, getIntentColor } from './theme' ;
+import { colorMap, getIntentColor } from './theme';
 import { NestedCSSProperties } from 'typestyle/lib/types';
 import { style } from 'typestyle';
 
@@ -456,7 +456,6 @@ export const body1RightGreyLevel1: NestedCSSProperties = {
   fontFamily: 'Roboto',
   fontSize: '14px',
   textAlign: 'left',
-  color: colorMap.greyishBrown,
 };
 
 export const body1CenterGreyLevel1: NestedCSSProperties = {
@@ -579,7 +578,6 @@ export const ScrollableStyle = style({
   height: 'calc(100%)',
 });
 
-
 export const CloseMaterialinearStyle = style({
   position: 'absolute',
   right: '2px',
@@ -657,15 +655,15 @@ export const transactionsSelectedStyle = style({
 
 export const chartWrapperStyle = style({
   width: '100%',
-  height:'calc(100% - 16px)',
+  height: 'calc(100% - 16px)',
   overflowX: 'auto',
   marginBottom: '16px',
 });
 
 export const wrapperActionGroupStyle = style({
-  margin : '10px',
-  $nest : {
-    span : {
+  margin: '10px',
+  $nest: {
+    span: {
       marginRight: '16px',
       padding: '8px',
     },

@@ -46,8 +46,8 @@ const FooterView: React.SFC<IFooterViewProps & WithThemeProps> = (props) => {
         <div className={wrapperAppMobileInfoStyle}>
         </div>
       }
-      <UpBox className={endFooter}>
-        <p className={style(body1RightGreyLevel1)}>
+      <UpBox className={endFooter} flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
+        <p className={style(body1RightGreyLevel1, { color: 'white' })}>
           <span>© {new Date().getFullYear()} - Tous droits réservés Up (R)evolution Digitale.</span>
           <span> </span>
         </p>
