@@ -7,18 +7,16 @@ export interface MenuItem {
   uri: string;
 }
 
-const isCollectiveOutingEnable = () => true;
-
 const getWorkspaceMenu = (user: IUser): MenuItem[] => {
   const menuItems: Array<MenuItem> = [
     {
-      title: 'Les (R)Bricks',
+      title: 'Les Bricks',
       iconClass: 'icon-Llist4',
       uri: `/bricks`,
       disabled: false,
     },
     {
-      title: 'Mes (R)Sessions',
+      title: 'Mes Sessions',
       uri: '/sessions',
       iconClass: 'icon-Lcolor-sampler',
       disabled: false,

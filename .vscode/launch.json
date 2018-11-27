@@ -16,7 +16,7 @@
       "request": "launch",
       "name": "App on 1337",
       "url": "http://localhost:1337",
-      "webRoot": "${workspaceFolder}"
+      "webRoot": "${workspaceFolder}/client"
     }
   ]
 }

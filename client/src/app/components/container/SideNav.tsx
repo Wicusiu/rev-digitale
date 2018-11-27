@@ -225,7 +225,6 @@ class SideNav extends React.Component<ISideNavProps & WithThemeProps, ISideNavSt
                     <img src={`${menuItem.icon}`}
                       className={logo} />
                   </ListItem>
-                  <Divider />
                   <List key={`subMenu-${index}`} className={classnames(ListStyle, subMenuListStyle)}>
                     {menuItem.childMenuItems &&
                       menuItem.childMenuItems.map((menuItem, index) => {
@@ -237,7 +236,6 @@ class SideNav extends React.Component<ISideNavProps & WithThemeProps, ISideNavSt
               );
             })
           }
-          <Divider />
         </nav>
         <div className={classnames(iconMenuStyle, style({ backgroundColor: theme.colorMap.primary }), this.state.showMenu !== true ? closedMenuStyle : '')}>
           <span onClick={this.toggleMenu} className={classnames(defaultIconStyle, this.state.showMenu ? 'icon-close' : 'icon-menu')}></span>
