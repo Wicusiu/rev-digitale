@@ -75,6 +75,16 @@ const applicationHttpStatusCodeMiddlewares = {
       return Promise.reject(responseBody.map(mapErrorToResultMessage));
     });
   },
+  422(dispatch: Dispatch<any>, response: Response): Promise<Response> {
+    // Retourne la liste des erreurs
+    return response.text().then((text) => {
+      let responseBody: Array<any> = text ? JSON.parse(text) : [];
+      if (!Array.isArray(responseBody)) {
+        responseBody = [responseBody];
+      }
+      return Promise.reject(responseBody.map(mapErrorToResultMessage));
+    });
+  },
   403(dispatch: Dispatch<any>, response: Response): Promise<Array<IError>> {
     // Retourne la liste des erreurs
     return response.text().then((text) => {

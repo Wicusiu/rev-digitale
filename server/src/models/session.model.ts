@@ -1,7 +1,12 @@
 import { Entity, model, property, belongsTo } from '@loopback/repository';
 import { Module } from './module.model';
+import { IdDefinition } from 'loopback-datasource-juggler';
 
-@model()
+@model({
+  settings: {
+    strictObjectIDCoercion: true,
+  }
+})
 export class Session extends Entity {
   @property({
     type: 'string',
@@ -19,6 +24,11 @@ export class Session extends Entity {
     type: 'string',
   })
   description?: string;
+
+  @property({
+    type: 'string',
+  })
+  location?: string;
 
   @property({
     type: 'date',

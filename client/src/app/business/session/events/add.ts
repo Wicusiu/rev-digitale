@@ -1,6 +1,6 @@
 import { ISessionService } from '../ISessionService';
 import { EventPayload, ACTION_STATUS, IResultMessage, IActionResult } from 'common/actions';
-import { Session } from 'app/api/mapper/swagger/typescript-fetch-client';
+import { Session, NewSession } from 'app/api/mapper/swagger/typescript-fetch-client';
 import { Action } from 'redux-actions';
 
 export type AddSessionEventPayload = EventPayload<Session>;
@@ -15,10 +15,10 @@ const addEventCreator = (status: ACTION_STATUS, aggregate?: Session, messages?: 
   type: ADD_SESSION_EVENT,
 });
 
-export const add = function (sessionService: ISessionService, entity: Session) {
+export const add = function (sessionService: ISessionService, args: NewSession) {
   return async (dispatch) => {
     dispatch(addEventCreator('PENDING'));
-    return sessionService.add(entity).then((entityAddResult: IActionResult<Session>) => {
+    return sessionService.add(args).then((entityAddResult: IActionResult<Session>) => {
       dispatch(addEventCreator('SUCCESS', entityAddResult.entity));
       return entityAddResult;
     }).catch((error) => {

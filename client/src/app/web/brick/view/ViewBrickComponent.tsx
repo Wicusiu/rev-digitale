@@ -43,7 +43,7 @@ class ViewBrickComponent extends React.Component<IViewBrickComponentProps & With
   render() {
     if (this.props.isFetching) {
       return <UpBox flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
-        <UpLoadingIndicator isLoading={true} />
+        <UpLoadingIndicator displayMode={'layer'} message={'Chargement en cours...'} isLoading={true} />
       </UpBox>;
     }
     if (this.props.brick) {

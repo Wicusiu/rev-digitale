@@ -15,12 +15,12 @@ const listEventCreator = (status: ACTION_STATUS, aggregate?: Array<Module>, mess
   type: LIST_MODULE_EVENT,
 });
 
-export const list = function (brickService: IModuleService) {
+export const list = function (moduleService: IModuleService) {
   return async (dispatch) => {
     dispatch(listEventCreator('PENDING'));
-    return brickService.all().then((bricks: Array<Module>) => {
-      dispatch(listEventCreator('SUCCESS', bricks));
-      return bricks;
+    return moduleService.all().then((modules: Array<Module>) => {
+      dispatch(listEventCreator('SUCCESS', modules));
+      return modules;
     }).catch((error) => {
       dispatch(listEventCreator('FAILURE', null, error));
       throw error;

@@ -1,6 +1,6 @@
 import { JsonServiceBase, Middleware } from 'app/api/JsonServiceBase';
 import { IResultMessage, IActionResult } from 'common/actions';
-import { Session, SessionApiFetchParamCreator } from './mapper/swagger/typescript-fetch-client';
+import { Session, SessionApiFetchParamCreator, NewSession } from './mapper/swagger/typescript-fetch-client';
 import { ISessionService } from 'app/business/session/ISessionService';
 
 export class SessionService extends JsonServiceBase<Session> implements ISessionService {
@@ -19,7 +19,7 @@ export class SessionService extends JsonServiceBase<Session> implements ISession
     return this.fetch<number>(params.url, params.options);
   }
 
-  add(args: Session): Promise<IActionResult<Session>> {
+  add(args: NewSession): Promise<IActionResult<Session>> {
     const params = SessionApiFetchParamCreator().sessionCreate(args);
     return this.fetch<Session>(params.url, params.options).then((session: Session) => {
       return {

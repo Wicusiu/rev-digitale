@@ -11,7 +11,7 @@ export class SessionRepository extends DefaultCrudRepository<
 
   public readonly module: BelongsToAccessor<
     Module,
-    typeof Session.prototype.moduleId
+    typeof Session.prototype.id
     >;
 
   constructor(

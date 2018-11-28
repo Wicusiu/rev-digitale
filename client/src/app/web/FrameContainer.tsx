@@ -154,7 +154,8 @@ class FrameContainer extends React.Component<IFrameContainerProps & RouteCompone
               {!user && (
                 <UpBox alignItems={'center'} justifyContent={'center'}>
                   <UpLoadingIndicator
-                    message="Chargement en cours"
+                    message={'Chargement en cours...'}
+                    displayMode={'layer'}
                     isLoading={true}
                   />
                 </UpBox>

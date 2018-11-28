@@ -1,15 +1,15 @@
 import { EventPayload, IResultMessage, ACTION_STATUS, IActionResult } from 'common/actions';
-import { User, UserCredentials } from 'app/api/mapper/swagger/typescript-fetch-client';
+import { User, UserCredentials, JwtToken } from 'app/api/mapper/swagger/typescript-fetch-client';
 import { Action } from 'redux-actions';
 import { IUserService } from './IUserService';
 import { push } from 'react-router-redux';
 
-export type SignInUserEventPayload = EventPayload<User>;
+export type SignInUserEventPayload = EventPayload<JwtToken>;
 export type SignOutUserEventPayload = EventPayload<User>;
 export const SIGNIN_USER_EVENT = 'SIGNIN_USER_EVENT';
 export const SIGNOUT_USER_EVENT = 'SIGNOUT_USER_EVENT';
 
-const signInEventCreator = (status: ACTION_STATUS, aggregate?: User, messages?: Array<IResultMessage>): Action<SignInUserEventPayload> => ({
+const signInEventCreator = (status: ACTION_STATUS, aggregate?: JwtToken, messages?: Array<IResultMessage>): Action<SignInUserEventPayload> => ({
   payload: {
     status,
     aggregate,
@@ -29,7 +29,7 @@ export const signOutEventCreator = (status: ACTION_STATUS): Action<SignOutUserEv
 export const signIn = function (userService: IUserService, entity: UserCredentials) {
   return async (dispatch) => {
     dispatch(signInEventCreator('PENDING'));
-    return userService.signIn(entity).then((entity: User) => {
+    return userService.signIn(entity).then((entity: JwtToken) => {
       dispatch(signInEventCreator('SUCCESS', entity));
       return entity;
     }).catch((error) => {

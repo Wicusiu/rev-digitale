@@ -39,9 +39,9 @@ const mapStateToProps = function (state: InstanceState, ownProps: IViewModuleCom
     errors: state.application.module.errors,
     module: state.application.module.currentValue,
     isFetching: state.application.module.isFetching,
-    isFetchingModules: state.application.module.isFetching,
-    modules: state.application.module.values,
-    errorsModules: state.application.module.errors,
+    isFetchingSession: state.application.session.isFetching,
+    sessions: state.application.session.values,
+    errorsSession: state.application.session.errors,
   } as Partial<IViewModuleComponentProps>;
 };
 

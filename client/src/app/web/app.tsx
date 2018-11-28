@@ -57,7 +57,7 @@ class Application extends React.Component<ApplicationProps, ApplicationState>{
       return (
         <UpThemeProvider theme={UpDefaultTheme}>
           <Background>
-            <UpLoadingIndicator message={'Chargement en cours...'} isLoading={true} />
+            <UpLoadingIndicator displayMode={'layer'} message={'Chargement en cours...'} isLoading={true} />
           </Background></UpThemeProvider>
       );
     }

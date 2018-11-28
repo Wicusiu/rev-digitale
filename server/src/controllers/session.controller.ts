@@ -39,7 +39,7 @@ export class SessionController {
       },
     },
   })
-  async create(@requestBody() session: Session): Promise<Session> {
+  async create(@requestBody() session: Partial<Session>): Promise<Session> {
     return await this.sessionRepository.create(session);
   }
 

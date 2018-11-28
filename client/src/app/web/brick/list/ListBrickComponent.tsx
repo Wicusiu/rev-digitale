@@ -33,7 +33,7 @@ class ListBrickComponent extends React.Component<IBricksComponentProps & WithThe
   render() {
     if (this.props.isFetching) {
       return <UpBox flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
-        <UpLoadingIndicator isLoading={true} />
+        <UpLoadingIndicator displayMode={'layer'} message={'Chargement en cours...'} isLoading={true} />
       </UpBox>;
     }
     if (this.props.bricks) {

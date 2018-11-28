@@ -12,6 +12,7 @@ import { fadeIn, appearFromBottom } from 'common/animations';
 export interface IViewModuleComponentProps {
   authenticatedUser?: IUser;
   isFetching?: boolean;
+  isFetchingSession?: boolean;
   module?: Module;
   id: string;
   sessions?: Array<Session>;
@@ -43,7 +44,7 @@ class ViewModuleComponent extends React.Component<IViewModuleComponentProps & Wi
   render() {
     if (this.props.isFetching) {
       return <UpBox flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
-        <UpLoadingIndicator isLoading={true} />
+        <UpLoadingIndicator displayMode={'layer'} message={'Chargement en cours...'} isLoading={true} />
       </UpBox>;
     }
     if (this.props.module) {
@@ -51,11 +52,6 @@ class ViewModuleComponent extends React.Component<IViewModuleComponentProps & Wi
         <UpNotification>
           {this.props.module.description}
         </UpNotification>
-        {this.props.authenticatedUser && this.props.authenticatedUser.is_admin &&
-          <UpButton intent={'primary'} actionType={'add'} onClick={() => this.props.addSession()}>
-            Ajouter une nouvelle session
-          </UpButton>
-        }
         {this.props.sessions && this.props.sessions.map((session: Session) => {
           const card: CardInfo = {
             description: session.description,
@@ -71,6 +67,16 @@ class ViewModuleComponent extends React.Component<IViewModuleComponentProps & Wi
               },
             ]}></Card></div>;
         })
+        }
+        {this.props.sessions != null && this.props.sessions.length === 0 &&
+          <UpNotification intent={'warning'}>
+            {'Aucune session programmée sur ce module !'}
+          </UpNotification>
+        }
+        {this.props.authenticatedUser && this.props.authenticatedUser.is_admin &&
+          <UpButton intent={'primary'} actionType={'add'} onClick={() => this.props.addSession()}>
+            Ajouter une nouvelle session
+          </UpButton>
         }
       </Page>;
     }

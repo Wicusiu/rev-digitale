@@ -21,7 +21,7 @@ const signInUserReducer: ReducerMapValue<UserState, SignInUserEventPayload> = (s
   return Object.assign({}, state, <UserState>{
     errors: action.payload.status === 'FAILURE' ? action.payload.messages : null,
     isFetching: action.payload.status === 'PENDING',
-    authenticatedUser: action.payload.aggregate ? action.payload.aggregate : null,
+    authenticatedUser: action.payload.aggregate ? { ...action.payload.aggregate.user, token: action.payload.aggregate.token } : null,
   });
 };
 
