@@ -119,7 +119,7 @@ export class UserController {
     return await this.userRepository.count(where);
   }
 
-  @authenticate('BearerStrategy')
+  // @authenticate('BearerStrategy')
   @get('/users', {
     responses: {
       '200': {

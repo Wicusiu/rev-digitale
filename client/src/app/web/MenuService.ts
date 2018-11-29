@@ -10,15 +10,15 @@ export interface MenuItem {
 const getWorkspaceMenu = (user: IUser): MenuItem[] => {
   const menuItems: Array<MenuItem> = [
     {
-      title: 'Les Bricks',
+      title: 'Mon Parcours',
+      uri: '/pathway',
       iconClass: 'icon-Llist4',
-      uri: `/bricks`,
       disabled: false,
     },
     {
-      title: 'Mes Sessions',
-      uri: '/sessions',
+      title: 'Les Bricks',
       iconClass: 'icon-Lcolor-sampler',
+      uri: `/bricks`,
       disabled: false,
     },
   ];

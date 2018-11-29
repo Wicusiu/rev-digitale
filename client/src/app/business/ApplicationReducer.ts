@@ -4,6 +4,7 @@ import { BrickState, BrickReducer } from './brick/BrickReducer';
 import { UserState, UserReducer } from './user/UserReducer';
 import { ModuleReducer, ModuleState } from './module/ModuleReducer';
 import { SessionReducer, SessionState } from './session/SessionReducer';
+import { PathwayState, PathwayReducer } from './pathway/PathwayReducer';
 
 const combinedReducer = combineReducers({
   message: MessageReducer,
@@ -11,6 +12,7 @@ const combinedReducer = combineReducers({
   user: UserReducer,
   module: ModuleReducer,
   session: SessionReducer,
+  pathway: PathwayReducer,
 });
 
 export interface ApplicationState {
@@ -19,6 +21,7 @@ export interface ApplicationState {
   user: UserState;
   module: ModuleState;
   session: SessionState;
+  pathway: PathwayState;
 }
 
 export { combinedReducer as ApplicationReducer };

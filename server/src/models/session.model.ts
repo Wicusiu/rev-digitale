@@ -1,6 +1,7 @@
 import { Entity, model, property, belongsTo } from '@loopback/repository';
 import { Module } from './module.model';
 import { IdDefinition } from 'loopback-datasource-juggler';
+import { Attendee } from './attendee.model';
 
 @model({
   settings: {
@@ -44,6 +45,9 @@ export class Session extends Entity {
 
   @belongsTo(() => Module)
   moduleId: string
+
+  @property.array(typeof Attendee)
+  attendees: Array<Attendee>
 
   constructor(data?: Partial<Session>) {
     super(data);

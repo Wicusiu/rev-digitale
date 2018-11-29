@@ -6,5 +6,5 @@ export interface ICRUDService<T, KT> {
   add(args: Partial<T>): Promise<IActionResult<T>>;
   update(args: T): Promise<IActionResult<T>>;
   delete(id: KT): Promise<IActionResult<KT>>;
-  all(): Promise<Array<T>>;
+  all(filters?: string): Promise<Array<T>>;
 }

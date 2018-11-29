@@ -49,8 +49,8 @@ export class BrickService extends JsonServiceBase<Brick> implements IBrickServic
     });
   }
 
-  all(): Promise<Array<Brick>> {
-    const params = BrickApiFetchParamCreator().brickFind();
+  all(filters?: string): Promise<Array<Brick>> {
+    const params = BrickApiFetchParamCreator().brickFind(filters);
     return this.fetch<Array<Brick>>(params.url, params.options);
   }
 }

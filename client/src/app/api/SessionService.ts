@@ -49,8 +49,8 @@ export class SessionService extends JsonServiceBase<Session> implements ISession
     });
   }
 
-  all(): Promise<Array<Session>> {
-    const params = SessionApiFetchParamCreator().sessionFind();
+  all(filters?: string): Promise<Array<Session>> {
+    const params = SessionApiFetchParamCreator().sessionFind(filters);
     return this.fetch<Array<Session>>(params.url, params.options);
   }
 
@@ -60,7 +60,17 @@ export class SessionService extends JsonServiceBase<Session> implements ISession
   }
 
   getByUserId(userId: string): Promise<Session[]> {
-    const params = SessionApiFetchParamCreator().sessionGetByModule(userId);
+    const params = SessionApiFetchParamCreator().sessionGetByUser(userId);
     return this.fetch<Array<Session>>(params.url, params.options);
+  }
+
+  register(userId: string, sessionId: string): Promise<IActionResult<Session>> {
+    const params = SessionApiFetchParamCreator().sessionRegister({ userId, sessionId });
+    return this.fetch<Session>(params.url, params.options).then((session: Session) => {
+      return {
+        succeeded: true,
+        entity: session,
+      } as IActionResult<Session>;
+    });
   }
 }

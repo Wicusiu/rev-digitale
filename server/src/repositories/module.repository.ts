@@ -11,7 +11,7 @@ export class ModuleRepository extends DefaultCrudRepository<
 
   public readonly brick: BelongsToAccessor<
     Brick,
-    typeof Module.prototype.brickId
+    typeof Module.prototype.id
     >;
 
   constructor(

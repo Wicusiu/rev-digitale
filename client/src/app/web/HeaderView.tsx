@@ -61,6 +61,7 @@ const loginShowStyle = style({
   fontSize: '0.875rem',
   marginLeft: '0.5rem',
   display: 'inline-block',
+  color: 'white',
 });
 
 const dropdownIconStyle = style({

@@ -235,7 +235,7 @@ export interface Module {
     /**
      *
      * @type {string}
-     * @memberof Brick
+     * @memberof Module
      */
     brickId?: string;
 }
@@ -305,7 +305,7 @@ export interface NewModule {
     /**
      *
      * @type {string}
-     * @memberof NewBrick
+     * @memberof NewModule
      */
     brickId?: string;
 }
@@ -331,13 +331,13 @@ export interface NewSession {
     /**
      *
      * @type {Date}
-     * @memberof Session
+     * @memberof NewSession
      */
     startDate: Date;
     /**
     *
     * @type {Date}
-    * @memberof Session
+    * @memberof NewSession
     */
     endDate: Date;
     /**
@@ -352,6 +352,47 @@ export interface NewSession {
      * @memberof NewSession
      */
     moduleId: string;
+
+    /**
+     *
+     * @type {array}
+     * @memberof NewSession
+     */
+    attendees?: Array<Attendee>;
+}
+
+export enum AttendeeParticipationStatus {
+    Planned,
+    Participated,
+    Declined,
+    Missed,
+}
+
+export class Attendee {
+    /**
+     *
+     * @type {string}
+     * @memberof Attendee
+     */
+    userId: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Attendee
+     */
+    comment?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Attendee
+     */
+    rating?: number;
+    /**
+     *
+     * @type {object}
+     * @memberof Attendee
+     */
+    status: AttendeeParticipationStatus;
 }
 
 /**
@@ -446,6 +487,12 @@ export interface Session {
      * @memberof Session
      */
     id: string;
+    /**
+     *
+     * @type {array}
+     * @memberof Session
+     */
+    attendees?: Array<Attendee>;
 }
 
 /**
@@ -469,13 +516,13 @@ export interface User {
     /**
      *
      * @type {string}
-     * @memberof NewUser
+     * @memberof User
      */
     lastName?: string;
     /**
      *
      * @type {string}
-     * @memberof NewUser
+     * @memberof User
      */
     firstName?: string;
     /**
@@ -546,6 +593,1375 @@ export interface UserCredentials {
  * @interface XAny
  */
 export interface XAny {
+}
+
+
+export class Pathway {
+    /**
+     *
+     * @type {string}
+     * @memberof Pathway
+     */
+    userId: string;
+    /**
+     *
+     * @type {Array}
+     * @memberof Pathway
+     */
+    moduleIds?: string[];
+}
+
+
+export class NewPathway {
+    /**
+     *
+     * @type {string}
+     * @memberof NewPathway
+     */
+    userId: string;
+    /**
+     *
+     * @type {Array}
+     * @memberof NewPathway
+     */
+    moduleIds?: string[];
+}
+
+/**
+ * PathwayApi - fetch parameter creator
+ * @export
+ */
+export const PathwayApiFetchParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         *
+         * @summary Count instances of the model matched by where from the data source.
+         * @param {string} [where] Criteria to match model instances
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayCount(where?: string, options: any = {}): FetchArgs {
+            const localVarPath = `/pathways/count`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Create a new instance of the model and persist it into the data source.
+         * @param {NewPathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayCreate(data?: NewPathway, options: any = {}): FetchArgs {
+            const localVarPath = `/pathways`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"NewPathway" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body = needsSerialization ? JSON.stringify(data || {}) : (data || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Create a change stream.
+         * @param {string} [paramsStream]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayCreateChangeStreamGetPathwaysChangeStream(paramsStream?: string, options: any = {}): FetchArgs {
+            const localVarPath = `/pathways/change-stream`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (paramsStream !== undefined) {
+                localVarQueryParameter['paramsStream'] = paramsStream;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Create a change stream.
+         * @param {string} [paramsStream]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayCreateChangeStreamPostPathwaysChangeStream(paramsStream?: string, options: any = {}): FetchArgs {
+            const localVarPath = `/pathways/change-stream`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new url.URLSearchParams();
+
+            if (paramsStream !== undefined) {
+                localVarFormParams.set('paramsStream', paramsStream as any);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'application/x-www-form-urlencoded';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            localVarRequestOptions.body = localVarFormParams.toString();
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Delete a model instance by {{id}} from the data source.
+         * @param {string} id Model id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayDeleteById(id: string, options: any = {}): FetchArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id', 'Required parameter id was null or undefined when calling pathwayDeleteById.');
+            }
+            const localVarPath = `/pathways/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'DELETE' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Check whether a model instance exists in the data source.
+         * @param {string} id Model id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayExistsGetPathwaysidExists(id: string, options: any = {}): FetchArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id', 'Required parameter id was null or undefined when calling pathwayExistsGetPathwaysidExists.');
+            }
+            const localVarPath = `/pathways/{id}/exists`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Check whether a model instance exists in the data source.
+         * @param {string} id Model id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayExistsHeadPathwaysid(id: string, options: any = {}): FetchArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id', 'Required parameter id was null or undefined when calling pathwayExistsHeadPathwaysid.');
+            }
+            const localVarPath = `/pathways/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'HEAD' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Find all instances of the model matched by filter from the data source.
+         * @param {string} [filter] Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayFind(filter?: string, options: any = {}): FetchArgs {
+            const localVarPath = `/pathways`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Find a model instance by {{id}} from the data source.
+         * @param {string} id Model id
+         * @param {string} [filter] Filter defining fields and include - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayFindById(id: string, filter?: string, options: any = {}): FetchArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id', 'Required parameter id was null or undefined when calling pathwayFindById.');
+            }
+            const localVarPath = `/pathways/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Find first instance of the model matched by filter from the data source.
+         * @param {string} [filter] Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayFindOne(filter?: string, options: any = {}): FetchArgs {
+            const localVarPath = `/pathways/findOne`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Patch an existing model instance or insert a new one into the data source.
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayPatchOrCreate(data?: Pathway, options: any = {}): FetchArgs {
+            const localVarPath = `/pathways`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'PATCH' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"Pathway" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body = needsSerialization ? JSON.stringify(data || {}) : (data || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Patch attributes for a model instance and persist it into the data source.
+         * @param {string} id pathway id
+         * @param {Pathway} [data] An object of model property name/value pairs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayPrototypePatchAttributes(id: string, data?: Pathway, options: any = {}): FetchArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id', 'Required parameter id was null or undefined when calling pathwayPrototypePatchAttributes.');
+            }
+            const localVarPath = `/pathways/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'PATCH' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"Pathway" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body = needsSerialization ? JSON.stringify(data || {}) : (data || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Replace attributes for a model instance and persist it into the data source.
+         * @param {string} id Model id
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayReplaceByIdPostPathwaysidReplace(id: string, data?: Pathway, options: any = {}): FetchArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id', 'Required parameter id was null or undefined when calling pathwayReplaceByIdPostPathwaysidReplace.');
+            }
+            const localVarPath = `/pathways/{id}/replace`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"Pathway" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body = needsSerialization ? JSON.stringify(data || {}) : (data || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Replace attributes for a model instance and persist it into the data source.
+         * @param {string} id Model id
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayReplaceByIdPutPathwaysid(id: string, data?: Pathway, options: any = {}): FetchArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id', 'Required parameter id was null or undefined when calling pathwayReplaceByIdPutPathwaysid.');
+            }
+            const localVarPath = `/pathways/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'PUT' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"Pathway" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body = needsSerialization ? JSON.stringify(data || {}) : (data || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Replace an existing model instance or insert a new one into the data source.
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayReplaceOrCreatePostPathwaysReplaceOrCreate(data?: Pathway, options: any = {}): FetchArgs {
+            const localVarPath = `/pathways/replaceOrCreate`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"Pathway" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body = needsSerialization ? JSON.stringify(data || {}) : (data || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Replace an existing model instance or insert a new one into the data source.
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayReplaceOrCreatePutPathways(data?: Pathway, options: any = {}): FetchArgs {
+            const localVarPath = `/pathways`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'PUT' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"Pathway" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body = needsSerialization ? JSON.stringify(data || {}) : (data || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Update instances of the model matched by {{where}} from the data source.
+         * @param {string} [where] Criteria to match model instances
+         * @param {Pathway} [data] An object of model property name/value pairs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayUpdateAll(where?: string, data?: Pathway, options: any = {}): FetchArgs {
+            const localVarPath = `/pathways/update`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"Pathway" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body = needsSerialization ? JSON.stringify(data || {}) : (data || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Update an existing model instance or insert a new one into the data source based on the where criteria.
+         * @param {string} [where] Criteria to match model instances
+         * @param {Pathway} [data] An object of model property name/value pairs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayUpsertWithWhere(where?: string, data?: Pathway, options: any = {}): FetchArgs {
+            const localVarPath = `/pathways/upsertWithWhere`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"Pathway" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body = needsSerialization ? JSON.stringify(data || {}) : (data || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PathwayApi - functional programming interface
+ * @export
+ */
+export const PathwayApiFp = function (configuration?: Configuration) {
+    return {
+        /**
+         *
+         * @summary Count instances of the model matched by where from the data source.
+         * @param {string} [where] Criteria to match model instances
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayCount(where?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<InlineResponse200> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayCount(where, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Create a new instance of the model and persist it into the data source.
+         * @param {NewPathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayCreate(data?: NewPathway, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Pathway> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayCreate(data, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Create a change stream.
+         * @param {string} [paramsStream]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayCreateChangeStreamGetPathwaysChangeStream(paramsStream?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<any> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayCreateChangeStreamGetPathwaysChangeStream(paramsStream, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Create a change stream.
+         * @param {string} [paramsStream]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayCreateChangeStreamPostPathwaysChangeStream(paramsStream?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<any> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayCreateChangeStreamPostPathwaysChangeStream(paramsStream, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Delete a model instance by {{id}} from the data source.
+         * @param {string} id Model id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayDeleteById(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<any> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayDeleteById(id, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Check whether a model instance exists in the data source.
+         * @param {string} id Model id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayExistsGetPathwaysidExists(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<InlineResponse2001> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayExistsGetPathwaysidExists(id, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Check whether a model instance exists in the data source.
+         * @param {string} id Model id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayExistsHeadPathwaysid(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<InlineResponse2001> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayExistsHeadPathwaysid(id, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Find all instances of the model matched by filter from the data source.
+         * @param {string} [filter] Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayFind(filter?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<Pathway>> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayFind(filter, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Find a model instance by {{id}} from the data source.
+         * @param {string} id Model id
+         * @param {string} [filter] Filter defining fields and include - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayFindById(id: string, filter?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Pathway> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayFindById(id, filter, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Find first instance of the model matched by filter from the data source.
+         * @param {string} [filter] Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayFindOne(filter?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Pathway> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayFindOne(filter, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Patch an existing model instance or insert a new one into the data source.
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayPatchOrCreate(data?: Pathway, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Pathway> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayPatchOrCreate(data, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Patch attributes for a model instance and persist it into the data source.
+         * @param {string} id pathway id
+         * @param {Pathway} [data] An object of model property name/value pairs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayPrototypePatchAttributes(id: string, data?: Pathway, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Pathway> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayPrototypePatchAttributes(id, data, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Replace attributes for a model instance and persist it into the data source.
+         * @param {string} id Model id
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayReplaceByIdPostPathwaysidReplace(id: string, data?: Pathway, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Pathway> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayReplaceByIdPostPathwaysidReplace(id, data, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Replace attributes for a model instance and persist it into the data source.
+         * @param {string} id Model id
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayReplaceByIdPutPathwaysid(id: string, data?: Pathway, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Pathway> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayReplaceByIdPutPathwaysid(id, data, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Replace an existing model instance or insert a new one into the data source.
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayReplaceOrCreatePostPathwaysReplaceOrCreate(data?: Pathway, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Pathway> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayReplaceOrCreatePostPathwaysReplaceOrCreate(data, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Replace an existing model instance or insert a new one into the data source.
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayReplaceOrCreatePutPathways(data?: Pathway, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Pathway> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayReplaceOrCreatePutPathways(data, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Update instances of the model matched by {{where}} from the data source.
+         * @param {string} [where] Criteria to match model instances
+         * @param {Pathway} [data] An object of model property name/value pairs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayUpdateAll(where?: string, data?: Pathway, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<InlineResponse2002> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayUpdateAll(where, data, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         *
+         * @summary Update an existing model instance or insert a new one into the data source based on the where criteria.
+         * @param {string} [where] Criteria to match model instances
+         * @param {Pathway} [data] An object of model property name/value pairs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayUpsertWithWhere(where?: string, data?: Pathway, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Pathway> {
+            const localVarFetchArgs = PathwayApiFetchParamCreator(configuration).pathwayUpsertWithWhere(where, data, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+    }
+};
+
+/**
+ * PathwayApi - factory interface
+ * @export
+ */
+export const PathwayApiFactory = function (configuration?: Configuration, fetch?: FetchAPI, basePath?: string) {
+    return {
+        /**
+         *
+         * @summary Count instances of the model matched by where from the data source.
+         * @param {string} [where] Criteria to match model instances
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayCount(where?: string, options?: any) {
+            return PathwayApiFp(configuration).pathwayCount(where, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Create a new instance of the model and persist it into the data source.
+         * @param {NewPathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayCreate(data?: NewPathway, options?: any) {
+            return PathwayApiFp(configuration).pathwayCreate(data, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Create a change stream.
+         * @param {string} [paramsStream]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayCreateChangeStreamGetPathwaysChangeStream(paramsStream?: string, options?: any) {
+            return PathwayApiFp(configuration).pathwayCreateChangeStreamGetPathwaysChangeStream(paramsStream, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Create a change stream.
+         * @param {string} [paramsStream]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayCreateChangeStreamPostPathwaysChangeStream(paramsStream?: string, options?: any) {
+            return PathwayApiFp(configuration).pathwayCreateChangeStreamPostPathwaysChangeStream(paramsStream, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Delete a model instance by {{id}} from the data source.
+         * @param {string} id Model id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayDeleteById(id: string, options?: any) {
+            return PathwayApiFp(configuration).pathwayDeleteById(id, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Check whether a model instance exists in the data source.
+         * @param {string} id Model id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayExistsGetPathwaysidExists(id: string, options?: any) {
+            return PathwayApiFp(configuration).pathwayExistsGetPathwaysidExists(id, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Check whether a model instance exists in the data source.
+         * @param {string} id Model id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayExistsHeadPathwaysid(id: string, options?: any) {
+            return PathwayApiFp(configuration).pathwayExistsHeadPathwaysid(id, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Find all instances of the model matched by filter from the data source.
+         * @param {string} [filter] Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayFind(filter?: string, options?: any) {
+            return PathwayApiFp(configuration).pathwayFind(filter, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Find a model instance by {{id}} from the data source.
+         * @param {string} id Model id
+         * @param {string} [filter] Filter defining fields and include - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayFindById(id: string, filter?: string, options?: any) {
+            return PathwayApiFp(configuration).pathwayFindById(id, filter, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Find first instance of the model matched by filter from the data source.
+         * @param {string} [filter] Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayFindOne(filter?: string, options?: any) {
+            return PathwayApiFp(configuration).pathwayFindOne(filter, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Patch an existing model instance or insert a new one into the data source.
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayPatchOrCreate(data?: Pathway, options?: any) {
+            return PathwayApiFp(configuration).pathwayPatchOrCreate(data, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Patch attributes for a model instance and persist it into the data source.
+         * @param {string} id pathway id
+         * @param {Pathway} [data] An object of model property name/value pairs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayPrototypePatchAttributes(id: string, data?: Pathway, options?: any) {
+            return PathwayApiFp(configuration).pathwayPrototypePatchAttributes(id, data, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Replace attributes for a model instance and persist it into the data source.
+         * @param {string} id Model id
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayReplaceByIdPostPathwaysidReplace(id: string, data?: Pathway, options?: any) {
+            return PathwayApiFp(configuration).pathwayReplaceByIdPostPathwaysidReplace(id, data, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Replace attributes for a model instance and persist it into the data source.
+         * @param {string} id Model id
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayReplaceByIdPutPathwaysid(id: string, data?: Pathway, options?: any) {
+            return PathwayApiFp(configuration).pathwayReplaceByIdPutPathwaysid(id, data, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Replace an existing model instance or insert a new one into the data source.
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayReplaceOrCreatePostPathwaysReplaceOrCreate(data?: Pathway, options?: any) {
+            return PathwayApiFp(configuration).pathwayReplaceOrCreatePostPathwaysReplaceOrCreate(data, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Replace an existing model instance or insert a new one into the data source.
+         * @param {Pathway} [data] Model instance data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayReplaceOrCreatePutPathways(data?: Pathway, options?: any) {
+            return PathwayApiFp(configuration).pathwayReplaceOrCreatePutPathways(data, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Update instances of the model matched by {{where}} from the data source.
+         * @param {string} [where] Criteria to match model instances
+         * @param {Pathway} [data] An object of model property name/value pairs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayUpdateAll(where?: string, data?: Pathway, options?: any) {
+            return PathwayApiFp(configuration).pathwayUpdateAll(where, data, options)(fetch, basePath);
+        },
+        /**
+         *
+         * @summary Update an existing model instance or insert a new one into the data source based on the where criteria.
+         * @param {string} [where] Criteria to match model instances
+         * @param {Pathway} [data] An object of model property name/value pairs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pathwayUpsertWithWhere(where?: string, data?: Pathway, options?: any) {
+            return PathwayApiFp(configuration).pathwayUpsertWithWhere(where, data, options)(fetch, basePath);
+        },
+    };
+};
+
+/**
+ * PathwayApi - object-oriented interface
+ * @export
+ * @class PathwayApi
+ * @extends {BaseAPI}
+ */
+export class PathwayApi extends BaseAPI {
+    /**
+     *
+     * @summary Count instances of the model matched by where from the data source.
+     * @param {} [where] Criteria to match model instances
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayCount(where?: string, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayCount(where, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Create a new instance of the model and persist it into the data source.
+     * @param {} [data] Model instance data
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayCreate(data?: NewPathway, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayCreate(data, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Create a change stream.
+     * @param {} [paramsStream]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayCreateChangeStreamGetPathwaysChangeStream(paramsStream?: string, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayCreateChangeStreamGetPathwaysChangeStream(paramsStream, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Create a change stream.
+     * @param {} [paramsStream]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayCreateChangeStreamPostPathwaysChangeStream(paramsStream?: string, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayCreateChangeStreamPostPathwaysChangeStream(paramsStream, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Delete a model instance by {{id}} from the data source.
+     * @param {} id Model id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayDeleteById(id: string, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayDeleteById(id, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Check whether a model instance exists in the data source.
+     * @param {} id Model id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayExistsGetPathwaysidExists(id: string, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayExistsGetPathwaysidExists(id, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Check whether a model instance exists in the data source.
+     * @param {} id Model id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayExistsHeadPathwaysid(id: string, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayExistsHeadPathwaysid(id, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Find all instances of the model matched by filter from the data source.
+     * @param {} [filter] Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayFind(filter?: string, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayFind(filter, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Find a model instance by {{id}} from the data source.
+     * @param {} id Model id
+     * @param {} [filter] Filter defining fields and include - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayFindById(id: string, filter?: string, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayFindById(id, filter, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Find first instance of the model matched by filter from the data source.
+     * @param {} [filter] Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({\&quot;something\&quot;:\&quot;value\&quot;})
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayFindOne(filter?: string, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayFindOne(filter, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Patch an existing model instance or insert a new one into the data source.
+     * @param {} [data] Model instance data
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayPatchOrCreate(data?: Pathway, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayPatchOrCreate(data, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Patch attributes for a model instance and persist it into the data source.
+     * @param {} id pathway id
+     * @param {} [data] An object of model property name/value pairs
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayPrototypePatchAttributes(id: string, data?: Pathway, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayPrototypePatchAttributes(id, data, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Replace attributes for a model instance and persist it into the data source.
+     * @param {} id Model id
+     * @param {} [data] Model instance data
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayReplaceByIdPostPathwaysidReplace(id: string, data?: Pathway, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayReplaceByIdPostPathwaysidReplace(id, data, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Replace attributes for a model instance and persist it into the data source.
+     * @param {} id Model id
+     * @param {} [data] Model instance data
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayReplaceByIdPutPathwaysid(id: string, data?: Pathway, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayReplaceByIdPutPathwaysid(id, data, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Replace an existing model instance or insert a new one into the data source.
+     * @param {} [data] Model instance data
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayReplaceOrCreatePostPathwaysReplaceOrCreate(data?: Pathway, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayReplaceOrCreatePostPathwaysReplaceOrCreate(data, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Replace an existing model instance or insert a new one into the data source.
+     * @param {} [data] Model instance data
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayReplaceOrCreatePutPathways(data?: Pathway, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayReplaceOrCreatePutPathways(data, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Update instances of the model matched by {{where}} from the data source.
+     * @param {} [where] Criteria to match model instances
+     * @param {} [data] An object of model property name/value pairs
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayUpdateAll(where?: string, data?: Pathway, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayUpdateAll(where, data, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Update an existing model instance or insert a new one into the data source based on the where criteria.
+     * @param {} [where] Criteria to match model instances
+     * @param {} [data] An object of model property name/value pairs
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PathwayApi
+     */
+    public pathwayUpsertWithWhere(where?: string, data?: Pathway, options?: any) {
+        return PathwayApiFp(this.configuration).pathwayUpsertWithWhere(where, data, options)(this.fetch, this.basePath);
+    }
+
 }
 
 
@@ -3652,6 +5068,34 @@ export const SessionApiFetchParamCreator = function (configuration?: Configurati
         },
         /**
          *
+         * @summary Register a user to a session and persist it into the data source.
+         * @param {{ userId: string, sessionId: string }} [data] Registration data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sessionRegister(data?: { userId: string, sessionId: string }, options: any = {}): FetchArgs {
+            const localVarPath = `/sessions/register`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"{ userId: string, sessionId: string }" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body = needsSerialization ? JSON.stringify(data || {}) : (data || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
          * @summary Create a change stream.
          * @param {string} [paramsStream]
          * @param {*} [options] Override http request option.
@@ -4513,6 +5957,26 @@ export const SessionApiFp = function (configuration?: Configuration) {
         },
         /**
          *
+         * @summary Register a user to a session and persist it into the data source.
+         * @param {{ userId: string, sessionId: string }} [data] Registration data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sessionRegister(data?: { userId: string, sessionId: string }, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Session> {
+            const localVarFetchArgs = SessionApiFetchParamCreator(configuration).sessionRegister(data, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+
+        /**
+         *
          * @summary Create a change stream.
          * @param {string} [paramsStream]
          * @param {*} [options] Override http request option.
@@ -5332,6 +6796,18 @@ export class SessionApi extends BaseAPI {
      */
     public sessionCreate(data?: NewSession, options?: any) {
         return SessionApiFp(this.configuration).sessionCreate(data, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     *
+     * @summary Register a user to a session.
+     * @param {} [data] Registration data
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SessionApi
+     */
+    public sessionRegister(data?: { userId: string, sessionId: string }, options?: any) {
+        return SessionApiFp(this.configuration).sessionRegister(data, options)(this.fetch, this.basePath);
     }
 
     /**

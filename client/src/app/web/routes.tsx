@@ -10,6 +10,8 @@ import BricksContainer from './brick/list/ListBrickContainer';
 import ViewBrickContainer from './brick/view/ViewBrickContainer';
 import ViewModuleContainer from './module/view/ViewModuleContainer';
 import EditSessionContainer from './session/edit/EditSessionContainer';
+import ListSessionContainer from './session/list/ListSessionContainer';
+import ViewPathwayContainer from './pathway/view/ViewPathwayContainer';
 
 export const routes = (
   <Route path="/" component={Background}>
@@ -23,7 +25,9 @@ export const routes = (
       <Route path="/modules" component={() => null} />
       <Route path="/modules/:id" component={ViewModuleContainer} />
 
-      <Route path="/sessions" component={() => null} />
+      <Route path="/pathway" component={ViewPathwayContainer} />
+
+      <Route path="/sessions" component={ListSessionContainer} />
       <Route path="/sessions/add" component={EditSessionContainer} />
       <Route path="/sessions/edit/:id" component={EditSessionContainer} />
 

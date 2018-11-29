@@ -53,7 +53,7 @@ export class ModuleController {
     return await this.moduleRepository.count(where);
   }
 
-  @authenticate('BearerStrategy')
+  // @authenticate('BearerStrategy')
   @get('/modules', {
     responses: {
       '200': {

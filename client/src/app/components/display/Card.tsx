@@ -182,6 +182,7 @@ export interface ICardProps {
   actions?: IAction[];
   publicAccess?: boolean;
   className?: string;
+  children?: React.ReactNode;
   navigateToCardView?: (e: React.MouseEvent<any>) => void;
 }
 
@@ -199,7 +200,7 @@ class Card extends React.Component<ICardProps & WithThemeProps> {
   render() {
 
     const { name, location, phoneNumber, subtitle, description, photo, websiteLink } = this.props.card;
-    const { defaultIcon, displayMode, theme, className } = this.props;
+    const { defaultIcon, displayMode, theme, className, children } = this.props;
 
     const NavigationStyleTheme = style({
       color: theme.colorMap.primary,
@@ -329,6 +330,7 @@ class Card extends React.Component<ICardProps & WithThemeProps> {
               {description}
             </UpParagraph>
           }
+          {children}
         </UpBox>
         {this.props.navigateToCardView &&
           <span className={classnames(NavigationStyle, NavigationStyleTheme, 'icon-arrow_forward')} />

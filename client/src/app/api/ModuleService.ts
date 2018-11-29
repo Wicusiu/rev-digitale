@@ -49,8 +49,8 @@ export class ModuleService extends JsonServiceBase<Module> implements IModuleSer
     });
   }
 
-  all(): Promise<Array<Module>> {
-    const params = ModuleApiFetchParamCreator().moduleFind();
+  all(filters?: string): Promise<Array<Module>> {
+    const params = ModuleApiFetchParamCreator().moduleFind(filters);
     return this.fetch<Array<Module>>(params.url, params.options);
   }
 

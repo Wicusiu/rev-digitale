@@ -12,6 +12,7 @@ const appInitialState: InstanceState = {
     session: {
     },
     module: {},
+    pathway: {},
   },
   routing: null,
 };

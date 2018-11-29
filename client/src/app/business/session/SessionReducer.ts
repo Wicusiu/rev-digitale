@@ -6,6 +6,8 @@ import { StateWithPagination } from 'common/state/StateWithPagination';
 import { GET_BY_MODULE_SESSION_EVENT, READ_SESSION_EVENT, ReadSessionEventPayload, UpdateSessionEventPayload, DeleteSessionEventPayload, AddSessionEventPayload, ADD_SESSION_EVENT, UPDATE_SESSION_EVENT, DELETE_SESSION_EVENT } from './SessionEvents';
 import { DefaultReadEntityReducerFactory, DefaultAddEntityReducerFactory, DefaultListEntityReducerFactory } from 'common/state/DefaultEntityReducer';
 import { LIST_SESSION_EVENT, ListSessionEventPayload } from './events/list';
+import { GET_BY_USER_SESSION_EVENT } from './events/getByUser';
+import { REGISTER_SESSION_EVENT } from './events/register';
 
 export interface SessionState extends StateWithPagination<Session> { }
 
@@ -14,6 +16,7 @@ const INITIAL_STATE: SessionState = appInitialState.application.session;
 type SessionEventPayload = ListSessionEventPayload | AddSessionEventPayload | ReadSessionEventPayload | UpdateSessionEventPayload | DeleteSessionEventPayload;
 
 const readSessionReducer = DefaultReadEntityReducerFactory<Session>();
+const registerSessionReducer = DefaultReadEntityReducerFactory<Session>();
 const listSessionReducer = DefaultListEntityReducerFactory<Session>();
 const addSessionReducer = DefaultAddEntityReducerFactory<Session>();
 
@@ -22,6 +25,8 @@ const SessionReducerMapper: ReducerMap<SessionState, SessionEventPayload> = {
   [ADD_SESSION_EVENT]: addSessionReducer,
   [LIST_SESSION_EVENT]: listSessionReducer,
   [GET_BY_MODULE_SESSION_EVENT]: listSessionReducer,
+  [GET_BY_USER_SESSION_EVENT]: listSessionReducer,
+  [REGISTER_SESSION_EVENT]: registerSessionReducer,
 };
 
 export const SessionReducer = handleActions<SessionState, SessionEventPayload>(SessionReducerMapper, INITIAL_STATE);

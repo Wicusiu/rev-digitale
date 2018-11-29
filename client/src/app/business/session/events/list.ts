@@ -15,10 +15,10 @@ const listEventCreator = (status: ACTION_STATUS, aggregate?: Array<Session>, mes
   type: LIST_SESSION_EVENT,
 });
 
-export const list = function (sessionService: ISessionService) {
+export const list = function (sessionService: ISessionService, filters?: string) {
   return async (dispatch) => {
     dispatch(listEventCreator('PENDING'));
-    return sessionService.all().then((sessions: Array<Session>) => {
+    return sessionService.all(filters).then((sessions: Array<Session>) => {
       dispatch(listEventCreator('SUCCESS', sessions));
       return sessions;
     }).catch((error) => {
