@@ -69,7 +69,7 @@ class ViewModuleComponent extends React.Component<IViewModuleComponentProps & Wi
           };
           return <div key={session.id} className={style((appearFromBottom(1, 'ease')))}>
             <Event className={style((fadeIn(2, 'ease')))} event={event}>
-              <UpBox flexDirection={'row'} className={style({ width: '100% !important', margin: '10px !important' })} alignItems={'center'} justifyContent={'center'}>
+              <UpBox flexDirection={'row'} className={style({ margin: '10px !important' })} justifyContent={'flex-start'} alignItems={'center'} >
                 <UpButton intent={'primary'} actionType={'timer'} onClick={() => this.registerToSession(session.id)}>
                   M'inscrire
                 </UpButton>

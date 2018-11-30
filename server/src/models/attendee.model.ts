@@ -9,7 +9,7 @@ export class Attendee extends ValueObject {
   userId?: string;
 
   @property({
-    type: 'object',
+    type: 'number',
   })
   status?: AttendeeParticipationStatus;
 

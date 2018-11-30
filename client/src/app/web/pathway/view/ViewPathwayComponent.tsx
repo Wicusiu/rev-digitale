@@ -61,22 +61,23 @@ class ViewPathwayComponent extends React.Component<IViewPathwayComponentProps & 
               name: mod.name,
               photo: mod.brick.logo,
             };
+            const sessionAttendee = mod.sessionAttendee ? mod.sessionAttendee.attendees.find(a => a.userId === this.props.pathway.userId) : null;
             return <div key={mod.id} className={style((appearFromBottom(1, 'ease')))}>
               <Card className={style((fadeIn(2, 'ease')))} card={card}>
                 <UpBox flexDirection={'row'} className={style({ width: '100% !important', margin: '10px !important' })} alignItems={'center'} justifyContent={'center'}>
-                  {mod.sessionAttendee && mod.sessionAttendee.status === AttendeeParticipationStatus.Participated &&
+                  {sessionAttendee && sessionAttendee.status === AttendeeParticipationStatus.Participated &&
                     <UpButton intent={'primary'} actionType={'comment'}>
-                      Votre Avis
+                      Votre avis
                     </UpButton>
                   }
-                  {mod.sessionAttendee && mod.sessionAttendee.status === AttendeeParticipationStatus.Planned &&
-                    <UpButton intent={'primary'} actionType={'edit'}>
-                      Modifier ma Session
+                  {sessionAttendee && sessionAttendee.status === AttendeeParticipationStatus.Planned &&
+                    <UpButton intent={'primary'} actionType={'edit'} onClick={() => this.viewModuleSessions(mod.id)}>
+                      Modifier ma session
                     </UpButton>
                   }
-                  {!mod.sessionAttendee &&
+                  {!sessionAttendee &&
                     <UpButton intent={'primary'} actionType={'timer'} onClick={() => this.viewModuleSessions(mod.id)}>
-                      Plannifier ma Session
+                      Plannifier ma session
                     </UpButton>
                   }
                 </UpBox>

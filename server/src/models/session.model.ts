@@ -46,7 +46,7 @@ export class Session extends Entity {
   @belongsTo(() => Module)
   moduleId: string
 
-  @property.array(typeof Attendee)
+  @property.array(Attendee)
   attendees: Array<Attendee>
 
   constructor(data?: Partial<Session>) {

@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { I18n } from 'react-redux-i18n';
+import { withI18n } from 'react-i18next';
 import ErrorPage from 'app/web/ErrorPage';
 import { style } from 'typestyle';
 import { withRouter, WithRouterProps } from 'react-router';
-import { UpNotification, UpLink, UpGrid, UpRow, UpBox } from '@up-group/react-controls';
+import { UpNotification, UpLink, UpBox } from '@up-group/react-controls';
 
 interface IErrorBoundaryFallbackComponentProps extends WithRouterProps {
   componentStack: string,
   error: Error,
+  t: Function,
 }
 
-export const DefaultErrorBoundaryFallbackComponent = ({ componentStack, error, router, location }: IErrorBoundaryFallbackComponentProps) => {
+export const DefaultErrorBoundaryFallbackComponent = ({ componentStack, error, router, location, t }: IErrorBoundaryFallbackComponentProps) => {
   return (
     <ErrorPage>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
@@ -27,14 +28,14 @@ export const DefaultErrorBoundaryFallbackComponent = ({ componentStack, error, r
         </g>
       </svg>
       <UpNotification intent={'info'}>
-        <p>{I18n.t('web.unexpectedErrorMessage')}</p>
+        <p>{t('web.unexpectedErrorMessage')}</p>
         <p>
           <UpLink onClick={() => router.replace({
             pathname: '/login',
             search: location.search,
             state: location.state,
             query: { redirectTo: location.pathname },
-          })}>{I18n.t('web.goBackMessage')}</UpLink>
+          })}>{t('web.goBackMessage')}</UpLink>
         </p>
       </UpNotification>
       <UpNotification intent={'error'}>
@@ -42,7 +43,7 @@ export const DefaultErrorBoundaryFallbackComponent = ({ componentStack, error, r
       </UpNotification>
       <UpBox>
         <div className={style({ margin: '16px 0px' })}
-          title={I18n.t('web.moreInfoTitle')}
+          title={t('web.moreInfoTitle')}
         >
           <UpNotification intent={'error'}>
             {componentStack}
@@ -119,4 +120,4 @@ export const withErrorBoundary = (
   </ErrorBoundary>
 );
 
-export default ErrorBoundary;
+export default withI18n()(ErrorBoundary);

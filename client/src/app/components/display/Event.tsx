@@ -29,6 +29,7 @@ const EventWrapperStyle = style({
   $nest: {
     '&.up-card': {
       marginBottom: '20px',
+      marginTop: '10px',
     },
   },
 }, media(DeviceSmartphones, {
@@ -84,16 +85,20 @@ const WrapperLogoStyle = style({
 });
 
 const LogoStyle = style({
-  position: 'relative',
   width: '180px',
-  height: '180px',
+  height: '100%',
   overflow: 'hidden',
-  backgroundColor: '#DDD',
+  backgroundColor: 'antiquewhite !important',
   $nest: {
     img: {
       width: '100%',
       maxWidth: '100%',
       height: '100%',
+    },
+    p: {
+      margin: '8px 8px',
+      color: 'black',
+      textAlign: 'left',
     },
   },
 }, media(DeviceSmartphones, {
@@ -214,34 +219,43 @@ class Event extends React.Component<IEventProps & WithThemeProps> {
     });
     return (
       <UpBox
-        flexDirection={displayMode === 'card' ? 'row' : 'column'}
+        flexDirection={displayMode === 'card' ? 'row' : 'column'} alignItems={'stretch'}
         className={classnames(EventWrapperStyle, className, 'up-card')}
         onClick={this.props.navigateToEventView}
         backgroundColor={colorMap.white}
       >
-        <div className={LogoStyle}>
+        <UpBox flexDirection={'column'} className={LogoStyle}>
           <UpBox flexDirection={'row'}>
-            <UpSvgIcon width={50} style={{ margin: '10px' }} color={this.props.theme.colorMap.primary} iconName={'calendar'} />
+            <UpSvgIcon width={45} style={{ margin: '10px' }} color={this.props.theme.colorMap.primary} iconName={'calendar'} />
             <UpBox flexDirection={'column'}>
               <div style={{
                 margin: '10px', fontSize: '18px',
-                color: this.props.theme.colorMap.primary, fontWeight: 500,
+                color: this.props.theme.colorMap.primary, fontWeight: 700,
               }}>
-                <DateFormatter date={startDate} />
+                <DateFormatter date={startDate} showDate={true} showTime={false} />
+                <div style={{
+                  fontSize: '12px',
+                  color: this.props.theme.colorMap.darkGray5, fontWeight: 400,
+                }}>
+                  <UpSvgIcon width={12} style={{ margin: '8px 4px 8px 0px' }} color={this.props.theme.colorMap.darkGray5} iconName={'timer'} />
+                  <DateFormatter date={startDate} showDate={false} showTime={true} />
+                  <span> - </span>
+                  <DateFormatter date={endDate} showDate={false} showTime={true} />
+                </div>
               </div>
             </UpBox>
           </UpBox>
-        </div>
+          {location &&
+            <UpBox flexDirection={'row'}>
+              <UpSvgIcon width={20} style={{ margin: '8px' }} color={this.props.theme.colorMap.primary} iconName={'location'} />
+              <UpParagraph className={EventAddressStyle}>{location}</UpParagraph>
+            </UpBox>
+          }
+        </UpBox>
         <UpBox className={EventContentStyle} flexDirection={'column'}>
           <UpParagraph className={EventTitleStyle}>{name}</UpParagraph>
           {subtitle &&
             <UpParagraph className={EventSubtitleStyle}>{subtitle}</UpParagraph>
-          }
-          {location &&
-            <UpBox flexDirection={'row'}>
-              <UpSvgIcon color={this.props.theme.colorMap.primary} iconName={'location'} />
-              <UpParagraph className={EventAddressStyle}>{location}</UpParagraph>
-            </UpBox>
           }
           {description && displayMode === 'card' &&
             <UpParagraph className={DescriptionStyle}>

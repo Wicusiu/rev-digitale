@@ -1,5 +1,4 @@
-import { Brick, AttendeeParticipationStatus } from 'app/api/mapper/swagger/typescript-fetch-client';
-import { Session } from 'inspector';
+import { Session, Brick, AttendeeParticipationStatus } from 'app/api/mapper/swagger/typescript-fetch-client';
 
 export interface IModule {
   /**
@@ -37,7 +36,7 @@ export interface IModule {
      * @type {Attendee}
      * @memberof Pathway
      */
-  sessionAttendee?: ISessionAttendee
+  sessionAttendee?: Session
 }
 
 export interface ISessionAttendee {
