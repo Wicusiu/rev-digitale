@@ -23,7 +23,7 @@ export interface IViewModuleComponentProps {
   viewSession?: (id: string) => void;
   addSession?: () => void;
   registerToSession?: (authToken: string, userId: string, sessionId: string) => Promise<IActionResult<Session>>;
-  publishMessage?: (message: string, intent: IntentType) => void;
+  publishMessage?: (message: IResultMessage) => void;
 }
 
 class ViewModuleComponent extends React.Component<IViewModuleComponentProps & WithThemeProps & RouteComponentProps<any, { id?: string }>> {
@@ -46,9 +46,11 @@ class ViewModuleComponent extends React.Component<IViewModuleComponentProps & Wi
 
   registerToSession = (sessionId: string) => {
     return this.props.registerToSession(this.props.authenticatedUser.token, this.props.authenticatedUser.id, sessionId).then((result) => {
-      this.props.publishMessage('Vous êtes inscrit à la session !', 'success');
+      this.props.publishMessage({ message: 'Vous êtes inscrit à la session !', intent: 'success' });
     }).catch((errors: IResultMessage[]) => {
-
+      errors.map((error) => {
+        this.props.publishMessage(error);
+      });
     });
   }
 

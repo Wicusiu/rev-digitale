@@ -13,7 +13,7 @@ import { isEmpty } from 'common/utils';
 import { push } from 'react-router-redux';
 import { SessionService } from 'app/api/SessionService';
 import { getByModule } from 'app/business/session/events/getByModule';
-import { IntentType } from 'common/actions';
+import { IntentType, IResultMessage } from 'common/actions';
 import { publishMessage } from 'app/business/message/MessageAction';
 
 const mapDispatchToProps = function (dispatch: Dispatch<any>) {
@@ -32,11 +32,8 @@ const mapDispatchToProps = function (dispatch: Dispatch<any>) {
       const sessionService = ServiceFactory.create(SessionService, dispatch, authToken);
       return dispatch(register(sessionService, userId, sessionId));
     },
-    publishMessage: (message: string, intent: IntentType) => {
-      return dispatch(publishMessage({
-        message,
-        intent,
-      }));
+    publishMessage: (message: IResultMessage) => {
+      return dispatch(publishMessage(message));
     },
     navigateTo: (route: string) => dispatch(push(route)),
   } as Partial<IViewModuleComponentProps>;

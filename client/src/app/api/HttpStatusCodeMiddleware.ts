@@ -24,10 +24,22 @@ export const Level = {
   0: 'error',
 };
 
-const mapErrorToResultMessage = (error: any): IResultMessage => {
+const handleErrors = (response: Response): Promise<Response> => {
+  // Retourne la liste des erreurs
+  return response.text().then((text) => {
+    let responseBody: Array<any> = text ? JSON.parse(text) : [];
+    if (!Array.isArray(responseBody)) {
+      responseBody = [responseBody];
+    }
+    return Promise.reject(responseBody.map(mapErrorToResultMessage));
+  });
+};
+
+const mapErrorToResultMessage = (result: any): IResultMessage => {
+  const error = result.error || result;
   const resultMessage: IResultMessage = {
     message: error.label || error.message,
-    code: error.code ? ErrorCode[error.code] : error.statusCode,
+    code: error.code ? ErrorCode[error.code] : error.name || error.statusCode,
     intent: 'error',
   };
   return resultMessage;
@@ -66,41 +78,23 @@ const applicationHttpStatusCodeMiddlewares = {
     });
   },
   401(dispatch: Dispatch<any>, response: Response): Promise<Response> {
-    // Retourne la liste des erreurs
-    return response.text().then((text) => {
-      let responseBody: Array<any> = text ? JSON.parse(text) : [];
-      if (!Array.isArray(responseBody)) {
-        responseBody = [responseBody];
-      }
-      return Promise.reject(responseBody.map(mapErrorToResultMessage));
-    });
+    return handleErrors(response);
   },
-  422(dispatch: Dispatch<any>, response: Response): Promise<Response> {
+  403(dispatch: Dispatch<any>, response: Response): Promise<Response> {
     // Retourne la liste des erreurs
-    return response.text().then((text) => {
-      let responseBody: Array<any> = text ? JSON.parse(text) : [];
-      if (!Array.isArray(responseBody)) {
-        responseBody = [responseBody];
-      }
-      return Promise.reject(responseBody.map(mapErrorToResultMessage));
-    });
-  },
-  403(dispatch: Dispatch<any>, response: Response): Promise<Array<IError>> {
-    // Retourne la liste des erreurs
-    return response.text().then((text) => {
-      let responseBody: Array<any> = text ? JSON.parse(text) : [];
-      if (!Array.isArray(responseBody)) {
-        responseBody = [responseBody];
-      }
-      return Promise.reject(responseBody.map(mapErrorToResultMessage));
-    });
+    return handleErrors(response);
   },
   404(dispatch: Dispatch<any>, response: Response): Promise<Response> {
-    console.warn('status code 404');
-    // dispatch(push('/'));
     const messages = new Array<IResultMessage>();
     messages.push({ message: 'La ressource demandée n\'existe pas', intent: 'error', code: ErrorCode.DomainEntityNotFound });
     return Promise.reject(messages);
+  },
+  406(dispatch: Dispatch<any>, response: Response): Promise<Response> {
+    return handleErrors(response);
+  },
+  422(dispatch: Dispatch<any>, response: Response): Promise<Response> {
+    // Retourne la liste des erreurs
+    return handleErrors(response);
   },
   500(dispatch: Dispatch<any>, response: Response): Promise<Response> {
     return response.text().then((text) => {
