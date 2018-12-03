@@ -9,6 +9,7 @@ import { style } from 'typestyle';
 import { fadeIn, appearFromBottom } from 'common/animations';
 import Event, { EventInfo } from 'app/components/display/Event';
 import { IActionResult, IResultMessage, IntentType } from 'common/actions';
+import Status from 'app/components/display/Status';
 
 export interface IViewModuleComponentProps {
   authenticatedUser?: IUser;
@@ -21,7 +22,7 @@ export interface IViewModuleComponentProps {
   read?: (authToken: string, id: string) => void;
   getSessions?: (authToken: string, id: string) => void;
   viewSession?: (id: string) => void;
-  addSession?: () => void;
+  addSession?: (moduleId?: string) => void;
   registerToSession?: (authToken: string, userId: string, sessionId: string) => Promise<IActionResult<Session>>;
   publishMessage?: (message: IResultMessage) => void;
 }
@@ -39,14 +40,19 @@ class ViewModuleComponent extends React.Component<IViewModuleComponentProps & Wi
     } else {
       // Lecture de la description de la brique
       this.props.read(this.props.authenticatedUser.token, this.props.id);
-      // Lecture des modules de la brique
-      this.props.getSessions(this.props.authenticatedUser.token, this.props.id);
+      this.refreshSessions();
     }
+  }
+
+  refreshSessions = () => {
+    // Lecture des modules de la brique
+    this.props.getSessions(this.props.authenticatedUser.token, this.props.id);
   }
 
   registerToSession = (sessionId: string) => {
     return this.props.registerToSession(this.props.authenticatedUser.token, this.props.authenticatedUser.id, sessionId).then((result) => {
       this.props.publishMessage({ message: 'Vous êtes inscrit à la session !', intent: 'success' });
+      return this.refreshSessions();
     }).catch((errors: IResultMessage[]) => {
       errors.map((error) => {
         this.props.publishMessage(error);
@@ -72,9 +78,14 @@ class ViewModuleComponent extends React.Component<IViewModuleComponentProps & Wi
           return <div key={session.id} className={style((appearFromBottom(1, 'ease')))}>
             <Event className={style((fadeIn(2, 'ease')))} event={event}>
               <UpBox flexDirection={'row'} className={style({ margin: '10px !important' })} justifyContent={'flex-start'} alignItems={'center'} >
-                <UpButton intent={'primary'} actionType={'timer'} onClick={() => this.registerToSession(session.id)}>
-                  M'inscrire
+                {session.attendees && session.attendees.some(a => a.userId === this.props.authenticatedUser.id) &&
+                  <Status intent={'success'}>Inscrit</Status>
+                }
+                {session.attendees == null || !session.attendees.some(a => a.userId === this.props.authenticatedUser.id) &&
+                  <UpButton intent={'primary'} actionType={'timer'} onClick={() => this.registerToSession(session.id)}>
+                    M'inscrire
                 </UpButton>
+                }
               </UpBox>
             </Event></div>;
         })
@@ -85,7 +96,7 @@ class ViewModuleComponent extends React.Component<IViewModuleComponentProps & Wi
           </UpNotification>
         }
         {this.props.authenticatedUser && this.props.authenticatedUser.is_admin &&
-          <UpButton intent={'primary'} actionType={'add'} onClick={() => this.props.addSession()}>
+          <UpButton intent={'primary'} actionType={'add'} onClick={() => this.props.addSession(this.props.id)}>
             Ajouter une nouvelle session
           </UpButton>
         }

@@ -28,6 +28,12 @@ export class Module extends Entity {
   })
   description: string;
 
+  @property({
+    type: 'string',
+    required: true,
+  })
+  details: string;
+
   @belongsTo(() => Brick)
   brickId: string;
 

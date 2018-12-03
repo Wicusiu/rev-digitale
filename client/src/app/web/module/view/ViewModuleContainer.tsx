@@ -27,7 +27,7 @@ const mapDispatchToProps = function (dispatch: Dispatch<any>) {
       return dispatch(getByModule(sessionService, moduleId));
     },
     viewSession: (id: string) => dispatch(push(`/sessions/edit/${id}`)),
-    addSession: () => dispatch(push(`/sessions/add`)),
+    addSession: (moduleId?: string) => dispatch(push(`/sessions/add?moduleId=${moduleId}`)),
     registerToSession: (authToken: string, userId: string, sessionId: string) => {
       const sessionService = ServiceFactory.create(SessionService, dispatch, authToken);
       return dispatch(register(sessionService, userId, sessionId));

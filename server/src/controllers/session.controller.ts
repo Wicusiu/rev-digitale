@@ -23,6 +23,7 @@ import * as ical from 'ical-generator';
 import * as moment from 'moment';
 import { authenticate } from '@loopback/authentication';
 import { AttendeeParticipationStatus, Attendee } from '../models/attendee.model';
+import { Nullable } from '../common';
 
 const upCal = ical({ domain: 'outlook.office.com', name: 'Up Calendar' });
 
@@ -259,14 +260,19 @@ export class SessionController {
         id: { neq: session.id },
       }
     });
-    let alreadyRegisteredInOtherSession: boolean = false;
+    let alreadyRegisteredInOtherSession: Nullable<Session> = null;
     otherSessions.forEach((otherSession) => {
-      alreadyRegisteredInOtherSession
-        = alreadyRegisteredInOtherSession || (otherSession.attendees && otherSession.attendees.find(a => a.userId === registration.userId) != null);
+      if (alreadyRegisteredInOtherSession == null && otherSession.attendees && otherSession.attendees.find(a => a.userId === registration.userId) != null) {
+        alreadyRegisteredInOtherSession = otherSession;
+      }
     });
 
-    if (alreadyRegisteredInOtherSession) {
-      throw new HttpErrors.NotAcceptable('Vous êtes déjà inscrit dans une autre session du module');
+    if (alreadyRegisteredInOtherSession != null) {
+      // Unregister from the session
+      const sessionToUpdate = alreadyRegisteredInOtherSession as Session;
+      sessionToUpdate.attendees = sessionToUpdate.attendees.filter(a => a.userId !== registration.userId);
+      this.sessionRepository.update(sessionToUpdate);
+      // throw new HttpErrors.NotAcceptable('Vous êtes déjà inscrit dans une autre session du module');
     }
 
     if (session.attendees == null) {

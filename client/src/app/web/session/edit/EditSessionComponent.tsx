@@ -88,7 +88,7 @@ class EditSessionComponent extends React.Component<IEditSessionComponentProps & 
 
   getValues = (): any => {
     let values: any = { startDate: null, endDate: null, location: '', description: '', name: '', moduleId: null };
-    if (this.props.session) {
+    if (this.props.sessionId && this.props.session) {
       values = { ...this.props.session };
     }
     if (values.startDate && isString(values.startDate)) {

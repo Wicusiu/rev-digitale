@@ -1,5 +1,4 @@
-import { Entity, model, property, belongsTo } from '@loopback/repository';
-import { truncateSync } from 'fs';
+import { Entity, model, property } from '@loopback/repository';
 
 @model()
 export class User extends Entity {
@@ -36,17 +35,17 @@ export class User extends Entity {
     type: 'date',
     required: true,
   })
-  date: string;
+  last_authenticated_date?: string;
 
   @property({
     type: 'string',
   })
-  photo: string;
+  photo?: string;
 
   @property({
     type: 'boolean',
   })
-  is_admin: boolean;
+  is_admin?: boolean;
 
   constructor(data?: Partial<User>) {
     super(data);

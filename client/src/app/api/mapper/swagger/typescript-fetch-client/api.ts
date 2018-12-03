@@ -590,6 +590,28 @@ export interface UserCredentials {
 /**
  *
  * @export
+ * @interface AuthCredentials
+ */
+export interface AuthCredentials {
+
+    /**
+     *
+     * @type {string}
+     * @memberof AuthCredentials
+     */
+    code: string;
+
+    /**
+     *
+     * @type {string}
+     * @memberof AuthCredentials
+     */
+    redirectURI: string;
+}
+
+/**
+ *
+ * @export
  * @interface XAny
  */
 export interface XAny {
@@ -7351,6 +7373,31 @@ export const UserApiFetchParamCreator = function (configuration?: Configuration)
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
 
             const needsSerialization = (<any>"UserCredentials" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body = needsSerialization ? JSON.stringify(data || {}) : (data || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        usersAuthSigninPost(data?: AuthCredentials, options: any = {}): FetchArgs {
+            const localVarPath = `/users/auth/signin`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            const needsSerialization = (<any>"AuthCredentials" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.body = needsSerialization ? JSON.stringify(data || {}) : (data || "");
 
             return {
